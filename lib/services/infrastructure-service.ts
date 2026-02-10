@@ -13,6 +13,13 @@ import {
   ServiceUtilization,
 } from "@/types";
 import infraData from "@/data/mock/infrastructure.json";
+import {
+  shiftDate,
+  shiftISODate,
+  shiftMonth,
+  computeDaysUntilExpiry,
+  computeCertificateStatus,
+} from "@/lib/utils/date-shift";
 
 type InfraData = {
   resourceUtilization: ResourceUtilization[];
@@ -32,35 +39,56 @@ type InfraData = {
 const data = infraData as Record<string, InfraData>;
 
 export async function getResourceUtilization(customerId: string): Promise<ResourceUtilization[]> {
-  return data[customerId]?.resourceUtilization ?? [];
+  const items = data[customerId]?.resourceUtilization ?? [];
+  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
 }
 
 export async function getLatencyMetrics(customerId: string): Promise<LatencyMetric[]> {
-  return data[customerId]?.latency ?? [];
+  const items = data[customerId]?.latency ?? [];
+  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
 }
 
 export async function getNetworkThroughput(customerId: string): Promise<NetworkThroughput[]> {
-  return data[customerId]?.networkThroughput ?? [];
+  const items = data[customerId]?.networkThroughput ?? [];
+  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
 }
 
 export async function getCertificates(customerId: string): Promise<CertificateInfo[]> {
-  return data[customerId]?.certificates ?? [];
+  const certs = data[customerId]?.certificates ?? [];
+  return certs.map((c) => {
+    const shiftedExpiry = shiftDate(c.expiresAt);
+    const daysUntilExpiry = computeDaysUntilExpiry(shiftedExpiry);
+    return {
+      ...c,
+      expiresAt: shiftedExpiry,
+      daysUntilExpiry,
+      status: computeCertificateStatus(daysUntilExpiry),
+    };
+  });
 }
 
 export async function getBackups(customerId: string): Promise<BackupStatus[]> {
-  return data[customerId]?.backups ?? [];
+  const items = data[customerId]?.backups ?? [];
+  return items.map((i) => ({
+    ...i,
+    lastBackup: shiftISODate(i.lastBackup),
+    nextScheduled: shiftISODate(i.nextScheduled),
+  }));
 }
 
 export async function getChangeCalendar(customerId: string): Promise<ChangeCalendarEntry[]> {
-  return data[customerId]?.changeCalendar ?? [];
+  const items = data[customerId]?.changeCalendar ?? [];
+  return items.map((i) => ({ ...i, date: shiftDate(i.date) }));
 }
 
 export async function getErrorRates(customerId: string): Promise<ErrorRate[]> {
-  return data[customerId]?.errorRates ?? [];
+  const items = data[customerId]?.errorRates ?? [];
+  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
 }
 
 export async function getDnsResolution(customerId: string): Promise<DnsResolution[]> {
-  return data[customerId]?.dnsResolution ?? [];
+  const items = data[customerId]?.dnsResolution ?? [];
+  return items.map((i) => ({ ...i, timestamp: shiftDate(i.timestamp) }));
 }
 
 export async function getPatchCompliance(customerId: string): Promise<PatchCompliance[]> {
@@ -68,13 +96,19 @@ export async function getPatchCompliance(customerId: string): Promise<PatchCompl
 }
 
 export async function getPendingChanges(customerId: string): Promise<ChangeRecord[]> {
-  return data[customerId]?.pendingChanges ?? [];
+  const items = data[customerId]?.pendingChanges ?? [];
+  return items.map((i) => ({ ...i, scheduledDate: shiftDate(i.scheduledDate) }));
 }
 
 export async function getProjects(customerId: string): Promise<ProjectDelivery[]> {
-  return data[customerId]?.projects ?? [];
+  const items = data[customerId]?.projects ?? [];
+  return items.map((i) => ({ ...i, dueDate: shiftDate(i.dueDate) }));
 }
 
 export async function getServiceUtilization(customerId: string): Promise<ServiceUtilization[]> {
-  return data[customerId]?.serviceUtilization ?? [];
+  const items = data[customerId]?.serviceUtilization ?? [];
+  return items.map((i) => ({
+    ...i,
+    months: i.months.map((m) => ({ ...m, month: shiftMonth(m.month) })),
+  }));
 }

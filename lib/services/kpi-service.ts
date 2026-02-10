@@ -1,5 +1,6 @@
 import { MonthlySla, CostBreakdown, RiskScore } from "@/types";
 import kpisData from "@/data/mock/kpis.json";
+import { shiftMonth } from "@/lib/utils/date-shift";
 
 const data = kpisData as Record<string, {
   slaHistory: MonthlySla[];
@@ -11,7 +12,8 @@ const data = kpisData as Record<string, {
 }>;
 
 export async function getSlaHistory(customerId: string): Promise<MonthlySla[]> {
-  return data[customerId]?.slaHistory ?? [];
+  const history = data[customerId]?.slaHistory ?? [];
+  return history.map((h) => ({ ...h, month: shiftMonth(h.month) }));
 }
 
 export async function getCurrentSla(customerId: string): Promise<number> {

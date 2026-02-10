@@ -1,5 +1,6 @@
 import { Incident, IncidentSummary, TicketVolume, MttrTrend } from "@/types";
 import incidentsData from "@/data/mock/incidents.json";
+import { shiftISODate, shiftISODateNullable, shiftMonth } from "@/lib/utils/date-shift";
 
 const data = incidentsData as Record<string, {
   incidents: Incident[];
@@ -9,7 +10,12 @@ const data = incidentsData as Record<string, {
 }>;
 
 export async function getIncidents(customerId: string): Promise<Incident[]> {
-  return data[customerId]?.incidents ?? [];
+  const incidents = data[customerId]?.incidents ?? [];
+  return incidents.map((i) => ({
+    ...i,
+    createdAt: shiftISODate(i.createdAt),
+    resolvedAt: shiftISODateNullable(i.resolvedAt),
+  }));
 }
 
 export async function getIncidentSummary(customerId: string): Promise<IncidentSummary[]> {
@@ -17,14 +23,22 @@ export async function getIncidentSummary(customerId: string): Promise<IncidentSu
 }
 
 export async function getTicketVolume(customerId: string): Promise<TicketVolume[]> {
-  return data[customerId]?.ticketVolume ?? [];
+  const volume = data[customerId]?.ticketVolume ?? [];
+  return volume.map((v) => ({ ...v, month: shiftMonth(v.month) }));
 }
 
 export async function getMttrTrends(customerId: string): Promise<MttrTrend[]> {
-  return data[customerId]?.mttrTrends ?? [];
+  const trends = data[customerId]?.mttrTrends ?? [];
+  return trends.map((t) => ({ ...t, month: shiftMonth(t.month) }));
 }
 
 export async function getOpenIncidents(customerId: string): Promise<Incident[]> {
   const incidents = data[customerId]?.incidents ?? [];
-  return incidents.filter((i) => i.status === "open" || i.status === "investigating");
+  return incidents
+    .filter((i) => i.status === "open" || i.status === "investigating")
+    .map((i) => ({
+      ...i,
+      createdAt: shiftISODate(i.createdAt),
+      resolvedAt: shiftISODateNullable(i.resolvedAt),
+    }));
 }
