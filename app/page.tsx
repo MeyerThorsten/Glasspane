@@ -100,7 +100,7 @@ export default function Home() {
             {/* Copy */}
             <div className="max-w-xl">
               <p className="text-sm font-semibold uppercase tracking-widest text-white/70">
-                T-Systems
+                Transparency
               </p>
               <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
                 Transparency Portal
@@ -207,7 +207,7 @@ export default function Home() {
             </h2>
             <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
               A single portal for availability, security, cost, and operational
-              insights — built on T-Systems Zero Outage standards.
+              insights — built on Zero Outage standards.
             </p>
           </div>
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -329,7 +329,7 @@ export default function Home() {
             </span>
             Transparency Portal
           </div>
-          <p>&copy; {new Date().getFullYear()} T-Systems International GmbH</p>
+          <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
         </div>
       </footer>
     </main>

@@ -53,7 +53,7 @@ export default function Sidebar() {
       {/* Footer */}
       <div className="px-5 py-4 border-t border-gray-100 dark:border-[#252533]">
         <div className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
-          T-Systems Transparency Portal
+          Transparency Portal
         </div>
       </div>
     </aside>
