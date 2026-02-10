@@ -13,7 +13,7 @@ export interface NavItem {
 
 export const navigationItems: NavItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: RiDashboardLine },
-  { label: "Reports", href: "#", icon: RiBarChartBoxLine },
-  { label: "Compliance", href: "#", icon: RiShieldCheckLine },
-  { label: "Settings", href: "#", icon: RiSettings3Line },
+  { label: "Reports", href: "/reports", icon: RiBarChartBoxLine },
+  { label: "Compliance", href: "/compliance", icon: RiShieldCheckLine },
+  { label: "Settings", href: "/settings", icon: RiSettings3Line },
 ];
