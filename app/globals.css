@@ -195,6 +195,21 @@ body {
   --color-tremor-content-inverted: #111118;
 }
 
+/* Dark mode Recharts / Tremor chart tooltip overrides */
+.dark .recharts-tooltip-wrapper .bg-tremor-background {
+  background-color: #1C1C27 !important;
+  border-color: #2E2E3D !important;
+}
+.dark .recharts-tooltip-wrapper .text-tremor-content-emphasis {
+  color: #E5E7EB !important;
+}
+.dark .recharts-tooltip-wrapper .text-tremor-content {
+  color: #9E9EB0 !important;
+}
+.dark .recharts-tooltip-wrapper .border-tremor-border {
+  border-color: #2E2E3D !important;
+}
+
 /* Widget grid sizes */
 .widget-grid {
   display: grid;
