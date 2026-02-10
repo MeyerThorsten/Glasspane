@@ -1,0 +1,65 @@
+[
+  {
+    "id": "svc-cloud-001",
+    "name": "Open Telekom Cloud",
+    "category": "Cloud",
+    "status": "operational",
+    "uptime": 99.998,
+    "slaTarget": 99.999,
+    "description": "Public cloud infrastructure with compute, storage, and networking"
+  },
+  {
+    "id": "svc-sap-001",
+    "name": "SAP S/4HANA Managed",
+    "category": "SAP",
+    "status": "operational",
+    "uptime": 99.999,
+    "slaTarget": 99.999,
+    "description": "Fully managed SAP S/4HANA hosting and operations"
+  },
+  {
+    "id": "svc-sec-001",
+    "name": "Managed Security (SOC)",
+    "category": "Security",
+    "status": "operational",
+    "uptime": 100.0,
+    "slaTarget": 99.999,
+    "description": "24/7 Security Operations Center with threat detection and response"
+  },
+  {
+    "id": "svc-conn-001",
+    "name": "MPLS WAN",
+    "category": "Connectivity",
+    "status": "degraded",
+    "uptime": 99.985,
+    "slaTarget": 99.99,
+    "description": "Multi-protocol label switching wide area network"
+  },
+  {
+    "id": "svc-work-001",
+    "name": "Digital Workplace",
+    "category": "Workplace",
+    "status": "operational",
+    "uptime": 99.997,
+    "slaTarget": 99.99,
+    "description": "Managed endpoint services including device management and collaboration"
+  },
+  {
+    "id": "svc-ai-001",
+    "name": "AI & Data Analytics Platform",
+    "category": "AI & Data",
+    "status": "operational",
+    "uptime": 99.99,
+    "slaTarget": 99.95,
+    "description": "Managed machine learning and data analytics infrastructure"
+  },
+  {
+    "id": "svc-iot-001",
+    "name": "IoT Hub",
+    "category": "IoT",
+    "status": "maintenance",
+    "uptime": 99.96,
+    "slaTarget": 99.95,
+    "description": "IoT device connectivity, management, and data ingestion platform"
+  }
+]

@@ -1,0 +1,66 @@
+{
+  "cust-001": {
+    "slaHistory": [
+      { "month": "2025-02", "availability": 99.995, "target": 99.999 },
+      { "month": "2025-03", "availability": 99.998, "target": 99.999 },
+      { "month": "2025-04", "availability": 99.999, "target": 99.999 },
+      { "month": "2025-05", "availability": 99.997, "target": 99.999 },
+      { "month": "2025-06", "availability": 99.999, "target": 99.999 },
+      { "month": "2025-07", "availability": 99.998, "target": 99.999 },
+      { "month": "2025-08", "availability": 99.999, "target": 99.999 },
+      { "month": "2025-09", "availability": 99.996, "target": 99.999 },
+      { "month": "2025-10", "availability": 99.999, "target": 99.999 },
+      { "month": "2025-11", "availability": 99.998, "target": 99.999 },
+      { "month": "2025-12", "availability": 99.999, "target": 99.999 },
+      { "month": "2026-01", "availability": 99.999, "target": 99.999 }
+    ],
+    "currentSla": 99.998,
+    "costs": [
+      { "category": "Cloud", "currentMonth": 42500, "previousMonth": 41200, "budget": 45000 },
+      { "category": "SAP", "currentMonth": 28000, "previousMonth": 27500, "budget": 30000 },
+      { "category": "Security", "currentMonth": 15200, "previousMonth": 15000, "budget": 16000 },
+      { "category": "Connectivity", "currentMonth": 8900, "previousMonth": 8800, "budget": 9500 },
+      { "category": "Workplace", "currentMonth": 12300, "previousMonth": 12100, "budget": 13000 }
+    ],
+    "risk": {
+      "overall": 23,
+      "high": 2,
+      "medium": 8,
+      "low": 13,
+      "trend": "down"
+    },
+    "changeSuccessRate": 97.3,
+    "changeSuccessRateTrend": "up"
+  },
+  "cust-002": {
+    "slaHistory": [
+      { "month": "2025-02", "availability": 99.98, "target": 99.95 },
+      { "month": "2025-03", "availability": 99.96, "target": 99.95 },
+      { "month": "2025-04", "availability": 99.99, "target": 99.95 },
+      { "month": "2025-05", "availability": 99.95, "target": 99.95 },
+      { "month": "2025-06", "availability": 99.97, "target": 99.95 },
+      { "month": "2025-07", "availability": 99.98, "target": 99.95 },
+      { "month": "2025-08", "availability": 99.96, "target": 99.95 },
+      { "month": "2025-09", "availability": 99.99, "target": 99.95 },
+      { "month": "2025-10", "availability": 99.97, "target": 99.95 },
+      { "month": "2025-11", "availability": 99.98, "target": 99.95 },
+      { "month": "2025-12", "availability": 99.96, "target": 99.95 },
+      { "month": "2026-01", "availability": 99.98, "target": 99.95 }
+    ],
+    "currentSla": 99.975,
+    "costs": [
+      { "category": "Cloud", "currentMonth": 18500, "previousMonth": 17800, "budget": 20000 },
+      { "category": "AI & Data", "currentMonth": 22000, "previousMonth": 21500, "budget": 25000 },
+      { "category": "IoT", "currentMonth": 9800, "previousMonth": 9500, "budget": 11000 }
+    ],
+    "risk": {
+      "overall": 35,
+      "high": 4,
+      "medium": 12,
+      "low": 19,
+      "trend": "stable"
+    },
+    "changeSuccessRate": 94.8,
+    "changeSuccessRateTrend": "stable"
+  }
+}

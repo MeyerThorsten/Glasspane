@@ -1,0 +1,41 @@
+import { WidgetConfig, ViewType } from "@/types";
+
+export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
+  "c-level": [
+    { id: "sla-compliance-gauge", title: "SLA Compliance", size: "medium", category: "kpi" },
+    { id: "zero-outage-score", title: "Zero Outage Score", size: "medium", category: "zero-outage" },
+    { id: "service-health-overview", title: "Service Health Overview", size: "large", category: "services" },
+    { id: "cost-overview", title: "Cost Overview", size: "medium", category: "cost" },
+    { id: "risk-score", title: "Risk Score", size: "small", category: "risk" },
+    { id: "major-incidents-summary", title: "Major Incidents", size: "medium", category: "incidents" },
+    { id: "digital-transformation", title: "Digital Transformation Progress", size: "medium", category: "transformation" },
+    { id: "security-posture", title: "Security Posture", size: "small", category: "security" },
+  ],
+  business: [
+    { id: "service-utilization", title: "Service Utilization", size: "medium", category: "services" },
+    { id: "ticket-volume-trends", title: "Ticket Volume Trends", size: "medium", category: "incidents" },
+    { id: "mttr-trends", title: "MTTR Trends", size: "medium", category: "incidents" },
+    { id: "change-success-rate", title: "Change Success Rate", size: "small", category: "changes" },
+    { id: "project-delivery-status", title: "Project Delivery Status", size: "large", category: "projects" },
+    { id: "sla-compliance-by-service", title: "SLA Compliance by Service", size: "large", category: "kpi" },
+    { id: "top-open-issues", title: "Top Open Issues", size: "medium", category: "incidents" },
+    { id: "pending-changes", title: "Pending Changes", size: "medium", category: "changes" },
+    { id: "zero-outage-pillars", title: "Zero Outage Pillars", size: "medium", category: "zero-outage" },
+    { id: "service-availability-trend", title: "Service Availability Trend", size: "full", category: "kpi" },
+  ],
+  technical: [
+    { id: "system-status-grid", title: "System Status", size: "full", category: "services" },
+    { id: "uptime-by-service", title: "Uptime by Service", size: "large", category: "kpi" },
+    { id: "latency-metrics", title: "Latency Metrics", size: "medium", category: "infrastructure" },
+    { id: "incident-by-severity", title: "Incidents by Severity", size: "medium", category: "incidents" },
+    { id: "patch-compliance", title: "Patch Compliance", size: "small", category: "security" },
+    { id: "resource-utilization", title: "Resource Utilization", size: "large", category: "infrastructure" },
+    { id: "network-throughput", title: "Network Throughput", size: "medium", category: "infrastructure" },
+    { id: "certificate-expiry", title: "Certificate Expiry", size: "medium", category: "security" },
+    { id: "vulnerability-summary", title: "Vulnerability Summary", size: "medium", category: "security" },
+    { id: "backup-success-rate", title: "Backup Success Rate", size: "small", category: "infrastructure" },
+    { id: "change-calendar", title: "Change Calendar", size: "medium", category: "changes" },
+    { id: "error-rate-by-service", title: "Error Rate by Service", size: "medium", category: "infrastructure" },
+    { id: "dns-resolution-time", title: "DNS Resolution Time", size: "small", category: "infrastructure" },
+  ],
+};

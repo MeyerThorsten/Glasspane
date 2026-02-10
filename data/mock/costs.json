@@ -1,0 +1,14 @@
+{
+  "cust-001": [
+    { "category": "Cloud", "currentMonth": 42500, "previousMonth": 41200, "budget": 45000 },
+    { "category": "SAP", "currentMonth": 28000, "previousMonth": 27500, "budget": 30000 },
+    { "category": "Security", "currentMonth": 15200, "previousMonth": 15000, "budget": 16000 },
+    { "category": "Connectivity", "currentMonth": 8900, "previousMonth": 8800, "budget": 9500 },
+    { "category": "Workplace", "currentMonth": 12300, "previousMonth": 12100, "budget": 13000 }
+  ],
+  "cust-002": [
+    { "category": "Cloud", "currentMonth": 18500, "previousMonth": 17800, "budget": 20000 },
+    { "category": "AI & Data", "currentMonth": 22000, "previousMonth": 21500, "budget": 25000 },
+    { "category": "IoT", "currentMonth": 9800, "previousMonth": 9500, "budget": 11000 }
+  ]
+}

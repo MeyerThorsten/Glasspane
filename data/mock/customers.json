@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cust-001",
+    "name": "Muster AG",
+    "industry": "Manufacturing",
+    "tier": "Enterprise Premium",
+    "subscribedCategories": ["Cloud", "SAP", "Security", "Connectivity", "Workplace"],
+    "contactEmail": "it@muster-ag.de",
+    "logoInitials": "MA"
+  },
+  {
+    "id": "cust-002",
+    "name": "TechVision GmbH",
+    "industry": "Technology",
+    "tier": "Standard",
+    "subscribedCategories": ["Cloud", "AI & Data", "IoT"],
+    "contactEmail": "ops@techvision.de",
+    "logoInitials": "TV"
+  }
+]

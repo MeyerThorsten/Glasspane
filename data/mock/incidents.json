@@ -1,0 +1,90 @@
+{
+  "cust-001": {
+    "incidents": [
+      { "id": "INC-001", "title": "Cloud storage latency spike", "severity": "P2", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-01-15T08:30:00Z", "resolvedAt": "2026-01-15T09:45:00Z", "mttrMinutes": 75 },
+      { "id": "INC-002", "title": "SAP batch job failure", "severity": "P3", "status": "resolved", "serviceId": "svc-sap-001", "serviceName": "SAP S/4HANA Managed", "createdAt": "2026-01-18T14:20:00Z", "resolvedAt": "2026-01-18T15:00:00Z", "mttrMinutes": 40 },
+      { "id": "INC-003", "title": "MPLS link degradation Frankfurt", "severity": "P2", "status": "investigating", "serviceId": "svc-conn-001", "serviceName": "MPLS WAN", "createdAt": "2026-02-08T11:00:00Z", "resolvedAt": null, "mttrMinutes": null },
+      { "id": "INC-004", "title": "Firewall rule sync delay", "severity": "P3", "status": "resolved", "serviceId": "svc-sec-001", "serviceName": "Managed Security (SOC)", "createdAt": "2026-01-22T03:15:00Z", "resolvedAt": "2026-01-22T03:45:00Z", "mttrMinutes": 30 },
+      { "id": "INC-005", "title": "Email gateway slowdown", "severity": "P3", "status": "resolved", "serviceId": "svc-work-001", "serviceName": "Digital Workplace", "createdAt": "2026-01-25T09:00:00Z", "resolvedAt": "2026-01-25T10:30:00Z", "mttrMinutes": 90 },
+      { "id": "INC-006", "title": "VM provisioning timeout", "severity": "P4", "status": "closed", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-01-10T16:00:00Z", "resolvedAt": "2026-01-10T16:20:00Z", "mttrMinutes": 20 },
+      { "id": "INC-007", "title": "SSL certificate near expiry warning", "severity": "P4", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-02-01T08:00:00Z", "resolvedAt": "2026-02-01T10:00:00Z", "mttrMinutes": 120 }
+    ],
+    "summary": [
+      { "severity": "P1", "open": 0, "resolved": 0, "total": 0 },
+      { "severity": "P2", "open": 1, "resolved": 1, "total": 2 },
+      { "severity": "P3", "open": 0, "resolved": 3, "total": 3 },
+      { "severity": "P4", "open": 0, "resolved": 2, "total": 2 }
+    ],
+    "ticketVolume": [
+      { "month": "2025-02", "opened": 45, "resolved": 42 },
+      { "month": "2025-03", "opened": 38, "resolved": 40 },
+      { "month": "2025-04", "opened": 52, "resolved": 48 },
+      { "month": "2025-05", "opened": 41, "resolved": 43 },
+      { "month": "2025-06", "opened": 35, "resolved": 37 },
+      { "month": "2025-07", "opened": 48, "resolved": 45 },
+      { "month": "2025-08", "opened": 33, "resolved": 36 },
+      { "month": "2025-09", "opened": 42, "resolved": 40 },
+      { "month": "2025-10", "opened": 37, "resolved": 39 },
+      { "month": "2025-11", "opened": 29, "resolved": 32 },
+      { "month": "2025-12", "opened": 25, "resolved": 28 },
+      { "month": "2026-01", "opened": 31, "resolved": 29 }
+    ],
+    "mttrTrends": [
+      { "month": "2025-02", "p1": 45, "p2": 120, "p3": 180, "p4": 240 },
+      { "month": "2025-03", "p1": 42, "p2": 110, "p3": 165, "p4": 220 },
+      { "month": "2025-04", "p1": 38, "p2": 105, "p3": 150, "p4": 210 },
+      { "month": "2025-05", "p1": 40, "p2": 100, "p3": 155, "p4": 200 },
+      { "month": "2025-06", "p1": 35, "p2": 95, "p3": 140, "p4": 190 },
+      { "month": "2025-07", "p1": 32, "p2": 90, "p3": 135, "p4": 185 },
+      { "month": "2025-08", "p1": 30, "p2": 85, "p3": 130, "p4": 175 },
+      { "month": "2025-09", "p1": 28, "p2": 82, "p3": 125, "p4": 170 },
+      { "month": "2025-10", "p1": 25, "p2": 78, "p3": 120, "p4": 160 },
+      { "month": "2025-11", "p1": 22, "p2": 75, "p3": 110, "p4": 150 },
+      { "month": "2025-12", "p1": 20, "p2": 70, "p3": 105, "p4": 145 },
+      { "month": "2026-01", "p1": 18, "p2": 68, "p3": 100, "p4": 140 }
+    ]
+  },
+  "cust-002": {
+    "incidents": [
+      { "id": "INC-101", "title": "AI model serving timeout", "severity": "P2", "status": "resolved", "serviceId": "svc-ai-001", "serviceName": "AI & Data Analytics Platform", "createdAt": "2026-01-20T10:00:00Z", "resolvedAt": "2026-01-20T12:30:00Z", "mttrMinutes": 150 },
+      { "id": "INC-102", "title": "IoT data ingestion backlog", "severity": "P3", "status": "resolved", "serviceId": "svc-iot-001", "serviceName": "IoT Hub", "createdAt": "2026-01-22T06:00:00Z", "resolvedAt": "2026-01-22T08:00:00Z", "mttrMinutes": 120 },
+      { "id": "INC-103", "title": "Cloud VM autoscaling failure", "severity": "P1", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-02-01T03:00:00Z", "resolvedAt": "2026-02-01T04:15:00Z", "mttrMinutes": 75 },
+      { "id": "INC-104", "title": "IoT Hub firmware update stall", "severity": "P3", "status": "open", "serviceId": "svc-iot-001", "serviceName": "IoT Hub", "createdAt": "2026-02-09T14:00:00Z", "resolvedAt": null, "mttrMinutes": null },
+      { "id": "INC-105", "title": "GPU cluster scheduling delay", "severity": "P4", "status": "resolved", "serviceId": "svc-ai-001", "serviceName": "AI & Data Analytics Platform", "createdAt": "2026-01-28T11:00:00Z", "resolvedAt": "2026-01-28T11:45:00Z", "mttrMinutes": 45 }
+    ],
+    "summary": [
+      { "severity": "P1", "open": 0, "resolved": 1, "total": 1 },
+      { "severity": "P2", "open": 0, "resolved": 1, "total": 1 },
+      { "severity": "P3", "open": 1, "resolved": 1, "total": 2 },
+      { "severity": "P4", "open": 0, "resolved": 1, "total": 1 }
+    ],
+    "ticketVolume": [
+      { "month": "2025-02", "opened": 22, "resolved": 20 },
+      { "month": "2025-03", "opened": 18, "resolved": 19 },
+      { "month": "2025-04", "opened": 25, "resolved": 22 },
+      { "month": "2025-05", "opened": 20, "resolved": 21 },
+      { "month": "2025-06", "opened": 17, "resolved": 18 },
+      { "month": "2025-07", "opened": 23, "resolved": 21 },
+      { "month": "2025-08", "opened": 15, "resolved": 17 },
+      { "month": "2025-09", "opened": 19, "resolved": 18 },
+      { "month": "2025-10", "opened": 16, "resolved": 17 },
+      { "month": "2025-11", "opened": 14, "resolved": 15 },
+      { "month": "2025-12", "opened": 12, "resolved": 14 },
+      { "month": "2026-01", "opened": 15, "resolved": 13 }
+    ],
+    "mttrTrends": [
+      { "month": "2025-02", "p1": 60, "p2": 150, "p3": 210, "p4": 300 },
+      { "month": "2025-03", "p1": 55, "p2": 140, "p3": 200, "p4": 280 },
+      { "month": "2025-04", "p1": 50, "p2": 135, "p3": 190, "p4": 260 },
+      { "month": "2025-05", "p1": 52, "p2": 130, "p3": 185, "p4": 250 },
+      { "month": "2025-06", "p1": 48, "p2": 125, "p3": 175, "p4": 240 },
+      { "month": "2025-07", "p1": 45, "p2": 120, "p3": 170, "p4": 230 },
+      { "month": "2025-08", "p1": 42, "p2": 115, "p3": 160, "p4": 220 },
+      { "month": "2025-09", "p1": 40, "p2": 110, "p3": 155, "p4": 210 },
+      { "month": "2025-10", "p1": 38, "p2": 105, "p3": 150, "p4": 200 },
+      { "month": "2025-11", "p1": 35, "p2": 100, "p3": 140, "p4": 190 },
+      { "month": "2025-12", "p1": 32, "p2": 95, "p3": 135, "p4": 180 },
+      { "month": "2026-01", "p1": 30, "p2": 90, "p3": 130, "p4": 170 }
+    ]
+  }
+}

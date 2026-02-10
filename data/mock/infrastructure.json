@@ -1,0 +1,277 @@
+{
+  "cust-001": {
+    "resourceUtilization": [
+      { "timestamp": "2026-01-01", "cpu": 45, "memory": 62, "disk": 55 },
+      { "timestamp": "2026-01-02", "cpu": 48, "memory": 64, "disk": 55 },
+      { "timestamp": "2026-01-03", "cpu": 52, "memory": 65, "disk": 56 },
+      { "timestamp": "2026-01-04", "cpu": 38, "memory": 60, "disk": 56 },
+      { "timestamp": "2026-01-05", "cpu": 35, "memory": 58, "disk": 56 },
+      { "timestamp": "2026-01-06", "cpu": 55, "memory": 68, "disk": 57 },
+      { "timestamp": "2026-01-07", "cpu": 62, "memory": 72, "disk": 57 },
+      { "timestamp": "2026-01-08", "cpu": 58, "memory": 70, "disk": 57 },
+      { "timestamp": "2026-01-09", "cpu": 50, "memory": 66, "disk": 58 },
+      { "timestamp": "2026-01-10", "cpu": 47, "memory": 63, "disk": 58 },
+      { "timestamp": "2026-01-11", "cpu": 42, "memory": 61, "disk": 58 },
+      { "timestamp": "2026-01-12", "cpu": 40, "memory": 60, "disk": 59 },
+      { "timestamp": "2026-01-13", "cpu": 53, "memory": 67, "disk": 59 },
+      { "timestamp": "2026-01-14", "cpu": 60, "memory": 71, "disk": 59 }
+    ],
+    "latency": [
+      { "timestamp": "2026-01-01", "p50": 12, "p95": 45, "p99": 120 },
+      { "timestamp": "2026-01-02", "p50": 11, "p95": 42, "p99": 115 },
+      { "timestamp": "2026-01-03", "p50": 13, "p95": 48, "p99": 130 },
+      { "timestamp": "2026-01-04", "p50": 10, "p95": 38, "p99": 95 },
+      { "timestamp": "2026-01-05", "p50": 9, "p95": 35, "p99": 88 },
+      { "timestamp": "2026-01-06", "p50": 14, "p95": 52, "p99": 145 },
+      { "timestamp": "2026-01-07", "p50": 15, "p95": 55, "p99": 160 },
+      { "timestamp": "2026-01-08", "p50": 13, "p95": 48, "p99": 135 },
+      { "timestamp": "2026-01-09", "p50": 11, "p95": 42, "p99": 110 },
+      { "timestamp": "2026-01-10", "p50": 10, "p95": 40, "p99": 105 },
+      { "timestamp": "2026-01-11", "p50": 9, "p95": 36, "p99": 92 },
+      { "timestamp": "2026-01-12", "p50": 10, "p95": 38, "p99": 98 },
+      { "timestamp": "2026-01-13", "p50": 12, "p95": 44, "p99": 120 },
+      { "timestamp": "2026-01-14", "p50": 14, "p95": 50, "p99": 140 }
+    ],
+    "networkThroughput": [
+      { "timestamp": "2026-01-01", "inbound": 850, "outbound": 620 },
+      { "timestamp": "2026-01-02", "inbound": 920, "outbound": 680 },
+      { "timestamp": "2026-01-03", "inbound": 1050, "outbound": 750 },
+      { "timestamp": "2026-01-04", "inbound": 780, "outbound": 560 },
+      { "timestamp": "2026-01-05", "inbound": 650, "outbound": 480 },
+      { "timestamp": "2026-01-06", "inbound": 1100, "outbound": 800 },
+      { "timestamp": "2026-01-07", "inbound": 1200, "outbound": 880 },
+      { "timestamp": "2026-01-08", "inbound": 1080, "outbound": 790 },
+      { "timestamp": "2026-01-09", "inbound": 950, "outbound": 700 },
+      { "timestamp": "2026-01-10", "inbound": 880, "outbound": 650 },
+      { "timestamp": "2026-01-11", "inbound": 820, "outbound": 600 },
+      { "timestamp": "2026-01-12", "inbound": 800, "outbound": 590 },
+      { "timestamp": "2026-01-13", "inbound": 980, "outbound": 720 },
+      { "timestamp": "2026-01-14", "inbound": 1120, "outbound": 830 }
+    ],
+    "certificates": [
+      { "domain": "cloud.muster-ag.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-08-15", "daysUntilExpiry": 186, "status": "valid" },
+      { "domain": "sap.muster-ag.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-03-01", "daysUntilExpiry": 19, "status": "expiring-soon" },
+      { "domain": "vpn.muster-ag.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-11-20", "daysUntilExpiry": 283, "status": "valid" },
+      { "domain": "mail.muster-ag.de", "issuer": "DigiCert Global G2", "expiresAt": "2026-06-10", "daysUntilExpiry": 120, "status": "valid" },
+      { "domain": "api.muster-ag.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-02-20", "daysUntilExpiry": 10, "status": "expiring-soon" }
+    ],
+    "backups": [
+      { "serviceName": "Open Telekom Cloud", "lastBackup": "2026-02-10T02:00:00Z", "successRate": 99.8, "nextScheduled": "2026-02-11T02:00:00Z" },
+      { "serviceName": "SAP S/4HANA Managed", "lastBackup": "2026-02-10T01:00:00Z", "successRate": 100, "nextScheduled": "2026-02-11T01:00:00Z" },
+      { "serviceName": "Managed Security (SOC)", "lastBackup": "2026-02-10T03:00:00Z", "successRate": 99.5, "nextScheduled": "2026-02-11T03:00:00Z" }
+    ],
+    "changeCalendar": [
+      { "date": "2026-02-03", "count": 3, "risk": "low" },
+      { "date": "2026-02-04", "count": 1, "risk": "medium" },
+      { "date": "2026-02-05", "count": 2, "risk": "low" },
+      { "date": "2026-02-06", "count": 0, "risk": "low" },
+      { "date": "2026-02-07", "count": 4, "risk": "high" },
+      { "date": "2026-02-10", "count": 2, "risk": "medium" },
+      { "date": "2026-02-11", "count": 1, "risk": "low" },
+      { "date": "2026-02-12", "count": 3, "risk": "low" },
+      { "date": "2026-02-13", "count": 0, "risk": "low" },
+      { "date": "2026-02-14", "count": 5, "risk": "high" },
+      { "date": "2026-02-17", "count": 2, "risk": "low" },
+      { "date": "2026-02-18", "count": 1, "risk": "medium" },
+      { "date": "2026-02-19", "count": 2, "risk": "low" },
+      { "date": "2026-02-20", "count": 3, "risk": "medium" },
+      { "date": "2026-02-21", "count": 1, "risk": "low" }
+    ],
+    "errorRates": [
+      { "timestamp": "2026-01-01", "serviceName": "Open Telekom Cloud", "rate": 0.02 },
+      { "timestamp": "2026-01-02", "serviceName": "Open Telekom Cloud", "rate": 0.015 },
+      { "timestamp": "2026-01-03", "serviceName": "Open Telekom Cloud", "rate": 0.025 },
+      { "timestamp": "2026-01-04", "serviceName": "Open Telekom Cloud", "rate": 0.01 },
+      { "timestamp": "2026-01-05", "serviceName": "Open Telekom Cloud", "rate": 0.008 },
+      { "timestamp": "2026-01-06", "serviceName": "Open Telekom Cloud", "rate": 0.03 },
+      { "timestamp": "2026-01-07", "serviceName": "Open Telekom Cloud", "rate": 0.035 },
+      { "timestamp": "2026-01-01", "serviceName": "SAP S/4HANA Managed", "rate": 0.005 },
+      { "timestamp": "2026-01-02", "serviceName": "SAP S/4HANA Managed", "rate": 0.004 },
+      { "timestamp": "2026-01-03", "serviceName": "SAP S/4HANA Managed", "rate": 0.006 },
+      { "timestamp": "2026-01-04", "serviceName": "SAP S/4HANA Managed", "rate": 0.003 },
+      { "timestamp": "2026-01-05", "serviceName": "SAP S/4HANA Managed", "rate": 0.002 },
+      { "timestamp": "2026-01-06", "serviceName": "SAP S/4HANA Managed", "rate": 0.007 },
+      { "timestamp": "2026-01-07", "serviceName": "SAP S/4HANA Managed", "rate": 0.008 }
+    ],
+    "dnsResolution": [
+      { "timestamp": "2026-02-04", "avgMs": 8.2 },
+      { "timestamp": "2026-02-05", "avgMs": 7.8 },
+      { "timestamp": "2026-02-06", "avgMs": 9.1 },
+      { "timestamp": "2026-02-07", "avgMs": 8.5 },
+      { "timestamp": "2026-02-08", "avgMs": 7.2 },
+      { "timestamp": "2026-02-09", "avgMs": 8.0 },
+      { "timestamp": "2026-02-10", "avgMs": 7.5 }
+    ],
+    "patchCompliance": [
+      { "category": "OS Patches", "compliant": 142, "nonCompliant": 8, "total": 150 },
+      { "category": "Application Patches", "compliant": 95, "nonCompliant": 5, "total": 100 },
+      { "category": "Firmware", "compliant": 38, "nonCompliant": 2, "total": 40 }
+    ],
+    "pendingChanges": [
+      { "id": "CHG-001", "title": "MPLS circuit upgrade Frankfurt", "scheduledDate": "2026-02-14", "risk": "high", "serviceName": "MPLS WAN", "status": "approved" },
+      { "id": "CHG-002", "title": "SAP kernel patch SP23", "scheduledDate": "2026-02-12", "risk": "medium", "serviceName": "SAP S/4HANA Managed", "status": "approved" },
+      { "id": "CHG-003", "title": "Firewall policy update", "scheduledDate": "2026-02-11", "risk": "low", "serviceName": "Managed Security (SOC)", "status": "pending" },
+      { "id": "CHG-004", "title": "Cloud storage tier migration", "scheduledDate": "2026-02-18", "risk": "medium", "serviceName": "Open Telekom Cloud", "status": "pending" },
+      { "id": "CHG-005", "title": "Email gateway version upgrade", "scheduledDate": "2026-02-20", "risk": "low", "serviceName": "Digital Workplace", "status": "approved" }
+    ],
+    "projects": [
+      { "id": "PRJ-001", "name": "Cloud Migration Wave 3", "progress": 72, "status": "on-track", "dueDate": "2026-04-30", "owner": "Cloud Services" },
+      { "id": "PRJ-002", "name": "SAP S/4HANA Upgrade to 2025", "progress": 45, "status": "at-risk", "dueDate": "2026-06-15", "owner": "SAP Operations" },
+      { "id": "PRJ-003", "name": "Zero Trust Network Implementation", "progress": 88, "status": "on-track", "dueDate": "2026-03-31", "owner": "Security" },
+      { "id": "PRJ-004", "name": "Workplace Modernization", "progress": 100, "status": "completed", "dueDate": "2026-01-31", "owner": "Workplace Services" },
+      { "id": "PRJ-005", "name": "SD-WAN Rollout", "progress": 30, "status": "delayed", "dueDate": "2026-05-30", "owner": "Network Services" }
+    ],
+    "digitalTransformation": [
+      { "name": "Cloud Migration", "progress": 72, "target": 100, "status": "on-track" },
+      { "name": "Process Automation", "progress": 55, "target": 100, "status": "on-track" },
+      { "name": "Security Modernization", "progress": 88, "target": 100, "status": "on-track" },
+      { "name": "Workplace Transformation", "progress": 100, "target": 100, "status": "completed" },
+      { "name": "Network Modernization", "progress": 30, "target": 100, "status": "delayed" }
+    ],
+    "serviceUtilization": [
+      { "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "category": "Cloud", "months": [
+        { "month": "2025-10", "usage": 65, "capacity": 100 }, { "month": "2025-11", "usage": 68, "capacity": 100 }, { "month": "2025-12", "usage": 72, "capacity": 100 }, { "month": "2026-01", "usage": 75, "capacity": 100 }
+      ]},
+      { "serviceId": "svc-sap-001", "serviceName": "SAP S/4HANA Managed", "category": "SAP", "months": [
+        { "month": "2025-10", "usage": 78, "capacity": 100 }, { "month": "2025-11", "usage": 80, "capacity": 100 }, { "month": "2025-12", "usage": 82, "capacity": 100 }, { "month": "2026-01", "usage": 81, "capacity": 100 }
+      ]},
+      { "serviceId": "svc-sec-001", "serviceName": "Managed Security (SOC)", "category": "Security", "months": [
+        { "month": "2025-10", "usage": 55, "capacity": 100 }, { "month": "2025-11", "usage": 58, "capacity": 100 }, { "month": "2025-12", "usage": 60, "capacity": 100 }, { "month": "2026-01", "usage": 62, "capacity": 100 }
+      ]},
+      { "serviceId": "svc-conn-001", "serviceName": "MPLS WAN", "category": "Connectivity", "months": [
+        { "month": "2025-10", "usage": 70, "capacity": 100 }, { "month": "2025-11", "usage": 72, "capacity": 100 }, { "month": "2025-12", "usage": 75, "capacity": 100 }, { "month": "2026-01", "usage": 78, "capacity": 100 }
+      ]},
+      { "serviceId": "svc-work-001", "serviceName": "Digital Workplace", "category": "Workplace", "months": [
+        { "month": "2025-10", "usage": 82, "capacity": 100 }, { "month": "2025-11", "usage": 84, "capacity": 100 }, { "month": "2025-12", "usage": 80, "capacity": 100 }, { "month": "2026-01", "usage": 83, "capacity": 100 }
+      ]}
+    ]
+  },
+  "cust-002": {
+    "resourceUtilization": [
+      { "timestamp": "2026-01-01", "cpu": 55, "memory": 70, "disk": 45 },
+      { "timestamp": "2026-01-02", "cpu": 58, "memory": 72, "disk": 45 },
+      { "timestamp": "2026-01-03", "cpu": 65, "memory": 75, "disk": 46 },
+      { "timestamp": "2026-01-04", "cpu": 42, "memory": 65, "disk": 46 },
+      { "timestamp": "2026-01-05", "cpu": 40, "memory": 62, "disk": 46 },
+      { "timestamp": "2026-01-06", "cpu": 68, "memory": 78, "disk": 47 },
+      { "timestamp": "2026-01-07", "cpu": 72, "memory": 80, "disk": 47 },
+      { "timestamp": "2026-01-08", "cpu": 66, "memory": 76, "disk": 47 },
+      { "timestamp": "2026-01-09", "cpu": 58, "memory": 72, "disk": 48 },
+      { "timestamp": "2026-01-10", "cpu": 54, "memory": 68, "disk": 48 },
+      { "timestamp": "2026-01-11", "cpu": 50, "memory": 66, "disk": 48 },
+      { "timestamp": "2026-01-12", "cpu": 48, "memory": 64, "disk": 49 },
+      { "timestamp": "2026-01-13", "cpu": 60, "memory": 74, "disk": 49 },
+      { "timestamp": "2026-01-14", "cpu": 70, "memory": 78, "disk": 49 }
+    ],
+    "latency": [
+      { "timestamp": "2026-01-01", "p50": 18, "p95": 65, "p99": 180 },
+      { "timestamp": "2026-01-02", "p50": 16, "p95": 58, "p99": 165 },
+      { "timestamp": "2026-01-03", "p50": 20, "p95": 70, "p99": 200 },
+      { "timestamp": "2026-01-04", "p50": 14, "p95": 50, "p99": 140 },
+      { "timestamp": "2026-01-05", "p50": 12, "p95": 45, "p99": 125 },
+      { "timestamp": "2026-01-06", "p50": 22, "p95": 75, "p99": 210 },
+      { "timestamp": "2026-01-07", "p50": 24, "p95": 80, "p99": 230 },
+      { "timestamp": "2026-01-08", "p50": 19, "p95": 68, "p99": 190 },
+      { "timestamp": "2026-01-09", "p50": 16, "p95": 58, "p99": 160 },
+      { "timestamp": "2026-01-10", "p50": 15, "p95": 54, "p99": 150 },
+      { "timestamp": "2026-01-11", "p50": 13, "p95": 48, "p99": 135 },
+      { "timestamp": "2026-01-12", "p50": 14, "p95": 52, "p99": 145 },
+      { "timestamp": "2026-01-13", "p50": 18, "p95": 62, "p99": 175 },
+      { "timestamp": "2026-01-14", "p50": 21, "p95": 72, "p99": 205 }
+    ],
+    "networkThroughput": [
+      { "timestamp": "2026-01-01", "inbound": 1200, "outbound": 950 },
+      { "timestamp": "2026-01-02", "inbound": 1350, "outbound": 1050 },
+      { "timestamp": "2026-01-03", "inbound": 1500, "outbound": 1200 },
+      { "timestamp": "2026-01-04", "inbound": 1100, "outbound": 880 },
+      { "timestamp": "2026-01-05", "inbound": 980, "outbound": 780 },
+      { "timestamp": "2026-01-06", "inbound": 1600, "outbound": 1280 },
+      { "timestamp": "2026-01-07", "inbound": 1750, "outbound": 1400 },
+      { "timestamp": "2026-01-08", "inbound": 1450, "outbound": 1150 },
+      { "timestamp": "2026-01-09", "inbound": 1300, "outbound": 1020 },
+      { "timestamp": "2026-01-10", "inbound": 1180, "outbound": 940 },
+      { "timestamp": "2026-01-11", "inbound": 1100, "outbound": 880 },
+      { "timestamp": "2026-01-12", "inbound": 1050, "outbound": 840 },
+      { "timestamp": "2026-01-13", "inbound": 1380, "outbound": 1100 },
+      { "timestamp": "2026-01-14", "inbound": 1550, "outbound": 1240 }
+    ],
+    "certificates": [
+      { "domain": "cloud.techvision.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-09-20", "daysUntilExpiry": 222, "status": "valid" },
+      { "domain": "ai.techvision.de", "issuer": "DigiCert Global G2", "expiresAt": "2026-04-15", "daysUntilExpiry": 64, "status": "valid" },
+      { "domain": "iot.techvision.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-02-25", "daysUntilExpiry": 15, "status": "expiring-soon" }
+    ],
+    "backups": [
+      { "serviceName": "Open Telekom Cloud", "lastBackup": "2026-02-10T02:00:00Z", "successRate": 99.2, "nextScheduled": "2026-02-11T02:00:00Z" },
+      { "serviceName": "AI & Data Analytics Platform", "lastBackup": "2026-02-10T04:00:00Z", "successRate": 98.5, "nextScheduled": "2026-02-11T04:00:00Z" }
+    ],
+    "changeCalendar": [
+      { "date": "2026-02-03", "count": 1, "risk": "low" },
+      { "date": "2026-02-04", "count": 2, "risk": "medium" },
+      { "date": "2026-02-05", "count": 0, "risk": "low" },
+      { "date": "2026-02-06", "count": 1, "risk": "low" },
+      { "date": "2026-02-07", "count": 3, "risk": "high" },
+      { "date": "2026-02-10", "count": 1, "risk": "low" },
+      { "date": "2026-02-11", "count": 2, "risk": "medium" },
+      { "date": "2026-02-12", "count": 0, "risk": "low" },
+      { "date": "2026-02-13", "count": 1, "risk": "low" },
+      { "date": "2026-02-14", "count": 2, "risk": "medium" }
+    ],
+    "errorRates": [
+      { "timestamp": "2026-01-01", "serviceName": "Open Telekom Cloud", "rate": 0.03 },
+      { "timestamp": "2026-01-02", "serviceName": "Open Telekom Cloud", "rate": 0.025 },
+      { "timestamp": "2026-01-03", "serviceName": "Open Telekom Cloud", "rate": 0.04 },
+      { "timestamp": "2026-01-04", "serviceName": "Open Telekom Cloud", "rate": 0.015 },
+      { "timestamp": "2026-01-05", "serviceName": "Open Telekom Cloud", "rate": 0.012 },
+      { "timestamp": "2026-01-06", "serviceName": "Open Telekom Cloud", "rate": 0.045 },
+      { "timestamp": "2026-01-07", "serviceName": "Open Telekom Cloud", "rate": 0.05 },
+      { "timestamp": "2026-01-01", "serviceName": "AI & Data Analytics Platform", "rate": 0.08 },
+      { "timestamp": "2026-01-02", "serviceName": "AI & Data Analytics Platform", "rate": 0.065 },
+      { "timestamp": "2026-01-03", "serviceName": "AI & Data Analytics Platform", "rate": 0.09 },
+      { "timestamp": "2026-01-04", "serviceName": "AI & Data Analytics Platform", "rate": 0.05 },
+      { "timestamp": "2026-01-05", "serviceName": "AI & Data Analytics Platform", "rate": 0.04 },
+      { "timestamp": "2026-01-06", "serviceName": "AI & Data Analytics Platform", "rate": 0.095 },
+      { "timestamp": "2026-01-07", "serviceName": "AI & Data Analytics Platform", "rate": 0.1 }
+    ],
+    "dnsResolution": [
+      { "timestamp": "2026-02-04", "avgMs": 12.5 },
+      { "timestamp": "2026-02-05", "avgMs": 11.8 },
+      { "timestamp": "2026-02-06", "avgMs": 13.2 },
+      { "timestamp": "2026-02-07", "avgMs": 12.0 },
+      { "timestamp": "2026-02-08", "avgMs": 10.5 },
+      { "timestamp": "2026-02-09", "avgMs": 11.2 },
+      { "timestamp": "2026-02-10", "avgMs": 10.8 }
+    ],
+    "patchCompliance": [
+      { "category": "OS Patches", "compliant": 85, "nonCompliant": 15, "total": 100 },
+      { "category": "Application Patches", "compliant": 60, "nonCompliant": 10, "total": 70 },
+      { "category": "Firmware", "compliant": 22, "nonCompliant": 3, "total": 25 }
+    ],
+    "pendingChanges": [
+      { "id": "CHG-101", "title": "GPU cluster scaling update", "scheduledDate": "2026-02-12", "risk": "medium", "serviceName": "AI & Data Analytics Platform", "status": "approved" },
+      { "id": "CHG-102", "title": "IoT Hub firmware rollout", "scheduledDate": "2026-02-15", "risk": "high", "serviceName": "IoT Hub", "status": "pending" },
+      { "id": "CHG-103", "title": "Cloud network policy update", "scheduledDate": "2026-02-11", "risk": "low", "serviceName": "Open Telekom Cloud", "status": "approved" }
+    ],
+    "projects": [
+      { "id": "PRJ-101", "name": "AI Model Deployment Pipeline", "progress": 60, "status": "on-track", "dueDate": "2026-05-15", "owner": "AI Engineering" },
+      { "id": "PRJ-102", "name": "IoT Edge Computing Rollout", "progress": 25, "status": "at-risk", "dueDate": "2026-07-01", "owner": "IoT Operations" },
+      { "id": "PRJ-103", "name": "Data Lake Modernization", "progress": 85, "status": "on-track", "dueDate": "2026-03-15", "owner": "Data Platform" }
+    ],
+    "digitalTransformation": [
+      { "name": "AI/ML Operationalization", "progress": 60, "target": 100, "status": "on-track" },
+      { "name": "IoT Edge Computing", "progress": 25, "target": 100, "status": "at-risk" },
+      { "name": "Data Lake Modernization", "progress": 85, "target": 100, "status": "on-track" },
+      { "name": "Cloud Native Migration", "progress": 45, "target": 100, "status": "on-track" }
+    ],
+    "serviceUtilization": [
+      { "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "category": "Cloud", "months": [
+        { "month": "2025-10", "usage": 70, "capacity": 100 }, { "month": "2025-11", "usage": 72, "capacity": 100 }, { "month": "2025-12", "usage": 78, "capacity": 100 }, { "month": "2026-01", "usage": 82, "capacity": 100 }
+      ]},
+      { "serviceId": "svc-ai-001", "serviceName": "AI & Data Analytics Platform", "category": "AI & Data", "months": [
+        { "month": "2025-10", "usage": 60, "capacity": 100 }, { "month": "2025-11", "usage": 65, "capacity": 100 }, { "month": "2025-12", "usage": 72, "capacity": 100 }, { "month": "2026-01", "usage": 78, "capacity": 100 }
+      ]},
+      { "serviceId": "svc-iot-001", "serviceName": "IoT Hub", "category": "IoT", "months": [
+        { "month": "2025-10", "usage": 40, "capacity": 100 }, { "month": "2025-11", "usage": 45, "capacity": 100 }, { "month": "2025-12", "usage": 50, "capacity": 100 }, { "month": "2026-01", "usage": 55, "capacity": 100 }
+      ]}
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "cust-001": {
+    "overall": 94.5,
+    "target": 95,
+    "pillars": [
+      {
+        "name": "People",
+        "score": 93,
+        "target": 95,
+        "metrics": [
+          { "name": "Certified Staff Ratio", "value": 92, "target": 95, "unit": "%" },
+          { "name": "Training Hours/Quarter", "value": 38, "target": 40, "unit": "hrs" },
+          { "name": "Staff Retention", "value": 96, "target": 95, "unit": "%" }
+        ]
+      },
+      {
+        "name": "Processes",
+        "score": 96,
+        "target": 95,
+        "metrics": [
+          { "name": "Change Success Rate", "value": 97.3, "target": 95, "unit": "%" },
+          { "name": "Incident Response SLA Met", "value": 98, "target": 95, "unit": "%" },
+          { "name": "Runbook Coverage", "value": 94, "target": 90, "unit": "%" }
+        ]
+      },
+      {
+        "name": "Platforms",
+        "score": 95,
+        "target": 95,
+        "metrics": [
+          { "name": "Patch Compliance", "value": 96, "target": 95, "unit": "%" },
+          { "name": "Redundancy Coverage", "value": 98, "target": 95, "unit": "%" },
+          { "name": "Monitoring Coverage", "value": 91, "target": 95, "unit": "%" }
+        ]
+      }
+    ]
+  },
+  "cust-002": {
+    "overall": 88.2,
+    "target": 90,
+    "pillars": [
+      {
+        "name": "People",
+        "score": 85,
+        "target": 90,
+        "metrics": [
+          { "name": "Certified Staff Ratio", "value": 82, "target": 90, "unit": "%" },
+          { "name": "Training Hours/Quarter", "value": 30, "target": 40, "unit": "hrs" },
+          { "name": "Staff Retention", "value": 93, "target": 90, "unit": "%" }
+        ]
+      },
+      {
+        "name": "Processes",
+        "score": 91,
+        "target": 90,
+        "metrics": [
+          { "name": "Change Success Rate", "value": 94.8, "target": 95, "unit": "%" },
+          { "name": "Incident Response SLA Met", "value": 92, "target": 95, "unit": "%" },
+          { "name": "Runbook Coverage", "value": 87, "target": 90, "unit": "%" }
+        ]
+      },
+      {
+        "name": "Platforms",
+        "score": 89,
+        "target": 90,
+        "metrics": [
+          { "name": "Patch Compliance", "value": 88, "target": 90, "unit": "%" },
+          { "name": "Redundancy Coverage", "value": 92, "target": 95, "unit": "%" },
+          { "name": "Monitoring Coverage", "value": 86, "target": 90, "unit": "%" }
+        ]
+      }
+    ]
+  }
+}
