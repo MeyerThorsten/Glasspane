@@ -11,6 +11,9 @@ import {
   RiServerLine,
   RiArrowRightLine,
   RiArrowDownLine,
+  RiBarChartBoxLine,
+  RiSettings3Line,
+  RiFileChartLine,
 } from "@remixicon/react";
 
 const features = [
@@ -79,6 +82,33 @@ const views = [
       "System status, latency monitoring, vulnerability scans, and infrastructure utilization.",
     highlights: ["Service Status Map", "Latency Metrics", "Vulnerability Scans"],
     query: "technical",
+  },
+];
+
+const pages = [
+  {
+    icon: RiBarChartBoxLine,
+    title: "Reports",
+    description:
+      "SLA performance history, incident summaries, cost breakdowns, and ticket trends — all the data you'd review monthly or export for stakeholders.",
+    highlights: ["SLA Trend Analysis", "Incident Summary Table", "Cost vs Budget", "Ticket Volume Charts"],
+    href: "/reports",
+  },
+  {
+    icon: RiShieldCheckLine,
+    title: "Compliance",
+    description:
+      "Security posture scoring, patch compliance rates, certificate expiry tracking, and backup health — your compliance status at a glance.",
+    highlights: ["Security Score & CVEs", "Patch Compliance Rates", "Certificate Expiry", "Backup Success Rates"],
+    href: "/compliance",
+  },
+  {
+    icon: RiSettings3Line,
+    title: "Settings",
+    description:
+      "Personalise your portal experience with theme preferences, view your customer profile, and manage notification settings.",
+    highlights: ["Light / Dark Theme", "Customer Profile", "Notification Preferences"],
+    href: "/settings",
   },
 ];
 
@@ -274,6 +304,56 @@ export default function Home() {
                   className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-magenta transition hover:text-magenta-hover"
                 >
                   View Dashboard
+                  <RiArrowRightLine className="h-4 w-4" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Portal Pages ──────────────────────────────────────── */}
+      <section className="bg-gray-50 dark:bg-[#111118] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+              Beyond the dashboard
+            </h2>
+            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+              Dedicated pages for reports, compliance tracking, and personalisation.
+            </p>
+          </div>
+          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+            {pages.map((p) => (
+              <div
+                key={p.title}
+                className="flex flex-col rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-6 shadow-sm transition hover:shadow-md"
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">
+                  <p.icon className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {p.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                  {p.description}
+                </p>
+                <ul className="mt-4 space-y-1">
+                  {p.highlights.map((h) => (
+                    <li
+                      key={h}
+                      className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-magenta" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={p.href}
+                  className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-magenta transition hover:text-magenta-hover"
+                >
+                  Open {p.title}
                   <RiArrowRightLine className="h-4 w-4" />
                 </Link>
               </div>
