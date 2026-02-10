@@ -13,6 +13,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) — redirects to the C-Level dashboard view.
 
+> **Note:** `--legacy-peer-deps` is required because Tremor v3 declares a peer dependency on React 18, while this project uses React 19 / Next.js 16. Tremor works fine at runtime.
+
 ## Tech Stack
 
 | Layer | Technology | Purpose |
@@ -38,6 +40,32 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to the C-Level
 | Font | Inter / system-ui |
 
 CSS variables and Tailwind theme tokens are defined in `app/globals.css`.
+
+## Tremor v3 + Tailwind CSS v4 Compatibility
+
+Tremor v3 constructs Tailwind class names dynamically at runtime using template literals (e.g. `` `fill-${color}-500` ``). Tailwind CSS v4's JIT scanner only detects class names that appear as complete strings in source files, so these dynamic classes are never generated — causing all chart colors to render as black (SVG default fill).
+
+### Color Safelist
+
+`app/globals.css` includes a `@source inline("...")` directive that explicitly safelists every color utility Tremor needs:
+
+- `fill-{color}-500` and `stroke-{color}-500` — SVG chart fills and strokes
+- `bg-{color}-{50,100,200,500,600}` — backgrounds at various shades
+- `text-{color}-{500,700,900}` — text colors
+- `border-{color}-500` and `ring-{color}-300` — borders and focus rings
+
+This covers 22 Tailwind colors (blue, cyan, slate, gray, red, orange, amber, emerald, violet, fuchsia, rose, indigo, green, pink, sky, teal, purple, yellow, zinc, neutral, stone, lime).
+
+### Tremor Semantic Tokens
+
+Tremor also uses semantic class names like `fill-tremor-content`, `bg-tremor-background`, `text-tremor-label`, etc. These require two things in `globals.css`:
+
+1. **Safelist entries** — the semantic classes are included in the `@source inline(...)` block
+2. **Theme definitions** — the `@theme inline` block defines the corresponding CSS custom properties (`--color-tremor-brand`, `--color-tremor-background`, `--color-tremor-content`, etc.) and font sizes (`--text-tremor-label`, `--text-tremor-default`, `--text-tremor-title`, `--text-tremor-metric`)
+
+### Adding New Chart Colors
+
+If you use a Tremor color not already in the safelist (e.g. `"warmGray"`), add its utilities to the `@source inline(...)` block in `globals.css` or the chart will render without color.
 
 ## Architecture
 
@@ -227,6 +255,13 @@ The widget grid uses a 12-column CSS Grid with predefined size classes:
 
 The widget will automatically appear in the dashboard grid, be lazy-loaded, and wrapped with the WidgetShell card styling.
 
+### Widget Authoring Guidelines
+
+- **Empty state:** Return `<div />` (not `null`) when data is loading or empty. Returning `null` unmounts the widget shell, causing Recharts `ResponsiveContainer` to lose its dimensions and log `width(0)` / `height(0)` warnings on re-mount (e.g. when switching customers).
+- **Chart colors:** Use high-contrast color pairs. Avoid pairing a color with `"gray"` — use `"slate"` or a distinct hue instead. Verify the colors you use are included in the safelist in `globals.css`.
+- **DonutChart center labels:** If you render a custom overlay in the center of a `DonutChart`, pass `showLabel={false}` and `showTooltip={false}` to prevent Tremor's built-in center label from overlapping.
+- **X-axis labels:** Tremor's bar/line charts may skip labels when the axis is crowded. Add `tickGap={2}` to force all labels to display.
+
 ## Connecting Real APIs
 
 Each service file in `lib/services/` exposes async functions that currently read from JSON files. To connect real APIs:
@@ -250,6 +285,12 @@ export async function getCurrentSla(customerId: string): Promise<number> {
   return data.currentSla;
 }
 ```
+
+## Known Issues
+
+- **Tremor DonutChart `wrapperStyle` warning** — In development mode, React 19 logs a warning: `"Invalid prop wrapperStyle supplied to React.Fragment"`. This is a known Tremor v3 bug where `wrapperStyle` is passed to a `<React.Fragment>`. It is cosmetic, dev-only, and does not affect functionality. It will be resolved when Tremor releases a React 19-compatible version.
+
+- **`--legacy-peer-deps` required** — Tremor v3 has not updated its peer dependency to include React 19. The library works correctly; only the peer dependency declaration is outdated.
 
 ## Scripts
 
