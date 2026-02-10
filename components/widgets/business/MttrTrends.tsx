@@ -33,7 +33,7 @@ export default function MttrTrends() {
         categories={["P1", "P2", "P3", "P4"]}
         colors={["rose", "fuchsia", "amber", "gray"]}
         valueFormatter={(v) => `${v} min`}
-        yAxisWidth={50}
+        yAxisWidth={64}
         className="h-64"
       />
     </div>
