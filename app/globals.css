@@ -2,6 +2,9 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Scan Tremor's compiled JS so Tailwind v4 picks up its dark: variant classes */
+@source "../node_modules/@tremor/react/dist/**/*.js";
+
 /* Tremor v3 constructs Tailwind class names dynamically (e.g. `fill-${color}-500`),
    which Tailwind v4's JIT scanner cannot detect. We must explicitly safelist them. */
 @source inline("
@@ -39,6 +42,12 @@
   text-tremor-default text-tremor-title text-tremor-metric text-tremor-content text-tremor-content-emphasis
   text-tremor-content-strong text-tremor-label text-tremor-content-subtle
   stroke-tremor-border border-tremor-border ring-tremor-ring
+  bg-dark-tremor-background bg-dark-tremor-background-muted bg-dark-tremor-background-subtle
+  bg-dark-tremor-background-emphasis
+  text-dark-tremor-content text-dark-tremor-content-subtle text-dark-tremor-content-emphasis
+  text-dark-tremor-content-strong text-dark-tremor-content-inverted text-dark-tremor-brand
+  border-dark-tremor-border ring-dark-tremor-ring
+  stroke-dark-tremor-border fill-dark-tremor-content
 ");
 
 :root {
@@ -91,6 +100,38 @@
   --color-tremor-content-emphasis: #374151;
   --color-tremor-content-strong: #111827;
   --color-tremor-content-inverted: #ffffff;
+
+  /* Tremor dark-mode semantic colors (used by Tremor's dark: prefixed classes) */
+  --color-dark-tremor-brand: #818cf8;
+  --color-dark-tremor-brand-faint: #1e1b4b;
+  --color-dark-tremor-brand-muted: #3730a3;
+  --color-dark-tremor-brand-subtle: #6366f1;
+  --color-dark-tremor-brand-emphasis: #a5b4fc;
+  --color-dark-tremor-brand-inverted: #111118;
+  --color-dark-tremor-background: #1C1C27;
+  --color-dark-tremor-background-muted: #111118;
+  --color-dark-tremor-background-subtle: #262633;
+  --color-dark-tremor-background-emphasis: #d1d5db;
+  --color-dark-tremor-border: #2E2E3D;
+  --color-dark-tremor-ring: #2E2E3D;
+  --color-dark-tremor-content: #9E9EB0;
+  --color-dark-tremor-content-subtle: #6B6B80;
+  --color-dark-tremor-content-emphasis: #E5E7EB;
+  --color-dark-tremor-content-strong: #F1F1F4;
+  --color-dark-tremor-content-inverted: #111118;
+
+  /* Tremor shadow tokens */
+  --shadow-tremor-input: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-tremor-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-tremor-dropdown: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-dark-tremor-input: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-dark-tremor-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-dark-tremor-dropdown: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  /* Tremor border radius */
+  --radius-tremor-default: 0.5rem;
+  --radius-tremor-small: 0.375rem;
+  --radius-tremor-full: 9999px;
 
   /* Tremor font sizes */
   --text-tremor-label: 0.75rem;
