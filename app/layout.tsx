@@ -3,7 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "T-Systems Transparency Dashboard",
-  description: "Service transparency and monitoring portal for T-Systems customers",
+  description:
+    "T-Systems Transparency Portal — Zero Outage Program, real-time service monitoring, and role-based dashboards for 99.999% availability.",
 };
 
 export default function RootLayout({
