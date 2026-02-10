@@ -29,7 +29,7 @@ export default function ProjectDeliveryStatus() {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <tr className="border-b border-gray-200 dark:border-[#2E2E3D] text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
             <th className="pb-2 pr-4">Project</th>
             <th className="pb-2 pr-4 w-40">Progress</th>
             <th className="pb-2 pr-4">Status</th>
@@ -39,19 +39,19 @@ export default function ProjectDeliveryStatus() {
         </thead>
         <tbody>
           {data.map((project) => (
-            <tr key={project.id} className="border-b border-gray-100">
-              <td className="py-2 pr-4 font-medium text-gray-900">{project.name}</td>
+            <tr key={project.id} className="border-b border-gray-100 dark:border-[#252533]">
+              <td className="py-2 pr-4 font-medium text-gray-900 dark:text-gray-100">{project.name}</td>
               <td className="py-2 pr-4">
                 <div className="flex items-center gap-2">
                   <ProgressBar value={project.progress} color="fuchsia" className="w-24" />
-                  <span className="text-xs text-gray-500">{project.progress}%</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{project.progress}%</span>
                 </div>
               </td>
               <td className="py-2 pr-4">
                 <StatusBadge label={project.status} variant={statusVariant[project.status]} />
               </td>
-              <td className="py-2 pr-4 text-gray-600">{project.dueDate}</td>
-              <td className="py-2 text-gray-600">{project.owner}</td>
+              <td className="py-2 pr-4 text-gray-600 dark:text-gray-400">{project.dueDate}</td>
+              <td className="py-2 text-gray-600 dark:text-gray-400">{project.owner}</td>
             </tr>
           ))}
         </tbody>

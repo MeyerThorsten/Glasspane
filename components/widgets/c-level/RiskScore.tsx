@@ -35,7 +35,7 @@ export default function RiskScore() {
       <div className="flex items-center justify-between">
         <div>
           <p className={`text-3xl font-bold ${scoreColor}`}>{data.overall}</p>
-          <p className="text-xs text-gray-500 mt-1">Risk Score</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Risk Score</p>
         </div>
         <TrendIndicator
           direction={data.trend}
@@ -45,7 +45,7 @@ export default function RiskScore() {
       </div>
 
       <div>
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
+        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
           <span>Risk Distribution</span>
           <span>{total} total items</span>
         </div>

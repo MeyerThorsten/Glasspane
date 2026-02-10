@@ -43,7 +43,7 @@ export default function SecurityPosture() {
       <div className="flex items-center justify-between">
         <div>
           <p className={`text-3xl font-bold ${scoreColor}`}>{data.overallScore}</p>
-          <p className="text-xs text-gray-500 mt-1">Security Score</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Security Score</p>
         </div>
         <div className="w-32 h-32">
           <DonutChart
@@ -59,7 +59,7 @@ export default function SecurityPosture() {
       </div>
 
       <div>
-        <p className="text-xs font-medium text-gray-500 mb-2">
+        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">
           Vulnerabilities ({totalVulns})
         </p>
         <div className="grid grid-cols-4 gap-2">
@@ -78,7 +78,7 @@ export default function SecurityPosture() {
               >
                 {v.count}
               </div>
-              <p className="text-xs text-gray-400 capitalize">{v.severity}</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 capitalize">{v.severity}</p>
             </div>
           ))}
         </div>

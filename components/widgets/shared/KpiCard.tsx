@@ -21,10 +21,10 @@ export default function KpiCard({ label, value, unit, trend, trendValue, trendPo
 
   return (
     <div>
-      <div className="text-xs text-gray-500 font-medium">{label}</div>
+      <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">{label}</div>
       <div className="mt-1 flex items-baseline gap-1">
-        <span className="text-2xl font-bold text-gray-900">{value}</span>
-        {unit && <span className="text-sm text-gray-500">{unit}</span>}
+        <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">{value}</span>
+        {unit && <span className="text-sm text-gray-500 dark:text-gray-400">{unit}</span>}
       </div>
       {trend && (
         <div className={`mt-1 flex items-center gap-1 text-xs ${trendColor}`}>

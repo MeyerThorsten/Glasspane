@@ -39,8 +39,8 @@ export default function DigitalTransformation() {
   return (
     <div className="space-y-4">
       <div>
-        <p className="text-2xl font-bold text-gray-900">{avgProgress}%</p>
-        <p className="text-xs text-gray-500">Average Progress</p>
+        <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{avgProgress}%</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">Average Progress</p>
       </div>
 
       <div className="space-y-3">
@@ -57,9 +57,9 @@ export default function DigitalTransformation() {
           return (
             <div key={milestone.name}>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700 truncate">{milestone.name}</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate">{milestone.name}</span>
                 <div className="flex items-center gap-2 ml-2 shrink-0">
-                  <span className="text-sm font-semibold text-gray-900">{milestone.progress}%</span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{milestone.progress}%</span>
                   <StatusBadge
                     label={statusLabel[milestone.status]}
                     variant={statusVariant[milestone.status]}

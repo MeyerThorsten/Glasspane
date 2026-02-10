@@ -24,7 +24,7 @@ export default function ResourceUtilization() {
   return (
     <div className="space-y-4">
       <div>
-        <p className="text-xs font-medium text-gray-500 mb-1">CPU Usage (%)</p>
+        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">CPU Usage (%)</p>
         <AreaChart
           data={cpuData}
           index="timestamp"
@@ -38,7 +38,7 @@ export default function ResourceUtilization() {
         />
       </div>
       <div>
-        <p className="text-xs font-medium text-gray-500 mb-1">Memory Usage (%)</p>
+        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Memory Usage (%)</p>
         <AreaChart
           data={memoryData}
           index="timestamp"
@@ -52,7 +52,7 @@ export default function ResourceUtilization() {
         />
       </div>
       <div>
-        <p className="text-xs font-medium text-gray-500 mb-1">Disk Usage (%)</p>
+        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Disk Usage (%)</p>
         <AreaChart
           data={diskData}
           index="timestamp"

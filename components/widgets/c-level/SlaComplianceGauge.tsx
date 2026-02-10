@@ -35,8 +35,8 @@ export default function SlaComplianceGauge() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-3xl font-bold text-gray-900">{currentSla.toFixed(3)}%</p>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">{currentSla.toFixed(3)}%</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             Target: {target}% {meetsTarget ? (
               <span className="text-emerald-600 font-medium">Met</span>
             ) : (
@@ -59,11 +59,11 @@ export default function SlaComplianceGauge() {
 
       {lastThree.length > 0 && (
         <div>
-          <p className="text-xs font-medium text-gray-500 mb-2">Recent Months</p>
+          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">Recent Months</p>
           <div className="grid grid-cols-3 gap-2">
             {lastThree.map((m) => (
               <div key={m.month} className="text-center">
-                <p className="text-xs text-gray-400">{m.month}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">{m.month}</p>
                 <p className={`text-sm font-semibold ${m.availability >= m.target ? "text-emerald-600" : "text-amber-600"}`}>
                   {m.availability.toFixed(3)}%
                 </p>

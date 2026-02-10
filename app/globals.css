@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 /* Tremor v3 constructs Tailwind class names dynamically (e.g. `fill-${color}-500`),
    which Tailwind v4's JIT scanner cannot detect. We must explicitly safelist them. */
 @source inline("
@@ -103,6 +105,12 @@ body {
   color: #111827;
 }
 
+.dark body,
+:is(.dark) body {
+  background: #111118;
+  color: #F1F1F4;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -116,6 +124,34 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #9CA3AF;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3A3A4D;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4A4A60;
+}
+
+/* Dark mode Tremor variable overrides */
+.dark {
+  --color-tremor-brand: #818cf8;
+  --color-tremor-brand-faint: #1e1b4b;
+  --color-tremor-brand-muted: #3730a3;
+  --color-tremor-brand-subtle: #6366f1;
+  --color-tremor-brand-emphasis: #a5b4fc;
+  --color-tremor-brand-inverted: #111118;
+  --color-tremor-background: #1C1C27;
+  --color-tremor-background-muted: #111118;
+  --color-tremor-background-subtle: #262633;
+  --color-tremor-background-emphasis: #d1d5db;
+  --color-tremor-border: #2E2E3D;
+  --color-tremor-ring: #2E2E3D;
+  --color-tremor-content: #9E9EB0;
+  --color-tremor-content-subtle: #6B6B80;
+  --color-tremor-content-emphasis: #E5E7EB;
+  --color-tremor-content-strong: #F1F1F4;
+  --color-tremor-content-inverted: #111118;
 }
 
 /* Widget grid sizes */

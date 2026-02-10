@@ -41,9 +41,9 @@ export default function PatchCompliance() {
         />
       </div>
       <div className="space-y-2">
-        <p className="text-3xl font-bold text-gray-900">{compliancePercent}%</p>
-        <p className="text-xs text-gray-500">Overall Compliance</p>
-        <div className="space-y-1 text-xs text-gray-600">
+        <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">{compliancePercent}%</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">Overall Compliance</p>
+        <div className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
           {data.map((d) => {
             const pct = d.total > 0 ? ((d.compliant / d.total) * 100).toFixed(0) : "0";
             return (

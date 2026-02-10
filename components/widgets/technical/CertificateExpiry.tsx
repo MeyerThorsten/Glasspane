@@ -27,7 +27,7 @@ export default function CertificateExpiry() {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200 text-left text-xs text-gray-500">
+          <tr className="border-b border-gray-200 dark:border-[#2E2E3D] text-left text-xs text-gray-500 dark:text-gray-400">
             <th className="pb-2 font-medium">Domain</th>
             <th className="pb-2 font-medium">Issuer</th>
             <th className="pb-2 font-medium">Expiry Date</th>
@@ -37,11 +37,11 @@ export default function CertificateExpiry() {
         </thead>
         <tbody>
           {data.map((cert) => (
-            <tr key={cert.domain} className="border-b border-gray-50">
-              <td className="py-2 font-medium text-gray-900">{cert.domain}</td>
-              <td className="py-2 text-gray-600">{cert.issuer}</td>
-              <td className="py-2 text-gray-600">{cert.expiresAt}</td>
-              <td className="py-2 text-right text-gray-700">{cert.daysUntilExpiry}</td>
+            <tr key={cert.domain} className="border-b border-gray-50 dark:border-[#252533]">
+              <td className="py-2 font-medium text-gray-900 dark:text-gray-100">{cert.domain}</td>
+              <td className="py-2 text-gray-600 dark:text-gray-400">{cert.issuer}</td>
+              <td className="py-2 text-gray-600 dark:text-gray-400">{cert.expiresAt}</td>
+              <td className="py-2 text-right text-gray-700 dark:text-gray-300">{cert.daysUntilExpiry}</td>
               <td className="py-2 text-right">
                 <StatusBadge
                   label={cert.status.replace("-", " ")}

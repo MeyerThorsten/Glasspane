@@ -25,14 +25,14 @@ export default function TopOpenIssues() {
   if (!data) return <div />;
 
   if (data.length === 0) {
-    return <p className="text-sm text-gray-500">No open issues.</p>;
+    return <p className="text-sm text-gray-500 dark:text-gray-400">No open issues.</p>;
   }
 
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <tr className="border-b border-gray-200 dark:border-[#2E2E3D] text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
             <th className="pb-2 pr-4">ID</th>
             <th className="pb-2 pr-4">Title</th>
             <th className="pb-2 pr-4">Severity</th>
@@ -42,14 +42,14 @@ export default function TopOpenIssues() {
         </thead>
         <tbody>
           {data.map((incident) => (
-            <tr key={incident.id} className="border-b border-gray-100">
-              <td className="py-2 pr-4 font-mono text-xs text-gray-600">{incident.id}</td>
-              <td className="py-2 pr-4 font-medium text-gray-900">{incident.title}</td>
+            <tr key={incident.id} className="border-b border-gray-100 dark:border-[#252533]">
+              <td className="py-2 pr-4 font-mono text-xs text-gray-600 dark:text-gray-400">{incident.id}</td>
+              <td className="py-2 pr-4 font-medium text-gray-900 dark:text-gray-100">{incident.title}</td>
               <td className="py-2 pr-4">
                 <StatusBadge label={incident.severity} variant={severityVariant[incident.severity] ?? "neutral"} />
               </td>
-              <td className="py-2 pr-4 text-gray-600">{incident.serviceName}</td>
-              <td className="py-2 text-gray-600 whitespace-nowrap">
+              <td className="py-2 pr-4 text-gray-600 dark:text-gray-400">{incident.serviceName}</td>
+              <td className="py-2 text-gray-600 dark:text-gray-400 whitespace-nowrap">
                 {new Date(incident.createdAt).toLocaleDateString()}
               </td>
             </tr>

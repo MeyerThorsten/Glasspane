@@ -7,7 +7,7 @@ import { CustomerProvider } from "@/lib/customer-context";
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <CustomerProvider>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
         <Sidebar />
         <div className="ml-[260px]">
           <Header />

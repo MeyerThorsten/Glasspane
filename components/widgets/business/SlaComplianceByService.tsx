@@ -27,7 +27,7 @@ export default function SlaComplianceByService() {
 
   return (
     <div>
-      <div className="flex items-center gap-4 mb-3 text-xs text-gray-500">
+      <div className="flex items-center gap-4 mb-3 text-xs text-gray-500 dark:text-gray-400">
         <span className="flex items-center gap-1">
           <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" /> Meets SLA
         </span>

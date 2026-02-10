@@ -32,7 +32,7 @@ export default function SystemStatusGrid() {
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-2 text-xs text-gray-500">
+      <div className="flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-400">
         {Object.entries(statusColor).map(([status, color]) => (
           <span key={status} className="flex items-center gap-1">
             <span className={`w-2 h-2 rounded-full ${color}`} />
@@ -44,10 +44,10 @@ export default function SystemStatusGrid() {
         {services.map((service) => (
           <div
             key={service.id}
-            className="flex items-center gap-2 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2"
+            className="flex items-center gap-2 rounded-lg border border-gray-100 dark:border-[#252533] bg-gray-50 dark:bg-[#1C1C27] px-3 py-2"
           >
             <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${statusColor[service.status]}`} />
-            <span className="text-sm text-gray-700 truncate">{service.name}</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300 truncate">{service.name}</span>
           </div>
         ))}
       </div>

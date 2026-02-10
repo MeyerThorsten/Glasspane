@@ -37,11 +37,11 @@ export default function MajorIncidentsSummary() {
     <div className="space-y-4">
       <div className="flex items-baseline gap-3">
         <div>
-          <p className="text-2xl font-bold text-gray-900">{totalIncidents}</p>
-          <p className="text-xs text-gray-500">Total Incidents</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalIncidents}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">Total Incidents</p>
         </div>
         {totalOpen > 0 && (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-200">
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800">
             {totalOpen} open
           </span>
         )}
@@ -53,12 +53,12 @@ export default function MajorIncidentsSummary() {
         className="mt-2"
       />
 
-      <div className="grid grid-cols-4 gap-2 pt-2 border-t border-gray-100">
+      <div className="grid grid-cols-4 gap-2 pt-2 border-t border-gray-100 dark:border-[#252533]">
         {summary.map((s) => (
           <div key={s.severity} className="text-center">
-            <p className="text-xs font-medium text-gray-400">{s.severity}</p>
-            <p className="text-sm font-semibold text-gray-900">{s.total}</p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs font-medium text-gray-400 dark:text-gray-500">{s.severity}</p>
+            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{s.total}</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500">
               {s.open > 0 ? (
                 <span className="text-red-600">{s.open} open</span>
               ) : (

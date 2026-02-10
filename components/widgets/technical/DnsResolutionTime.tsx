@@ -26,11 +26,11 @@ export default function DnsResolutionTime() {
   return (
     <div className="space-y-3">
       <div>
-        <p className="text-3xl font-bold text-gray-900">{currentAvg.toFixed(1)} ms</p>
-        <p className="text-xs text-gray-500">Current Avg Resolution Time</p>
+        <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">{currentAvg.toFixed(1)} ms</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">Current Avg Resolution Time</p>
       </div>
       <div>
-        <p className="text-xs font-medium text-gray-500 mb-1">7-Day Trend</p>
+        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">7-Day Trend</p>
         <AreaChart
           data={chartData}
           index="timestamp"

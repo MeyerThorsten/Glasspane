@@ -29,13 +29,13 @@ export default function BackupSuccessRate() {
         return (
           <div
             key={backup.serviceName}
-            className="rounded-lg border border-gray-100 bg-gray-50 p-3"
+            className="rounded-lg border border-gray-100 dark:border-[#252533] bg-gray-50 dark:bg-[#1C1C27] p-3"
           >
-            <p className="text-sm font-medium text-gray-700">{backup.serviceName}</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{backup.serviceName}</p>
             <p className={`text-2xl font-bold mt-1 ${rateColor}`}>
               {backup.successRate}%
             </p>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Last: {new Date(backup.lastBackup).toLocaleString()}
             </p>
           </div>

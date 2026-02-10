@@ -15,15 +15,15 @@ export default function ViewTabs() {
   const currentView = (searchParams.get("view") as ViewType) || "c-level";
 
   return (
-    <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-lg">
+    <div className="flex items-center gap-1 bg-gray-100 dark:bg-[#262633] p-1 rounded-lg">
       {views.map((v) => (
         <button
           key={v.id}
           onClick={() => router.push(`/dashboard?view=${v.id}`)}
           className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
             currentView === v.id
-              ? "bg-white text-magenta shadow-sm"
-              : "text-gray-600 hover:text-gray-900"
+              ? "bg-white dark:bg-[#1C1C27] text-magenta shadow-sm"
+              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
           }`}
         >
           {v.label}

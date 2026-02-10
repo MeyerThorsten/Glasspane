@@ -40,7 +40,7 @@ export default function ChangeSuccessRate() {
           showTooltip={false}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-2xl font-bold text-gray-900">{data.rate}%</span>
+          <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">{data.rate}%</span>
         </div>
       </div>
       <div className={`mt-3 flex items-center gap-1 text-sm font-medium ${trendColor}`}>

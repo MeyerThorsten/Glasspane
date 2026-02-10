@@ -91,7 +91,7 @@ const stats = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white dark:bg-[#111118]">
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#E20074] to-[#5A0030] text-white">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.1),transparent_60%)]" />
@@ -199,13 +199,13 @@ export default function Home() {
       </section>
 
       {/* ── Features Grid ────────────────────────────────────── */}
-      <section id="features" className="bg-gray-50 py-20 sm:py-28">
+      <section id="features" className="bg-gray-50 dark:bg-[#111118] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
               Everything you need for service transparency
             </h2>
-            <p className="mt-4 text-lg text-gray-500">
+            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
               A single portal for availability, security, cost, and operational
               insights — built on T-Systems Zero Outage standards.
             </p>
@@ -214,15 +214,15 @@ export default function Home() {
             {features.map((f) => (
               <div
                 key={f.title}
-                className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md"
+                className="rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-6 shadow-sm transition hover:shadow-md"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 text-magenta">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">
                   <f.icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                   {f.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-500">
+                <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                   {f.description}
                 </p>
               </div>
@@ -235,10 +235,10 @@ export default function Home() {
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
               Three views, one portal
             </h2>
-            <p className="mt-4 text-lg text-gray-500">
+            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
               Every stakeholder sees the data that matters most to them.
             </p>
           </div>
@@ -246,23 +246,23 @@ export default function Home() {
             {views.map((v) => (
               <div
                 key={v.title}
-                className="flex flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md"
+                className="flex flex-col rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-6 shadow-sm transition hover:shadow-md"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 text-magenta">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">
                   <v.icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                   {v.title}
                 </h3>
                 <p className="text-sm font-medium text-magenta">{v.subtitle}</p>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-500">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                   {v.description}
                 </p>
                 <ul className="mt-4 space-y-1">
                   {v.highlights.map((h) => (
                     <li
                       key={h}
-                      className="flex items-center gap-2 text-sm text-gray-600"
+                      className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-magenta" />
                       {h}
@@ -303,10 +303,10 @@ export default function Home() {
       {/* ── CTA ──────────────────────────────────────────────── */}
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
             Ready to see your services?
           </h2>
-          <p className="mt-4 text-lg text-gray-500">
+          <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
             Explore the live dashboard demo with 31 widgets across three
             role-based views.
           </p>
@@ -321,9 +321,9 @@ export default function Home() {
       </section>
 
       {/* ── Footer ───────────────────────────────────────────── */}
-      <footer className="border-t border-gray-200 bg-gray-50 py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 text-center text-sm text-gray-400">
-          <div className="flex items-center gap-2 font-semibold text-gray-600">
+      <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
+          <div className="flex items-center gap-2 font-semibold text-gray-600 dark:text-gray-400">
             <span className="flex h-6 w-6 items-center justify-center rounded bg-magenta text-[10px] font-bold text-white">
               T
             </span>

@@ -27,7 +27,7 @@ export default function ZeroOutageScore() {
     <div className="space-y-4">
       <div className="flex items-baseline gap-2">
         <p className={`text-3xl font-bold ${scoreColor}`}>{data.overall}</p>
-        <p className="text-sm text-gray-500">/ {data.target} target</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">/ {data.target} target</p>
       </div>
 
       <div className="space-y-3">
@@ -37,7 +37,7 @@ export default function ZeroOutageScore() {
           return (
             <div key={pillar.name}>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">{pillar.name}</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{pillar.name}</span>
                 <span className={`text-sm font-semibold ${meetsTarget ? "text-emerald-600" : "text-amber-600"}`}>
                   {pillar.score} / {pillar.target}
                 </span>
