@@ -89,7 +89,7 @@ export function perturbAbsolute(
  * `monthField` is the key containing the "YYYY-MM" string.
  * `generate` receives (month, rng) and returns a new item to append.
  */
-export function extendMonthlyData<T extends Record<string, unknown>>(
+export function extendMonthlyData<T extends object>(
   items: T[],
   monthField: keyof T,
   generate: (month: string, rng: () => number) => T,
@@ -125,7 +125,7 @@ export function extendMonthlyData<T extends Record<string, unknown>>(
  * `dateField` is the key containing the "YYYY-MM-DD" string.
  * `generate` receives (date, rng, previousItem) and returns a new item.
  */
-export function extendDailyData<T extends Record<string, unknown>>(
+export function extendDailyData<T extends object>(
   items: T[],
   dateField: keyof T,
   generate: (date: string, rng: () => number, prev: T) => T,

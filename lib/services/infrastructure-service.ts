@@ -123,19 +123,39 @@ export async function getChangeCalendar(customerId: string): Promise<ChangeCalen
 
 export async function getErrorRates(customerId: string): Promise<ErrorRate[]> {
   const items = data[customerId]?.errorRates ?? [];
-  return items.map((i, idx) => ({
+  const shifted = items.map((i, idx) => ({
     ...i,
     timestamp: shiftDate(i.timestamp),
     rate: perturb(i.rate, 10, `errorRate|${idx}`, 0, 5),
   }));
+  // Group by service, extend each independently, then merge
+  const byService = new Map<string, ErrorRate[]>();
+  for (const item of shifted) {
+    const group = byService.get(item.serviceName) ?? [];
+    group.push(item);
+    byService.set(item.serviceName, group);
+  }
+  const extended: ErrorRate[] = [];
+  for (const [, group] of byService) {
+    extended.push(...extendDailyData(group, "timestamp", (date, rng, prev) => ({
+      timestamp: date,
+      serviceName: prev.serviceName as string,
+      rate: Math.round(Math.max(0, Math.min(5, (prev.rate as number) + (rng() * 0.02 - 0.01))) * 1000) / 1000,
+    })));
+  }
+  return extended;
 }
 
 export async function getDnsResolution(customerId: string): Promise<DnsResolution[]> {
   const items = data[customerId]?.dnsResolution ?? [];
-  return items.map((i, idx) => ({
+  const shifted = items.map((i, idx) => ({
     ...i,
     timestamp: shiftDate(i.timestamp),
     avgMs: perturb(i.avgMs, 5, `dnsAvg|${idx}`, 0),
+  }));
+  return extendDailyData(shifted, "timestamp", (date, rng, prev) => ({
+    timestamp: date,
+    avgMs: Math.round(Math.max(1, (prev.avgMs as number) + (rng() * 2 - 1)) * 100) / 100,
   }));
 }
 
