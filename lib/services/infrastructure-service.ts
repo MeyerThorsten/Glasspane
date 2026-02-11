@@ -20,7 +20,7 @@ import {
   computeDaysUntilExpiry,
   computeCertificateStatus,
 } from "@/lib/utils/date-shift";
-import { perturb, perturbInt, perturbAbsolute, extendMonthlyData } from "@/lib/utils/data-variation";
+import { perturb, perturbInt, perturbAbsolute, extendMonthlyData, extendDailyData } from "@/lib/utils/data-variation";
 
 type InfraData = {
   resourceUtilization: ResourceUtilization[];
@@ -41,33 +41,50 @@ const data = infraData as Record<string, InfraData>;
 
 export async function getResourceUtilization(customerId: string): Promise<ResourceUtilization[]> {
   const items = data[customerId]?.resourceUtilization ?? [];
-  return items.map((i, idx) => ({
+  const shifted = items.map((i, idx) => ({
     ...i,
     timestamp: shiftDate(i.timestamp),
     cpu: perturb(i.cpu, 3, `cpu|${idx}`, 0, 100),
     memory: perturb(i.memory, 3, `memory|${idx}`, 0, 100),
     disk: perturb(i.disk, 3, `disk|${idx}`, 0, 100),
   }));
+  return extendDailyData(shifted, "timestamp", (date, rng, prev) => ({
+    timestamp: date,
+    cpu: Math.round(Math.max(0, Math.min(100, (prev.cpu as number) + (rng() * 10 - 5))) * 100) / 100,
+    memory: Math.round(Math.max(0, Math.min(100, (prev.memory as number) + (rng() * 6 - 3))) * 100) / 100,
+    disk: Math.round(Math.max(0, Math.min(100, (prev.disk as number) + (rng() * 2 - 0.5))) * 100) / 100,
+  }));
 }
 
 export async function getLatencyMetrics(customerId: string): Promise<LatencyMetric[]> {
   const items = data[customerId]?.latency ?? [];
-  return items.map((i, idx) => ({
+  const shifted = items.map((i, idx) => ({
     ...i,
     timestamp: shiftDate(i.timestamp),
     p50: perturb(i.p50, 5, `p50|${idx}`, 0),
     p95: perturb(i.p95, 5, `p95|${idx}`, 0),
     p99: perturb(i.p99, 5, `p99|${idx}`, 0),
   }));
+  return extendDailyData(shifted, "timestamp", (date, rng, prev) => ({
+    timestamp: date,
+    p50: Math.round(Math.max(1, (prev.p50 as number) + (rng() * 4 - 2)) * 100) / 100,
+    p95: Math.round(Math.max(5, (prev.p95 as number) + (rng() * 10 - 5)) * 100) / 100,
+    p99: Math.round(Math.max(10, (prev.p99 as number) + (rng() * 30 - 15)) * 100) / 100,
+  }));
 }
 
 export async function getNetworkThroughput(customerId: string): Promise<NetworkThroughput[]> {
   const items = data[customerId]?.networkThroughput ?? [];
-  return items.map((i, idx) => ({
+  const shifted = items.map((i, idx) => ({
     ...i,
     timestamp: shiftDate(i.timestamp),
     inbound: perturb(i.inbound, 8, `inbound|${idx}`, 0),
     outbound: perturb(i.outbound, 8, `outbound|${idx}`, 0),
+  }));
+  return extendDailyData(shifted, "timestamp", (date, rng, prev) => ({
+    timestamp: date,
+    inbound: Math.round(Math.max(100, (prev.inbound as number) + (rng() * 200 - 100)) * 100) / 100,
+    outbound: Math.round(Math.max(100, (prev.outbound as number) + (rng() * 150 - 75)) * 100) / 100,
   }));
 }
 

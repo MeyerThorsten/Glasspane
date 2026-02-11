@@ -5,7 +5,7 @@
  * stable within a single day but change day-to-day.
  */
 
-import { getDaysDelta, getMonthsDelta, shiftMonth } from "./date-shift";
+import { getDaysDelta } from "./date-shift";
 
 /** Mulberry32 — fast 32-bit PRNG returning values in [0, 1). */
 export function mulberry32(seed: number): () => number {
@@ -85,6 +85,7 @@ export function perturbAbsolute(
 
 /**
  * Append synthetic months to a monthly time-series array.
+ * Compares the last item's month against the current month and fills the gap.
  * `monthField` is the key containing the "YYYY-MM" string.
  * `generate` receives (month, rng) and returns a new item to append.
  */
@@ -93,22 +94,58 @@ export function extendMonthlyData<T extends Record<string, unknown>>(
   monthField: keyof T,
   generate: (month: string, rng: () => number) => T,
 ): T[] {
-  const monthsDelta = getMonthsDelta();
-  if (monthsDelta === 0 || items.length === 0) return items;
+  if (items.length === 0) return items;
 
-  const result = [...items];
   const lastMonth = items[items.length - 1][monthField] as string;
-
-  // Parse the last shifted month and generate new ones
   const [lastY, lastM] = lastMonth.split("-").map(Number);
 
-  for (let i = 1; i <= monthsDelta; i++) {
+  const now = new Date();
+  const curY = now.getUTCFullYear();
+  const curM = now.getUTCMonth() + 1;
+  const monthsToAdd = (curY - lastY) * 12 + (curM - lastM);
+
+  if (monthsToAdd <= 0) return items;
+
+  const result = [...items];
+  for (let i = 1; i <= monthsToAdd; i++) {
     const d = new Date(Date.UTC(lastY, lastM - 1 + i, 1));
     const y = d.getUTCFullYear();
     const m = String(d.getUTCMonth() + 1).padStart(2, "0");
     const month = `${y}-${m}`;
     const rng = mulberry32(dayHash(`extend|${month}`));
     result.push(generate(month, rng));
+  }
+
+  return result;
+}
+
+/**
+ * Append synthetic days to a daily time-series array.
+ * Compares the last item's date against today and fills the gap.
+ * `dateField` is the key containing the "YYYY-MM-DD" string.
+ * `generate` receives (date, rng, previousItem) and returns a new item.
+ */
+export function extendDailyData<T extends Record<string, unknown>>(
+  items: T[],
+  dateField: keyof T,
+  generate: (date: string, rng: () => number, prev: T) => T,
+): T[] {
+  if (items.length === 0) return items;
+
+  const lastDate = items[items.length - 1][dateField] as string;
+  const lastD = new Date(lastDate + "T00:00:00Z");
+  const now = new Date();
+  const todayMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const daysToAdd = Math.floor((todayMs - lastD.getTime()) / 86_400_000);
+
+  if (daysToAdd <= 0) return items;
+
+  const result = [...items];
+  for (let i = 1; i <= daysToAdd; i++) {
+    const d = new Date(lastD.getTime() + i * 86_400_000);
+    const dateStr = d.toISOString().slice(0, 10);
+    const rng = mulberry32(dayHash(`extendDaily|${dateStr}`));
+    result.push(generate(dateStr, rng, result[result.length - 1]));
   }
 
   return result;
