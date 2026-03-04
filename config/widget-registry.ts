@@ -5,6 +5,8 @@ import { lazy, ComponentType } from "react";
 const registry: Record<string, () => Promise<{ default: ComponentType }>> = {
   // AI widgets
   "ai-summary": () => import("@/components/ai/AiSummaryWidget"),
+  "ai-anomalies": () => import("@/components/ai/AiAnomaliesWidget"),
+  "ai-predictions": () => import("@/components/ai/AiPredictionsWidget"),
 
   // C-Level widgets
   "sla-compliance-gauge": () => import("@/components/widgets/c-level/SlaComplianceGauge"),
