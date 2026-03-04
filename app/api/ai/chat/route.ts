@@ -40,8 +40,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ answer });
   } catch (error) {
     console.error("AI chat error:", error);
+    const message = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { error: "Failed to generate response" },
+      { error: "Failed to generate response", detail: message },
       { status: 500 },
     );
   }
