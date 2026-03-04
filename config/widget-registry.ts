@@ -8,6 +8,9 @@ const registry: Record<string, () => Promise<{ default: ComponentType }>> = {
   "ai-anomalies": () => import("@/components/ai/AiAnomaliesWidget"),
   "ai-predictions": () => import("@/components/ai/AiPredictionsWidget"),
 
+  // Optimization
+  "optimization-recommendations": () => import("@/components/widgets/OptimizationWidget"),
+
   // C-Level widgets
   "sla-compliance-gauge": () => import("@/components/widgets/c-level/SlaComplianceGauge"),
   "zero-outage-score": () => import("@/components/widgets/c-level/ZeroOutageScore"),

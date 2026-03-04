@@ -12,6 +12,7 @@ export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
     { id: "major-incidents-summary", title: "Major Incidents", size: "medium", category: "incidents" },
     { id: "digital-transformation", title: "Digital Transformation Progress", size: "medium", category: "transformation" },
     { id: "security-posture", title: "Security Posture", size: "small", category: "security" },
+    { id: "optimization-recommendations", title: "Optimization Recommendations", size: "medium", category: "optimization" },
   ],
   business: [
     { id: "ai-summary", title: "AI Summary", size: "medium", category: "kpi" },
