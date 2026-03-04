@@ -3,7 +3,6 @@ import {
   RiShieldCheckLine,
   RiDashboardLine,
   RiUserSettingsLine,
-  RiLockLine,
   RiMoneyEuroCircleLine,
   RiAlarmWarningLine,
   RiLineChartLine,
@@ -13,16 +12,13 @@ import {
   RiArrowDownLine,
   RiBarChartBoxLine,
   RiSettings3Line,
-  RiFileChartLine,
+  RiSparklingLine,
+  RiChat3Line,
+  RiRadarLine,
+  RiBrainLine,
 } from "@remixicon/react";
 
 const features = [
-  {
-    icon: RiShieldCheckLine,
-    title: "Zero Outage Program",
-    description:
-      "99.999% availability target built on the three pillars: People, Processes, and Platforms.",
-  },
   {
     icon: RiDashboardLine,
     title: "Real-Time Monitoring",
@@ -31,27 +27,45 @@ const features = [
   },
   {
     icon: RiUserSettingsLine,
-    title: "Role-Based Views",
+    title: "Multi-View Dashboard",
     description:
       "C-Level, Business, and Technical dashboards tailored to each audience.",
   },
   {
-    icon: RiLockLine,
-    title: "Security & Compliance",
+    icon: RiShieldCheckLine,
+    title: "SLA Tracking",
     description:
-      "Vulnerability tracking, patch compliance, and certificate management.",
+      "99.999% availability target with real-time SLA compliance gauges and trend analysis.",
   },
   {
     icon: RiMoneyEuroCircleLine,
-    title: "Cost Transparency",
+    title: "Cost Management",
     description:
       "Budget vs. actual spending, month-over-month trends, and per-service breakdown.",
   },
   {
-    icon: RiAlarmWarningLine,
-    title: "Incident Management",
+    icon: RiSparklingLine,
+    title: "AI-Powered Summaries",
     description:
-      "MTTR trends, severity tracking, and change management in one place.",
+      "Natural-language dashboard summaries tailored to your role — C-level, business, or technical.",
+  },
+  {
+    icon: RiChat3Line,
+    title: "Intelligent Chat Assistant",
+    description:
+      "Ask questions about your infrastructure data in plain English and get instant, data-driven answers.",
+  },
+  {
+    icon: RiRadarLine,
+    title: "Anomaly Detection",
+    description:
+      "AI automatically flags unusual metric patterns — CPU spikes, latency trends, error rate surges.",
+  },
+  {
+    icon: RiBrainLine,
+    title: "Predictive Insights",
+    description:
+      "Forecasts SLA risks, cost overruns, and capacity thresholds before they become problems.",
   },
 ];
 
@@ -114,9 +128,9 @@ const pages = [
 
 const stats = [
   { value: "99.999%", label: "Availability Target" },
-  { value: "31", label: "Dashboard Widgets" },
+  { value: "35+", label: "Dashboard Widgets" },
+  { value: "4", label: "AI Features" },
   { value: "3", label: "Role-Based Views" },
-  { value: "24/7", label: "Real-Time Monitoring" },
 ];
 
 export default function Home() {
@@ -136,9 +150,10 @@ export default function Home() {
                 Transparency Portal
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-white/80">
-                Zero Outage Program. 99.999% availability. Real-time service
-                monitoring across every layer of your infrastructure — designed
-                for executives, operations, and engineering teams.
+                AI-powered infrastructure transparency for managed service
+                providers. Real-time monitoring, anomaly detection, and
+                predictive insights — designed for executives, operations,
+                and engineering teams.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
@@ -239,8 +254,12 @@ export default function Home() {
               A single portal for availability, security, cost, and operational
               insights — built on Zero Outage standards.
             </p>
+            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-950/30 px-4 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+              Powered by IBM watsonx.ai
+            </p>
           </div>
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
               <div
                 key={f.title}
@@ -387,8 +406,8 @@ export default function Home() {
             Ready to see your services?
           </h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            Explore the live dashboard demo with 31 widgets across three
-            role-based views.
+            Explore the live dashboard demo with 35+ widgets and AI-powered
+            insights across three role-based views.
           </p>
           <Link
             href="/dashboard?view=c-level"
