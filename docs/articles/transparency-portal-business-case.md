@@ -31,7 +31,7 @@ The portal architecture uses a Backend-for-Frontend (BFF) pattern with an adapte
 
 | Layer | Component | Role |
 |-------|-----------|------|
-| **Customer Browser** | C-Level Widgets, Business Widgets, Technical Widgets, AI Chat (watsonx) | Role-based dashboards with 36 widgets, all fetching data via HTTPS |
+| **Customer Browser** | C-Level Widgets, Business Widgets, Technical Widgets, AI Chat (watsonx) | Role-based dashboards with 44 widgets, all fetching data via HTTPS |
 | **BFF (Next.js API Routes)** | Adapter Factory | Routes requests to mock or live adapters based on `DATA_SOURCE` environment variable |
 | **BFF — Adapters** | Instana Adapter, Concert Adapter, Turbonomic Adapter, watsonx.ai Adapter | Each adapter handles its own API calls, caching, rate limiting, and error handling |
 | **IBM Services** | IBM Instana, IBM Concert, IBM Turbonomic, IBM watsonx.ai | External REST APIs providing live infrastructure, security, optimization, and AI data |
@@ -53,7 +53,7 @@ The portal architecture uses a Backend-for-Frontend (BFF) pattern with an adapte
 
 ## AI Capabilities: watsonx.ai Integration (Live)
 
-The portal already integrates four AI features powered by IBM watsonx.ai, operational in mock mode and ready for production when API credentials are provisioned. These features add 5 widgets to the portal (AI Summary, AI Chat, AI Anomalies, AI Predictions, and Optimization Recommendations) for a total of **36 widgets** across 3 role-based views.
+The portal already integrates four AI features powered by IBM watsonx.ai, operational in mock mode and ready for production when API credentials are provisioned. These features add 5 widgets to the portal (AI Summary, AI Chat, AI Anomalies, AI Predictions, and Optimization Recommendations) for a total of **44 widgets** across 3 role-based views.
 
 ### AI Feature Architecture
 
@@ -523,7 +523,7 @@ A working prototype of the Transparency Portal is live at [transparency-chi.verc
 
 | Page | What It Shows |
 |------|---------------|
-| **Dashboard** | Three role-based views (C-Level, Business, Technical) with 36 widgets covering SLA, cost, risk, incidents, security, infrastructure, and AI-powered insights |
+| **Dashboard** | Three role-based views (C-Level, Business, Technical) with 44 widgets covering SLA, cost, risk, incidents, security, infrastructure, and AI-powered insights |
 | **Reports** | SLA performance trends, incident tables, cost breakdowns, ticket volume charts -- the data you would review monthly |
 | **Compliance** | Security posture scoring, patch compliance rates, certificate expiry tracking, backup health -- your compliance status at a glance |
 | **Settings** | Theme preferences, customer profile, notification controls |
@@ -568,6 +568,34 @@ What does not exist -- yet -- is the bridge between T-Systems' operational excel
 ---
 
 **Thorsten Meyer** is an AI strategist who reads the filings so you don't have to.
+
+---
+
+## Future Roadmap
+
+### Login-Based Role Routing
+
+The current portal uses manual view tabs (C-Level / Business / Technical) for role switching. A production deployment would integrate authentication-based role routing:
+
+- **NextAuth.js integration** for user authentication with enterprise SSO (SAML/OIDC) support
+- **Role stored in session** — each user is assigned a role (c-level, business, technical) during provisioning
+- **Middleware auto-routing** — Next.js middleware reads the session role and redirects to the appropriate dashboard view on login
+- **Simplified UI for non-admin users** — ViewTabs are hidden when users have a single assigned role; admin users retain manual switching
+- **Customer association** — each user account is linked to a customer record, eliminating the need for the customer selector dropdown
+
+This transforms the portal from a demo tool into a multi-tenant production application where each user sees exactly the data relevant to their role and organisation.
+
+### ServiceNow ITSM Integration
+
+The current mock data layer is designed to be swapped for real API backends. ServiceNow is the primary target for ITSM data integration:
+
+- **ServiceNow Table API** replaces mock JSON files — `incident` table maps to incident widgets, `change_request` to change widgets, `cmdb_ci` to service inventory
+- **OAuth2 authentication** with the customer's ServiceNow instance, managed via the BFF layer (credentials never exposed to the browser)
+- **Real-time webhooks** — ServiceNow business rules push incident and change notifications to the portal via webhooks, enabling live dashboard updates without polling
+- **Bidirectional actions** — accepted optimization recommendations could create ServiceNow change requests directly from the portal
+- **Settings page** — a dedicated configuration page for ServiceNow connection setup (instance URL, OAuth client credentials, table mappings)
+
+This integration would convert the portal from a visibility tool into an operational control plane, where customers can both see and act on their service data.
 
 ---
 
