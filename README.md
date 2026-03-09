@@ -1,8 +1,10 @@
-# T-Systems Transparency Dashboard
+# ClarityOps — Transparency Dashboard
 
-A demo-ready dashboard showcasing how T-Systems customers can monitor their subscribed IT services. Built around T-Systems' **Zero Outage** strategy (99.999% availability target) and the 3P pillars: People, Processes, Platforms.
+A demo-ready dashboard showcasing how managed service customers can monitor their subscribed IT services. Built around the **Zero Outage** strategy (99.999% availability target) and the 3P pillars: People, Processes, Platforms.
 
-This MVP uses mock data to demonstrate the look, feel, and interaction model of a widget-driven, role-based transparency portal.
+*Single Source of Truth — Transparency for Managed Services*
+
+This MVP uses mock data to demonstrate the look, feel, and interaction model of a widget-driven, role-based transparency portal with AI-powered insights.
 
 ## Quick Start
 

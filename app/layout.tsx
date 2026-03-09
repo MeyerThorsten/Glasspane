@@ -3,9 +3,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-context";
 
 export const metadata: Metadata = {
-  title: "Transparency Dashboard",
+  title: "ClarityOps Dashboard",
   description:
-    "Transparency Portal — Zero Outage Program, real-time service monitoring, and role-based dashboards for 99.999% availability.",
+    "ClarityOps — Single Source of Truth. Transparency for Managed Services with real-time monitoring, AI-powered insights, and role-based dashboards for 99.999% availability.",
 };
 
 export default function RootLayout({

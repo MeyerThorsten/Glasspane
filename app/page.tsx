@@ -128,8 +128,8 @@ const pages = [
 
 const stats = [
   { value: "99.999%", label: "Availability Target" },
-  { value: "35+", label: "Dashboard Widgets" },
-  { value: "4", label: "AI Features" },
+  { value: "44+", label: "Dashboard Widgets" },
+  { value: "10", label: "AI Features" },
   { value: "3", label: "Role-Based Views" },
 ];
 
@@ -144,11 +144,14 @@ export default function Home() {
             {/* Copy */}
             <div className="max-w-xl">
               <p className="text-sm font-semibold uppercase tracking-widest text-white/70">
-                Transparency
+                Single Source of Truth
               </p>
               <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                Transparency Portal
+                ClarityOps
               </h1>
+              <p className="mt-2 text-lg font-medium text-white/90">
+                Transparency for Managed Services
+              </p>
               <p className="mt-6 text-lg leading-relaxed text-white/80">
                 AI-powered infrastructure transparency for managed service
                 providers. Real-time monitoring, anomaly detection, and
@@ -181,7 +184,7 @@ export default function Home() {
                   <span className="h-3 w-3 rounded-full bg-yellow-400" />
                   <span className="h-3 w-3 rounded-full bg-green-400" />
                   <span className="ml-3 text-xs text-white/40">
-                    transparency-portal / dashboard
+                    clarityops / dashboard
                   </span>
                 </div>
                 <div className="grid grid-cols-3 gap-3">
@@ -406,7 +409,7 @@ export default function Home() {
             Ready to see your services?
           </h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            Explore the live dashboard demo with 35+ widgets and AI-powered
+            Explore the live dashboard demo with 44+ widgets and AI-powered
             insights across three role-based views.
           </p>
           <Link
@@ -423,7 +426,7 @@ export default function Home() {
       <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
           <div className="font-semibold text-gray-600 dark:text-gray-400">
-            Transparency Portal
+            ClarityOps
           </div>
           <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
         </div>

@@ -14,7 +14,7 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="h-16 flex items-center px-5 border-b border-gray-100 dark:border-[#252533]">
         <div className="flex items-center gap-2">
-          <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">Transparency</span>
+          <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">ClarityOps</span>
         </div>
       </div>
 
@@ -51,7 +51,7 @@ export default function Sidebar() {
       {/* Footer */}
       <div className="px-5 py-4 border-t border-gray-100 dark:border-[#252533]">
         <div className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
-          Transparency Portal
+          ClarityOps — Single Source of Truth
         </div>
       </div>
     </aside>
