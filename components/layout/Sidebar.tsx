@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { navigationItems } from "@/config/navigation";
 import CustomerSelector from "./CustomerSelector";
 import { useSidebar } from "@/lib/sidebar-context";
-import { RiCloseLine, RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
+import { RiCloseLine, RiMenuFoldLine, RiMenuUnfoldLine } from "@remixicon/react";
 import Image from "next/image";
 
 export default function Sidebar() {
@@ -28,12 +28,12 @@ export default function Sidebar() {
         } ${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         {/* Logo */}
-        <div className={`h-16 flex items-center justify-between border-b border-gray-100 dark:border-[#252533] ${collapsed ? "px-3" : "px-5"}`}>
+        <div className={`flex items-center justify-between border-b border-gray-100 dark:border-[#252533] ${collapsed ? "px-3 py-4" : "px-5 py-5"}`}>
           <div className="flex items-center gap-2 overflow-hidden">
             {collapsed ? (
-              <Image src="/logo.png" alt="All Is Well" width={36} height={36} className="h-8 w-8 object-cover object-left" priority />
+              <Image src="/logo.png" alt="All Is Well" width={40} height={40} className="h-9 w-9 object-cover object-left" priority />
             ) : (
-              <Image src="/logo.png" alt="All Is Well" width={220} height={48} className="h-11 w-auto" priority />
+              <Image src="/logo.png" alt="All Is Well" width={260} height={58} className="h-14 w-auto" priority />
             )}
           </div>
           <button
@@ -84,13 +84,16 @@ export default function Sidebar() {
         <div className="hidden lg:flex px-3 py-3 border-t border-gray-100 dark:border-[#252533] justify-center">
           <button
             onClick={toggleCollapse}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-[#262633] transition-colors"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-[#262633] transition-colors w-full justify-center"
             title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {collapsed ? (
-              <RiArrowRightSLine className="w-5 h-5" />
+              <RiMenuUnfoldLine className="w-5 h-5" />
             ) : (
-              <RiArrowLeftSLine className="w-5 h-5" />
+              <>
+                <RiMenuFoldLine className="w-5 h-5" />
+                <span className="text-xs font-medium">Collapse</span>
+              </>
             )}
           </button>
         </div>
