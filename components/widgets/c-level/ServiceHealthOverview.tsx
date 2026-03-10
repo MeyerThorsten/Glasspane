@@ -39,7 +39,7 @@ export default function ServiceHealthOverview() {
           return (
             <div
               key={service.id}
-              className="flex items-center justify-between rounded-lg border border-gray-100 dark:border-[#252533] px-3 py-2"
+              className="flex items-center justify-between rounded-lg border border-gray-100 dark:border-[#2E2E3D] px-3 py-2"
             >
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{service.name}</p>

@@ -104,7 +104,7 @@ export default function OptimizationWidget() {
           <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
             €{totalAnnualSavings.toLocaleString()}/yr
           </p>
-          <p className="text-[10px] text-gray-400">potential savings identified</p>
+          <p className="text-[10px] text-gray-400 dark:text-gray-500">potential savings identified</p>
         </div>
       </div>
 
@@ -118,8 +118,8 @@ export default function OptimizationWidget() {
             key={rec.id}
             className={`flex items-start gap-3 rounded-lg border p-3 transition-opacity ${
               isDismissed
-                ? "border-gray-100 dark:border-[#252533] opacity-50"
-                : "border-gray-100 dark:border-[#252533]"
+                ? "border-gray-100 dark:border-[#2E2E3D] opacity-50"
+                : "border-gray-100 dark:border-[#2E2E3D]"
             }`}
           >
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-magenta-50 dark:bg-[#2D1025] text-magenta">

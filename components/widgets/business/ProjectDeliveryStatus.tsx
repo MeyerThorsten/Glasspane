@@ -39,7 +39,7 @@ export default function ProjectDeliveryStatus() {
         </thead>
         <tbody>
           {data.map((project) => (
-            <tr key={project.id} className="border-b border-gray-100 dark:border-[#252533]">
+            <tr key={project.id} className="border-b border-gray-100 dark:border-[#2E2E3D]">
               <td className="py-2 pr-4 font-medium text-gray-900 dark:text-gray-100">{project.name}</td>
               <td className="py-2 pr-4">
                 <div className="flex items-center gap-2">

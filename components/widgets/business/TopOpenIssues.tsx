@@ -42,7 +42,7 @@ export default function TopOpenIssues() {
         </thead>
         <tbody>
           {data.map((incident) => (
-            <tr key={incident.id} className="border-b border-gray-100 dark:border-[#252533]">
+            <tr key={incident.id} className="border-b border-gray-100 dark:border-[#2E2E3D]">
               <td className="py-2 pr-4 font-mono text-xs text-gray-600 dark:text-gray-400">{incident.id}</td>
               <td className="py-2 pr-4 font-medium text-gray-900 dark:text-gray-100">{incident.title}</td>
               <td className="py-2 pr-4">

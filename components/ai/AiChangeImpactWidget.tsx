@@ -76,7 +76,7 @@ export default function AiChangeImpactWidget() {
               <span className="text-sm font-medium text-gray-900 dark:text-gray-100 flex-1">
                 {c.title}
               </span>
-              <span className="text-[10px] text-gray-400">{c.date}</span>
+              <span className="text-[10px] text-gray-400 dark:text-gray-500">{c.date}</span>
             </div>
             <div className="flex items-center gap-4 pl-4.5 text-xs text-gray-500 dark:text-gray-400">
               <span>Risk: {c.riskScore}/5</span>

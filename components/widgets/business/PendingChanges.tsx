@@ -50,7 +50,7 @@ export default function PendingChanges() {
         </thead>
         <tbody>
           {data.map((change) => (
-            <tr key={change.id} className="border-b border-gray-100 dark:border-[#252533]">
+            <tr key={change.id} className="border-b border-gray-100 dark:border-[#2E2E3D]">
               <td className="py-2 pr-4 font-mono text-xs text-gray-600 dark:text-gray-400">{change.id}</td>
               <td className="py-2 pr-4 font-medium text-gray-900 dark:text-gray-100">{change.title}</td>
               <td className="py-2 pr-4 text-gray-600 dark:text-gray-400 whitespace-nowrap">{change.scheduledDate}</td>

@@ -29,7 +29,7 @@ export default function WidgetShell({ title, size, children, loading, error, wid
   return (
     <>
       <div className={`${dragListeners ? "" : sizeClasses[size] + " "}bg-white dark:bg-[#1C1C27] rounded-xl border border-gray-200 dark:border-[#2E2E3D] shadow-sm overflow-hidden`}>
-        <div className="px-5 py-4 border-b border-gray-100 dark:border-[#252533]">
+        <div className="px-5 py-4 border-b border-gray-100 dark:border-[#2E2E3D]">
           <div className="flex items-center gap-2">
             {dragListeners && (
               <button

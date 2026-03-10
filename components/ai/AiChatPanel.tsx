@@ -79,7 +79,7 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
       {open && (
         <div className="fixed bottom-20 right-6 z-50 w-[400px] max-h-[520px] bg-white dark:bg-[#1C1C27] rounded-xl border border-gray-200 dark:border-[#2E2E3D] shadow-2xl flex flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-[#252533]">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-[#2E2E3D]">
             <div className="flex items-center gap-2">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-500">
                 <path d="M12 2a8 8 0 0 1 8 8c0 3.3-2 6.2-5 7.6V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2.4C6 16.2 4 13.3 4 10a8 8 0 0 1 8-8z" />
@@ -125,7 +125,7 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
           </div>
 
           {/* Input */}
-          <div className="border-t border-gray-100 dark:border-[#252533] p-3">
+          <div className="border-t border-gray-100 dark:border-[#2E2E3D] p-3">
             <form
               onSubmit={(e) => {
                 e.preventDefault();

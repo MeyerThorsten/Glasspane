@@ -79,7 +79,7 @@ export default function AiCapacityPlannerWidget() {
                 <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                   {r.type}
                 </span>
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-gray-400 dark:text-gray-500">
                   {r.current}% used · +{r.dailyGrowth}%/day
                 </span>
               </div>

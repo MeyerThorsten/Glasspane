@@ -53,7 +53,7 @@ export default function MajorIncidentsSummary() {
         className="mt-2"
       />
 
-      <div className="grid grid-cols-4 gap-2 pt-2 border-t border-gray-100 dark:border-[#252533]">
+      <div className="grid grid-cols-4 gap-2 pt-2 border-t border-gray-100 dark:border-[#2E2E3D]">
         {summary.map((s) => (
           <div key={s.severity} className="text-center">
             <p className="text-xs font-medium text-gray-400 dark:text-gray-500">{s.severity}</p>

@@ -37,7 +37,7 @@ export default function CertificateExpiry() {
         </thead>
         <tbody>
           {data.map((cert) => (
-            <tr key={cert.domain} className="border-b border-gray-50 dark:border-[#252533]">
+            <tr key={cert.domain} className="border-b border-gray-100 dark:border-[#2E2E3D]">
               <td className="py-2 font-medium text-gray-900 dark:text-gray-100">{cert.domain}</td>
               <td className="py-2 text-gray-600 dark:text-gray-400">{cert.issuer}</td>
               <td className="py-2 text-gray-600 dark:text-gray-400">{cert.expiresAt}</td>

@@ -44,7 +44,7 @@ export default function SystemStatusGrid() {
         {services.map((service) => (
           <div
             key={service.id}
-            className="flex items-center gap-2 rounded-lg border border-gray-100 dark:border-[#252533] bg-gray-50 dark:bg-[#1C1C27] px-3 py-2"
+            className="flex items-center gap-2 rounded-lg border border-gray-100 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#1C1C27] px-3 py-2"
           >
             <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${statusColor[service.status]}`} />
             <span className="text-sm text-gray-700 dark:text-gray-300 truncate">{service.name}</span>
