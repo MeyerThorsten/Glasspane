@@ -6,6 +6,7 @@ import { ViewType } from "@/types";
 import { viewConfigs } from "@/config/view-configs";
 import { useCustomer } from "@/lib/customer-context";
 import { useWidgetOrder } from "@/lib/use-widget-order";
+import { useFavorites } from "@/lib/use-widget-favorites";
 import WidgetGrid from "@/components/widgets/WidgetGrid";
 import ZeroOutageBanner from "@/components/layout/ZeroOutageBanner";
 import AiChatPanel from "@/components/ai/AiChatPanel";
@@ -17,6 +18,7 @@ function DashboardContent() {
   const view = (searchParams.get("view") as ViewType) || "c-level";
   const defaultWidgets = viewConfigs[view] || viewConfigs["c-level"];
   const { widgets: orderedWidgets, reorder, reset, hasCustomOrder } = useWidgetOrder(view, defaultWidgets);
+  const { isFavorite, toggleFavorite } = useFavorites(view);
 
   if (loading) {
     return (
@@ -46,12 +48,18 @@ function DashboardContent() {
       })
     : orderedWidgets;
 
+  const sortedWidgets = [...filteredWidgets].sort((a, b) => {
+    const aFav = isFavorite(a.id) ? 0 : 1;
+    const bFav = isFavorite(b.id) ? 0 : 1;
+    return aFav - bFav;
+  });
+
   return (
     <>
       <Header onResetLayout={reset} hasCustomOrder={hasCustomOrder} />
       <main className="p-6">
         <ZeroOutageBanner />
-        <WidgetGrid widgets={filteredWidgets} onReorder={reorder} />
+        <WidgetGrid widgets={sortedWidgets} onReorder={reorder} isFavorite={isFavorite} toggleFavorite={toggleFavorite} />
         <AiChatPanel view={view} />
       </main>
     </>

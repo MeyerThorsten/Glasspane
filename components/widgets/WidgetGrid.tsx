@@ -16,9 +16,11 @@ import SortableWidget from "./SortableWidget";
 interface WidgetGridProps {
   widgets: WidgetConfig[];
   onReorder?: (activeId: string, overId: string) => void;
+  isFavorite?: (id: string) => boolean;
+  toggleFavorite?: (id: string) => void;
 }
 
-export default function WidgetGrid({ widgets, onReorder }: WidgetGridProps) {
+export default function WidgetGrid({ widgets, onReorder, isFavorite, toggleFavorite }: WidgetGridProps) {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: { distance: 8 },
@@ -45,7 +47,13 @@ export default function WidgetGrid({ widgets, onReorder }: WidgetGridProps) {
         >
           <div className="widget-grid">
             {widgets.map((config, index) => (
-              <SortableWidget key={config.id} config={config} index={index} />
+              <SortableWidget
+                key={config.id}
+                config={config}
+                index={index}
+                isFavorite={isFavorite ? isFavorite(config.id) : undefined}
+                onToggleFavorite={toggleFavorite ? () => toggleFavorite(config.id) : undefined}
+              />
             ))}
           </div>
         </SortableContext>

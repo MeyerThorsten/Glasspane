@@ -18,6 +18,8 @@ const sizeClasses: Record<WidgetSize, string> = {
 interface SortableWidgetProps {
   config: WidgetConfig;
   index?: number;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
 }
 
 function WidgetFallback({ title, size }: { title: string; size: string }) {
@@ -28,7 +30,7 @@ function WidgetFallback({ title, size }: { title: string; size: string }) {
   );
 }
 
-export default function SortableWidget({ config, index }: SortableWidgetProps) {
+export default function SortableWidget({ config, index, isFavorite, onToggleFavorite }: SortableWidgetProps) {
   const {
     attributes,
     listeners,
@@ -49,7 +51,7 @@ export default function SortableWidget({ config, index }: SortableWidgetProps) {
   const Component = getWidgetComponent(config.id);
 
   return (
-    <div ref={setNodeRef} style={style} className={sizeClasses[config.size]} {...attributes}>
+    <div ref={setNodeRef} style={style} className={`${sizeClasses[config.size]}${isFavorite ? " ring-1 ring-amber-400/20" : ""}`} {...attributes}>
       <Suspense fallback={<WidgetFallback title={config.title} size={config.size} />}>
         <WidgetShell
           title={config.title}
@@ -57,6 +59,8 @@ export default function SortableWidget({ config, index }: SortableWidgetProps) {
           widgetId={config.id}
           dragListeners={listeners}
           animationDelay={index !== undefined ? index * 50 : 0}
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
         >
           <Component key={`${config.id}-${refreshKey}`} />
         </WidgetShell>
