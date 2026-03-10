@@ -1,8 +1,8 @@
-# ClarityOps — Transparency Dashboard
+# All Is Well — Your End-to-End Digital Health Dashboard
 
-A demo-ready dashboard showcasing how managed service customers can monitor their subscribed IT services. Built around the **Zero Outage** strategy (99.999% availability target) and the 3P pillars: People, Processes, Platforms.
+A demo-ready dashboard showcasing how managed service customers can monitor their subscribed IT services. Built around the **Zero Outage** strategy (99.999% availability target) and the 3P pillars: People, Processes, Platforms. **All Is Well** provides AI-powered insights alongside real-time operational metrics in a unified transparency portal.
 
-*Single Source of Truth — Transparency for Managed Services*
+*Your End-to-End Digital Health Dashboard*
 
 This MVP uses mock data to demonstrate the look, feel, and interaction model of a widget-driven, role-based transparency portal with AI-powered insights.
 
@@ -121,17 +121,22 @@ Transparency/
 │   └── widgets/
 │       ├── WidgetShell.tsx           # Card wrapper (title, loading, error)
 │       ├── WidgetGrid.tsx            # CSS Grid renderer: config → components
+│       ├── SortableWidget.tsx        # Drag-and-drop widget wrapper
+│       ├── AiChatPanel.tsx           # Conversational AI panel
 │       ├── shared/                   # KpiCard, StatusBadge, TrendIndicator
-│       ├── c-level/                  # 8 widget components
-│       ├── business/                 # 10 widget components
-│       └── technical/                # 13 widget components
+│       ├── c-level/                  # 13 widget components (incl. AI + optimization)
+│       ├── business/                 # 14 widget components (incl. AI)
+│       ├── technical/                # 17 widget components (incl. AI)
+│       └── ai/                       # 9 AI-powered widget components
 ├── config/
-│   ├── widget-registry.ts            # Widget ID → lazy component mapping
+│   ├── widget-registry.ts            # Widget ID → lazy component mapping (44 widgets)
 │   ├── view-configs.ts               # Widget layout arrays per view
 │   ├── navigation.ts                 # Sidebar nav items
 │   └── theme.ts                      # Brand color tokens
 ├── lib/
 │   ├── customer-context.tsx           # React Context for active customer
+│   ├── sidebar-context.tsx            # React Context for sidebar collapsed state
+│   ├── use-widget-order.ts            # Hook for persisted drag-and-drop widget order
 │   └── services/                      # 8 service modules (async data access)
 │       ├── customer-service.ts
 │       ├── service-service.ts
@@ -162,12 +167,14 @@ Transparency/
 │   ├── infrastructure.ts
 │   └── security.ts
 └── public/
-    └── tsystems-logo.svg
+    └── logo.png
 ```
 
 ## Widget Catalog
 
-### C-Level View (8 widgets)
+44 widgets are registered across 3 role-based views. AI-powered widgets are shared across views and powered by the AI service layer.
+
+### C-Level View (13 widgets)
 
 | Widget | Size | Visualization |
 |--------|------|--------------|
@@ -179,8 +186,13 @@ Transparency/
 | Major Incidents Summary | medium | BarList of P1-P4 incidents with counts |
 | Digital Transformation Progress | medium | ProgressBars for migration milestones |
 | Security Posture | small | DonutChart of vulnerabilities + overall score |
+| Optimization | medium | Cost and performance optimization recommendations |
+| AI Summary | medium | AI-generated executive summary of service health |
+| AI Risk Briefing | medium | AI-assessed risk factors and mitigation priorities |
+| AI Cost Forecast | medium | AI-predicted cost trends and budget recommendations |
+| AI Predictions | medium | AI-driven forecasts for key operational metrics |
 
-### Business View (10 widgets)
+### Business View (14 widgets)
 
 | Widget | Size | Visualization |
 |--------|------|--------------|
@@ -194,8 +206,12 @@ Transparency/
 | Pending Changes | medium | Table with date/risk/service |
 | Zero Outage Pillars | medium | Three CategoryBars with metrics |
 | Service Availability Trend | full | AreaChart with 99.999% reference line |
+| AI Summary | medium | AI-generated operational summary |
+| AI Anomalies | medium | AI-detected anomalies in service behaviour |
+| AI SLA Risk Advisor | medium | AI-ranked SLA breach risk per service |
+| AI Change Impact | medium | AI-predicted impact assessment for pending changes |
 
-### Technical View (13 widgets)
+### Technical View (17 widgets)
 
 | Widget | Size | Visualization |
 |--------|------|--------------|
@@ -212,6 +228,24 @@ Transparency/
 | Change Calendar | medium | Heatmap grid by day/risk |
 | Error Rate by Service | medium | LineChart per service |
 | DNS Resolution Time | small | Sparkline with 7-day trend |
+| AI Anomalies | medium | AI-detected infrastructure anomalies |
+| AI Root Cause Patterns | medium | AI-identified recurring failure patterns |
+| AI Capacity Planner | medium | AI-driven capacity forecasting and scaling advice |
+| AI Predictions | medium | AI-driven forecasts for infrastructure metrics |
+
+### AI Widgets (9 components, shared across views)
+
+| Widget | Purpose |
+|--------|---------|
+| AiSummaryWidget | Executive / operational health summary |
+| AiAnomaliesWidget | Anomaly detection across services |
+| AiPredictionsWidget | Predictive metric forecasting |
+| AiRiskBriefingWidget | Risk factor analysis and prioritisation |
+| AiCostForecastWidget | Cost trend predictions and budget guidance |
+| AiRootCausePatternsWidget | Recurring failure pattern analysis |
+| AiSlaRiskAdvisorWidget | SLA breach risk ranking |
+| AiCapacityPlannerWidget | Capacity forecasting and scaling recommendations |
+| AiChangeImpactWidget | Change risk and impact assessment |
 
 ## Mock Data
 
