@@ -6,6 +6,7 @@ import { navigationItems } from "@/config/navigation";
 import CustomerSelector from "./CustomerSelector";
 import { useSidebar } from "@/lib/sidebar-context";
 import { RiCloseLine } from "@remixicon/react";
+import Image from "next/image";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -29,7 +30,7 @@ export default function Sidebar() {
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-5 border-b border-gray-100 dark:border-[#252533]">
           <div className="flex items-center gap-2">
-            <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">All Is Well</span>
+            <Image src="/logo.png" alt="All Is Well" width={180} height={40} className="h-8 w-auto" priority />
           </div>
           <button
             onClick={close}

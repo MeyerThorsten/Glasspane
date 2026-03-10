@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   RiShieldCheckLine,
   RiDashboardLine,
@@ -143,12 +144,13 @@ export default function Home() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Copy */}
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-white/70">
-                Your End-to-End Digital Health Dashboard
-              </p>
-              <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              <Image src="/logo.png" alt="All Is Well" width={360} height={80} className="h-16 w-auto brightness-0 invert" priority />
+              <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
                 All Is Well
               </h1>
+              <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-white/70">
+                Your End-to-End Digital Health Dashboard
+              </p>
               <p className="mt-6 text-lg leading-relaxed text-white/80">
                 AI-powered infrastructure transparency for managed service
                 providers. Real-time monitoring, anomaly detection, and
