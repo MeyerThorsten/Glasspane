@@ -53,7 +53,7 @@ The portal architecture uses a Backend-for-Frontend (BFF) pattern with an adapte
 
 ## AI Capabilities: watsonx.ai Integration (Live)
 
-The portal already integrates four AI features powered by IBM watsonx.ai, operational in mock mode and ready for production when API credentials are provisioned. These features add 5 widgets to the portal (AI Summary, AI Chat, AI Anomalies, AI Predictions, and Optimization Recommendations) for a total of **44 widgets** across 3 role-based views.
+The portal already integrates four AI features powered by IBM watsonx.ai, operational in mock mode and ready for production when API credentials are provisioned. These features contribute to **9 AI-powered widgets** within the portal's 44-widget total (AI Summary, AI Chat, AI Anomalies, AI Predictions, Optimization Recommendations, and associated intelligence overlays) spread across 3 role-based views.
 
 ### AI Feature Architecture
 
@@ -519,11 +519,11 @@ This positions T-Systems at the intersection of two powerful trends: the trust e
 
 ## What the Live Demo Proves
 
-A working prototype of the Transparency Portal is live at [transparency-chi.vercel.app](https://transparency-chi.vercel.app). It demonstrates:
+A working prototype of the Transparency Portal -- branded **"All Is Well — Your End-to-End Digital Health Dashboard"** -- is live at [transparency-chi.vercel.app](https://transparency-chi.vercel.app). It demonstrates:
 
 | Page | What It Shows |
 |------|---------------|
-| **Dashboard** | Three role-based views (C-Level, Business, Technical) with 44 widgets covering SLA, cost, risk, incidents, security, infrastructure, and AI-powered insights |
+| **Dashboard** | Three role-based views (C-Level: 13 widgets, Business: 14 widgets, Technical: 17 widgets) with 44 total widgets covering SLA, cost, risk, incidents, security, infrastructure, and AI-powered insights |
 | **Reports** | SLA performance trends, incident tables, cost breakdowns, ticket volume charts -- the data you would review monthly |
 | **Compliance** | Security posture scoring, patch compliance rates, certificate expiry tracking, backup health -- your compliance status at a glance |
 | **Settings** | Theme preferences, customer profile, notification controls |
@@ -531,6 +531,24 @@ A working prototype of the Transparency Portal is live at [transparency-chi.verc
 Every page is customer-context-aware: select a different customer, and all data updates. Light and dark mode throughout. AI features (summary, chat, anomaly detection, predictions) are active across all views. Built on the same data services that the Zero Outage program already collects.
 
 The gap between "we have this data" and "the customer can see this data" is not a multi-year infrastructure project. It is a presentation layer on top of operational data that already exists.
+
+### Enterprise-Grade UX: Nine Enhancements Delivered
+
+The prototype does not just display data -- it behaves like production software. Nine enterprise UX capabilities have been implemented that move the portal from "impressive demo" to "product customers rely on daily":
+
+| Capability | What It Does | Why It Matters |
+|------------|-------------|----------------|
+| **Real-Time Data Refresh** | Auto-refresh toggle (30s / 1m / 5m intervals), per-widget manual refresh with spinner overlay, simulated data variation on each cycle | Customers see a live system, not a static snapshot. Operational trust requires a portal that breathes. |
+| **Dashboard Export / PDF** | One-click PDF export via html2canvas + jsPDF with branded header; print-friendly data report via browser print dialog | Audit evidence, board packs, and QBR slides generated directly from the portal. Eliminates the manual report-compilation workflow that currently costs 8-10 SDM hours per account per week. |
+| **Widget Search & Filter** | Collapsible search bar with 300ms debounce, category filter chips, non-matching widgets fade to 20% opacity | Enterprise dashboards have 44 widgets across three views. Search is not a nice-to-have; it is how power users navigate at speed. |
+| **Notification Center** | Slide-out panel with 12 mock notification types (critical / warning / info / system), read/unread state persisted to localStorage, dynamic badge count on bell icon | Critical alerts surface immediately. Customers do not need to poll T-Systems for status -- the portal tells them. |
+| **Widget Favorites / Pinning** | Star icon on hover, pinned widgets sort to top, per-view persistence in localStorage | Different users care about different metrics. Personalization drives daily usage, which drives switching cost. |
+| **Dark Mode (Full Audit)** | All 44 widgets audited and fixed for consistent dark mode -- standardized border tokens, background tokens, text color scales | Enterprise users work across lighting conditions and corporate themes. Inconsistent dark mode signals an unfinished product. |
+| **Animated Transitions** | Staggered fade-slide-up widget entrance, count-up animation on KPI numbers, shimmer loading skeletons, hover lift effect | Perceived performance and responsiveness are a trust signal. A portal that feels fast and polished communicates that T-Systems' engineering is fast and polished. |
+| **Comparison Mode** | Toggle with three presets (Month-over-Month, Quarter-over-Quarter, Year-over-Year), delta indicators showing % change on 10 supported widgets | The most common customer question at renewals: "Are things getting better or worse?" Comparison mode answers it in one click, without a service delivery manager preparing slides. |
+| **Drag-and-Drop Reordering** | Widget reordering via @dnd-kit across all three views | Each customer organization prioritizes different metrics. A CFO-heavy account front-loads cost widgets; a CISO-led account front-loads security. Customization drives ownership. |
+
+These nine capabilities are not cosmetic additions. Each one closes a specific gap between "demo tool" and "production software that customers integrate into their daily workflow." A portal that customers check once a quarter is a nice-to-have. A portal that customers check every morning -- because it refreshes automatically, notifies them of anomalies, exports evidence for audits, and remembers how they like it organized -- is a switching cost.
 
 ---
 
