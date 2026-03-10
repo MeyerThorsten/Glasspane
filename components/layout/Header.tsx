@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import ViewTabs from "./ViewTabs";
 import ThemeToggle from "./ThemeToggle";
 import AutoRefreshToggle from "./AutoRefreshToggle";
+import ExportMenu from "./ExportMenu";
 import { RiNotification3Line, RiUser3Line, RiMenuLine } from "@remixicon/react";
 import { useCustomer } from "@/lib/customer-context";
 import { useSidebar } from "@/lib/sidebar-context";
@@ -12,9 +13,11 @@ import { useNotifications } from "@/lib/notification-context";
 export default function Header({
   onResetLayout,
   hasCustomOrder,
+  gridRef,
 }: {
   onResetLayout?: () => void;
   hasCustomOrder?: boolean;
+  gridRef?: React.RefObject<HTMLDivElement | null>;
 }) {
   const { customer } = useCustomer();
   const { toggle } = useSidebar();
@@ -47,6 +50,13 @@ export default function Header({
           </button>
         )}
         <AutoRefreshToggle />
+        {gridRef && (
+          <ExportMenu
+            gridRef={gridRef}
+            viewName="Dashboard"
+            customerName={customer?.name || "Dashboard"}
+          />
+        )}
         {customer && (
           <span className="text-sm text-gray-500 dark:text-gray-400 hidden md:block">
             {customer.name}

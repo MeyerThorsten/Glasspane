@@ -256,3 +256,9 @@ body {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+
+@media print {
+  aside, header, .no-print { display: none !important; }
+  .widget-grid { margin: 0 !important; }
+  body { background: white !important; color: black !important; }
+}

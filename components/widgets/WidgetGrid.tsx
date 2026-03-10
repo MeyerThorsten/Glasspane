@@ -19,9 +19,10 @@ interface WidgetGridProps {
   isFavorite?: (id: string) => boolean;
   toggleFavorite?: (id: string) => void;
   dimmedWidgets?: Set<string>;
+  gridRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export default function WidgetGrid({ widgets, onReorder, isFavorite, toggleFavorite, dimmedWidgets }: WidgetGridProps) {
+export default function WidgetGrid({ widgets, onReorder, isFavorite, toggleFavorite, dimmedWidgets, gridRef }: WidgetGridProps) {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: { distance: 8 },
@@ -46,7 +47,7 @@ export default function WidgetGrid({ widgets, onReorder, isFavorite, toggleFavor
           items={widgets.map((w) => w.id)}
           strategy={rectSortingStrategy}
         >
-          <div className="widget-grid">
+          <div className="widget-grid" ref={gridRef}>
             {widgets.map((config, index) => (
               <SortableWidget
                 key={config.id}

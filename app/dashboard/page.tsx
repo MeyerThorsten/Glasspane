@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useState, useRef } from "react";
 import { ViewType } from "@/types";
 import { viewConfigs } from "@/config/view-configs";
 import { useCustomer } from "@/lib/customer-context";
@@ -22,6 +22,7 @@ function DashboardContent() {
   const { isFavorite, toggleFavorite } = useFavorites(view);
   const [searchText, setSearchText] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   if (loading) {
     return (
@@ -70,7 +71,7 @@ function DashboardContent() {
 
   return (
     <>
-      <Header onResetLayout={reset} hasCustomOrder={hasCustomOrder} />
+      <Header onResetLayout={reset} hasCustomOrder={hasCustomOrder} gridRef={gridRef} />
       <main className="p-6">
         <ZeroOutageBanner />
         <WidgetSearch
@@ -86,6 +87,7 @@ function DashboardContent() {
           isFavorite={isFavorite}
           toggleFavorite={toggleFavorite}
           dimmedWidgets={dimmedWidgets}
+          gridRef={gridRef}
         />
         <AiChatPanel view={view} />
       </main>
