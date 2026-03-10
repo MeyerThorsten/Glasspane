@@ -14,6 +14,7 @@ interface WidgetShellProps {
   error?: string | null;
   widgetId?: string;
   dragListeners?: Record<string, Function>;
+  animationDelay?: number;
 }
 
 const sizeClasses: Record<WidgetSize, string> = {
@@ -23,12 +24,15 @@ const sizeClasses: Record<WidgetSize, string> = {
   full: "widget-full",
 };
 
-export default function WidgetShell({ title, size, children, loading, error, widgetId, dragListeners }: WidgetShellProps) {
+export default function WidgetShell({ title, size, children, loading, error, widgetId, dragListeners, animationDelay }: WidgetShellProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <>
-      <div className={`${dragListeners ? "" : sizeClasses[size] + " "}bg-white dark:bg-[#1C1C27] rounded-xl border border-gray-200 dark:border-[#2E2E3D] shadow-sm overflow-hidden`}>
+      <div
+        className={`${dragListeners ? "" : sizeClasses[size] + " "}bg-white dark:bg-[#1C1C27] rounded-xl border border-gray-200 dark:border-[#2E2E3D] shadow-sm overflow-hidden hover:-translate-y-0.5 hover:shadow-md transition-all duration-200`}
+        style={{ animation: `fadeSlideUp 0.3s ease-out ${animationDelay || 0}ms both` }}
+      >
         <div className="px-5 py-4 border-b border-gray-100 dark:border-[#2E2E3D]">
           <div className="flex items-center gap-2">
             {dragListeners && (
@@ -55,10 +59,10 @@ export default function WidgetShell({ title, size, children, loading, error, wid
         </div>
         <div className="p-5 min-h-[100px]">
           {loading ? (
-            <div className="space-y-3 animate-pulse">
-              <div className="h-4 bg-gray-100 dark:bg-[#262633] rounded w-3/4" />
-              <div className="h-32 bg-gray-50 dark:bg-[#1C1C27] rounded" />
-              <div className="h-4 bg-gray-100 dark:bg-[#262633] rounded w-1/2" />
+            <div className="space-y-3">
+              <div className="h-4 rounded w-3/4" style={{ background: "linear-gradient(90deg, transparent 25%, rgba(0,0,0,0.04) 50%, transparent 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite" }} />
+              <div className="h-32 rounded" style={{ background: "linear-gradient(90deg, transparent 25%, rgba(0,0,0,0.04) 50%, transparent 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite" }} />
+              <div className="h-4 rounded w-1/2" style={{ background: "linear-gradient(90deg, transparent 25%, rgba(0,0,0,0.04) 50%, transparent 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite" }} />
             </div>
           ) : error ? (
             <div className="flex items-center justify-center h-32 text-sm text-danger">

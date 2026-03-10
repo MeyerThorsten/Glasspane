@@ -16,6 +16,7 @@ const sizeClasses: Record<WidgetSize, string> = {
 
 interface SortableWidgetProps {
   config: WidgetConfig;
+  index?: number;
 }
 
 function WidgetFallback({ title, size }: { title: string; size: string }) {
@@ -26,7 +27,7 @@ function WidgetFallback({ title, size }: { title: string; size: string }) {
   );
 }
 
-export default function SortableWidget({ config }: SortableWidgetProps) {
+export default function SortableWidget({ config, index }: SortableWidgetProps) {
   const {
     attributes,
     listeners,
@@ -52,6 +53,7 @@ export default function SortableWidget({ config }: SortableWidgetProps) {
           size={config.size}
           widgetId={config.id}
           dragListeners={listeners}
+          animationDelay={index !== undefined ? index * 50 : 0}
         >
           <Component />
         </WidgetShell>

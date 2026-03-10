@@ -44,8 +44,8 @@ export default function WidgetGrid({ widgets, onReorder }: WidgetGridProps) {
           strategy={rectSortingStrategy}
         >
           <div className="widget-grid">
-            {widgets.map((config) => (
-              <SortableWidget key={config.id} config={config} />
+            {widgets.map((config, index) => (
+              <SortableWidget key={config.id} config={config} index={index} />
             ))}
           </div>
         </SortableContext>
