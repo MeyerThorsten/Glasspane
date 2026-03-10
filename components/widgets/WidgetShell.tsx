@@ -5,6 +5,7 @@ import { WidgetSize } from "@/types";
 import AnomalyBadge from "@/components/ai/AnomalyBadge";
 import DataFreshness from "@/components/widgets/shared/DataFreshness";
 import WidgetExpandModal from "@/components/widgets/WidgetExpandModal";
+import { useRefresh } from "@/lib/refresh-context";
 
 interface WidgetShellProps {
   title: string;
@@ -15,6 +16,7 @@ interface WidgetShellProps {
   widgetId?: string;
   dragListeners?: Record<string, Function>;
   animationDelay?: number;
+  onRefresh?: () => void;
 }
 
 const sizeClasses: Record<WidgetSize, string> = {
@@ -24,8 +26,16 @@ const sizeClasses: Record<WidgetSize, string> = {
   full: "widget-full",
 };
 
-export default function WidgetShell({ title, size, children, loading, error, widgetId, dragListeners, animationDelay }: WidgetShellProps) {
+export default function WidgetShell({ title, size, children, loading, error, widgetId, dragListeners, animationDelay, onRefresh }: WidgetShellProps) {
   const [expanded, setExpanded] = useState(false);
+  const [lastRefreshed, setLastRefreshed] = useState<Date | undefined>(undefined);
+  const { triggerRefresh, isRefreshing } = useRefresh();
+
+  function handleRefresh() {
+    triggerRefresh();
+    setLastRefreshed(new Date());
+    onRefresh?.();
+  }
 
   return (
     <>
@@ -46,7 +56,14 @@ export default function WidgetShell({ title, size, children, loading, error, wid
             <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</h3>
             {widgetId && <AnomalyBadge widgetId={widgetId} />}
             <div className="ml-auto flex items-center gap-2">
-              <DataFreshness />
+              <DataFreshness lastRefreshed={lastRefreshed} />
+              <button
+                onClick={handleRefresh}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                title="Refresh widget"
+              >
+                <i className={`ri-refresh-line text-sm${isRefreshing ? " animate-spin" : ""}`} />
+              </button>
               <button
                 onClick={() => setExpanded(true)}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
@@ -57,7 +74,7 @@ export default function WidgetShell({ title, size, children, loading, error, wid
             </div>
           </div>
         </div>
-        <div className="p-5 min-h-[100px]">
+        <div className="relative p-5 min-h-[100px]">
           {loading ? (
             <div className="space-y-3">
               <div className="h-4 rounded w-3/4" style={{ background: "linear-gradient(90deg, transparent 25%, rgba(0,0,0,0.04) 50%, transparent 75%)", backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite" }} />
@@ -70,6 +87,11 @@ export default function WidgetShell({ title, size, children, loading, error, wid
             </div>
           ) : (
             children
+          )}
+          {isRefreshing && !loading && !error && (
+            <div className="absolute inset-0 bg-white/50 dark:bg-[#1C1C27]/50 flex items-center justify-center rounded-b-xl">
+              <i className="ri-refresh-line text-2xl text-gray-400 dark:text-gray-500 animate-spin" />
+            </div>
           )}
         </div>
       </div>

@@ -3,6 +3,7 @@
 import Sidebar from "@/components/layout/Sidebar";
 import { CustomerProvider } from "@/lib/customer-context";
 import { SidebarProvider, useSidebar } from "@/lib/sidebar-context";
+import { RefreshProvider } from "@/lib/refresh-context";
 
 function ContentArea({ children }: { children: React.ReactNode }) {
   const { collapsed } = useSidebar();
@@ -17,13 +18,15 @@ function ContentArea({ children }: { children: React.ReactNode }) {
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <CustomerProvider>
-      <SidebarProvider>
-        <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
-          <Sidebar />
-          <ContentArea>{children}</ContentArea>
-        </div>
-      </SidebarProvider>
-    </CustomerProvider>
+    <RefreshProvider>
+      <CustomerProvider>
+        <SidebarProvider>
+          <div className="min-h-screen bg-gray-50 dark:bg-[#111118]">
+            <Sidebar />
+            <ContentArea>{children}</ContentArea>
+          </div>
+        </SidebarProvider>
+      </CustomerProvider>
+    </RefreshProvider>
   );
 }

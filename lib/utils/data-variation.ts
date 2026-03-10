@@ -189,6 +189,28 @@ export function extendDailyData<T extends object>(
 }
 
 /**
+ * Same as perturb but includes an epoch counter in the seed,
+ * so refreshing produces different values.
+ */
+export function perturbWithEpoch(
+  value: number,
+  pct: number,
+  key: string,
+  epoch: number,
+  min?: number,
+  max?: number,
+): number {
+  const today = new Date();
+  const dateStr = `${today.getUTCFullYear()}-${String(today.getUTCMonth() + 1).padStart(2, "0")}-${String(today.getUTCDate()).padStart(2, "0")}`;
+  const rng = mulberry32(djb2(`${dateStr}|${key}|${epoch}`));
+  const factor = 1 + (rng() * 2 - 1) * (pct / 100);
+  let result = value * factor;
+  if (min !== undefined) result = Math.max(min, result);
+  if (max !== undefined) result = Math.min(max, result);
+  return Math.round(result * 100) / 100;
+}
+
+/**
  * Generate synthetic incidents that appear over elapsed weeks.
  * Returns 1-2 per elapsed week, capped at `maxNew` total.
  */

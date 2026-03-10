@@ -6,6 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { WidgetConfig, WidgetSize } from "@/types";
 import { getWidgetComponent } from "@/config/widget-registry";
 import WidgetShell from "./WidgetShell";
+import { useRefresh } from "@/lib/refresh-context";
 
 const sizeClasses: Record<WidgetSize, string> = {
   small: "widget-small",
@@ -37,6 +38,8 @@ export default function SortableWidget({ config, index }: SortableWidgetProps) {
     isDragging,
   } = useSortable({ id: config.id });
 
+  const { refreshKey } = useRefresh();
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -55,7 +58,7 @@ export default function SortableWidget({ config, index }: SortableWidgetProps) {
           dragListeners={listeners}
           animationDelay={index !== undefined ? index * 50 : 0}
         >
-          <Component />
+          <Component key={`${config.id}-${refreshKey}`} />
         </WidgetShell>
       </Suspense>
     </div>
