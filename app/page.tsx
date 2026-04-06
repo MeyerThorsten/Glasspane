@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   RiShieldCheckLine,
   RiDashboardLine,
@@ -423,7 +422,7 @@ export default function Home() {
       {/* ── Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
-          <Image src="/logo.png" alt="All Is Well" width={280} height={62} className="h-14 w-auto" />
+          <span className="text-xl font-bold text-gray-600 dark:text-gray-300">All Is Well</span>
           <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
         </div>
       </footer>

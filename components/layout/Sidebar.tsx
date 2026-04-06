@@ -6,7 +6,6 @@ import { navigationItems } from "@/config/navigation";
 import CustomerSelector from "./CustomerSelector";
 import { useSidebar } from "@/lib/sidebar-context";
 import { RiCloseLine, RiMenuFoldLine, RiMenuUnfoldLine } from "@remixicon/react";
-import Image from "next/image";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -30,11 +29,9 @@ export default function Sidebar() {
         {/* Logo */}
         <div className={`flex items-center justify-between border-b border-gray-100 dark:border-[#252533] ${collapsed ? "px-3 py-4" : "px-5 py-5"}`}>
           <div className="flex items-center gap-2 overflow-hidden">
-            {collapsed ? (
-              <Image src="/logo.png" alt="All Is Well" width={40} height={40} className="h-9 w-9 object-cover object-left" priority />
-            ) : (
-              <Image src="/logo.png" alt="All Is Well" width={260} height={58} className="h-14 w-auto" priority />
-            )}
+            <span className={`font-bold text-gray-900 dark:text-white whitespace-nowrap ${collapsed ? "text-lg" : "text-xl"}`}>
+              {collapsed ? "AiW" : "All Is Well"}
+            </span>
           </div>
           <button
             onClick={close}
