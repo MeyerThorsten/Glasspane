@@ -1,7 +1,7 @@
 [
   {
     "id": "svc-cloud-001",
-    "name": "Open Telekom Cloud",
+    "name": "Cloud Platform",
     "category": "Cloud",
     "status": "operational",
     "uptime": 99.998,

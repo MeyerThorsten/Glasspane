@@ -56,7 +56,7 @@
       { "domain": "api.muster-ag.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-02-20", "daysUntilExpiry": 10, "status": "expiring-soon" }
     ],
     "backups": [
-      { "serviceName": "Open Telekom Cloud", "lastBackup": "2026-02-10T02:00:00Z", "successRate": 99.8, "nextScheduled": "2026-02-11T02:00:00Z" },
+      { "serviceName": "Cloud Platform", "lastBackup": "2026-02-10T02:00:00Z", "successRate": 99.8, "nextScheduled": "2026-02-11T02:00:00Z" },
       { "serviceName": "SAP S/4HANA Managed", "lastBackup": "2026-02-10T01:00:00Z", "successRate": 100, "nextScheduled": "2026-02-11T01:00:00Z" },
       { "serviceName": "Managed Security (SOC)", "lastBackup": "2026-02-10T03:00:00Z", "successRate": 99.5, "nextScheduled": "2026-02-11T03:00:00Z" }
     ],
@@ -78,13 +78,13 @@
       { "date": "2026-02-21", "count": 1, "risk": "low" }
     ],
     "errorRates": [
-      { "timestamp": "2026-01-01", "serviceName": "Open Telekom Cloud", "rate": 0.02 },
-      { "timestamp": "2026-01-02", "serviceName": "Open Telekom Cloud", "rate": 0.015 },
-      { "timestamp": "2026-01-03", "serviceName": "Open Telekom Cloud", "rate": 0.025 },
-      { "timestamp": "2026-01-04", "serviceName": "Open Telekom Cloud", "rate": 0.01 },
-      { "timestamp": "2026-01-05", "serviceName": "Open Telekom Cloud", "rate": 0.008 },
-      { "timestamp": "2026-01-06", "serviceName": "Open Telekom Cloud", "rate": 0.03 },
-      { "timestamp": "2026-01-07", "serviceName": "Open Telekom Cloud", "rate": 0.035 },
+      { "timestamp": "2026-01-01", "serviceName": "Cloud Platform", "rate": 0.02 },
+      { "timestamp": "2026-01-02", "serviceName": "Cloud Platform", "rate": 0.015 },
+      { "timestamp": "2026-01-03", "serviceName": "Cloud Platform", "rate": 0.025 },
+      { "timestamp": "2026-01-04", "serviceName": "Cloud Platform", "rate": 0.01 },
+      { "timestamp": "2026-01-05", "serviceName": "Cloud Platform", "rate": 0.008 },
+      { "timestamp": "2026-01-06", "serviceName": "Cloud Platform", "rate": 0.03 },
+      { "timestamp": "2026-01-07", "serviceName": "Cloud Platform", "rate": 0.035 },
       { "timestamp": "2026-01-01", "serviceName": "SAP S/4HANA Managed", "rate": 0.005 },
       { "timestamp": "2026-01-02", "serviceName": "SAP S/4HANA Managed", "rate": 0.004 },
       { "timestamp": "2026-01-03", "serviceName": "SAP S/4HANA Managed", "rate": 0.006 },
@@ -111,7 +111,7 @@
       { "id": "CHG-001", "title": "MPLS circuit upgrade Frankfurt", "scheduledDate": "2026-02-14", "risk": "high", "serviceName": "MPLS WAN", "status": "approved" },
       { "id": "CHG-002", "title": "SAP kernel patch SP23", "scheduledDate": "2026-02-12", "risk": "medium", "serviceName": "SAP S/4HANA Managed", "status": "approved" },
       { "id": "CHG-003", "title": "Firewall policy update", "scheduledDate": "2026-02-11", "risk": "low", "serviceName": "Managed Security (SOC)", "status": "pending" },
-      { "id": "CHG-004", "title": "Cloud storage tier migration", "scheduledDate": "2026-02-18", "risk": "medium", "serviceName": "Open Telekom Cloud", "status": "pending" },
+      { "id": "CHG-004", "title": "Cloud storage tier migration", "scheduledDate": "2026-02-18", "risk": "medium", "serviceName": "Cloud Platform", "status": "pending" },
       { "id": "CHG-005", "title": "Email gateway version upgrade", "scheduledDate": "2026-02-20", "risk": "low", "serviceName": "Digital Workplace", "status": "approved" }
     ],
     "projects": [
@@ -129,7 +129,7 @@
       { "name": "Network Modernization", "progress": 30, "target": 100, "status": "delayed" }
     ],
     "serviceUtilization": [
-      { "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "category": "Cloud", "months": [
+      { "serviceId": "svc-cloud-001", "serviceName": "Cloud Platform", "category": "Cloud", "months": [
         { "month": "2025-10", "usage": 65, "capacity": 100 }, { "month": "2025-11", "usage": 68, "capacity": 100 }, { "month": "2025-12", "usage": 72, "capacity": 100 }, { "month": "2026-01", "usage": 75, "capacity": 100 }
       ]},
       { "serviceId": "svc-sap-001", "serviceName": "SAP S/4HANA Managed", "category": "SAP", "months": [
@@ -201,7 +201,7 @@
       { "domain": "iot.techvision.de", "issuer": "T-TeleSec GlobalRoot Class 2", "expiresAt": "2026-02-25", "daysUntilExpiry": 15, "status": "expiring-soon" }
     ],
     "backups": [
-      { "serviceName": "Open Telekom Cloud", "lastBackup": "2026-02-10T02:00:00Z", "successRate": 99.2, "nextScheduled": "2026-02-11T02:00:00Z" },
+      { "serviceName": "Cloud Platform", "lastBackup": "2026-02-10T02:00:00Z", "successRate": 99.2, "nextScheduled": "2026-02-11T02:00:00Z" },
       { "serviceName": "AI & Data Analytics Platform", "lastBackup": "2026-02-10T04:00:00Z", "successRate": 98.5, "nextScheduled": "2026-02-11T04:00:00Z" }
     ],
     "changeCalendar": [
@@ -217,13 +217,13 @@
       { "date": "2026-02-14", "count": 2, "risk": "medium" }
     ],
     "errorRates": [
-      { "timestamp": "2026-01-01", "serviceName": "Open Telekom Cloud", "rate": 0.03 },
-      { "timestamp": "2026-01-02", "serviceName": "Open Telekom Cloud", "rate": 0.025 },
-      { "timestamp": "2026-01-03", "serviceName": "Open Telekom Cloud", "rate": 0.04 },
-      { "timestamp": "2026-01-04", "serviceName": "Open Telekom Cloud", "rate": 0.015 },
-      { "timestamp": "2026-01-05", "serviceName": "Open Telekom Cloud", "rate": 0.012 },
-      { "timestamp": "2026-01-06", "serviceName": "Open Telekom Cloud", "rate": 0.045 },
-      { "timestamp": "2026-01-07", "serviceName": "Open Telekom Cloud", "rate": 0.05 },
+      { "timestamp": "2026-01-01", "serviceName": "Cloud Platform", "rate": 0.03 },
+      { "timestamp": "2026-01-02", "serviceName": "Cloud Platform", "rate": 0.025 },
+      { "timestamp": "2026-01-03", "serviceName": "Cloud Platform", "rate": 0.04 },
+      { "timestamp": "2026-01-04", "serviceName": "Cloud Platform", "rate": 0.015 },
+      { "timestamp": "2026-01-05", "serviceName": "Cloud Platform", "rate": 0.012 },
+      { "timestamp": "2026-01-06", "serviceName": "Cloud Platform", "rate": 0.045 },
+      { "timestamp": "2026-01-07", "serviceName": "Cloud Platform", "rate": 0.05 },
       { "timestamp": "2026-01-01", "serviceName": "AI & Data Analytics Platform", "rate": 0.08 },
       { "timestamp": "2026-01-02", "serviceName": "AI & Data Analytics Platform", "rate": 0.065 },
       { "timestamp": "2026-01-03", "serviceName": "AI & Data Analytics Platform", "rate": 0.09 },
@@ -249,7 +249,7 @@
     "pendingChanges": [
       { "id": "CHG-101", "title": "GPU cluster scaling update", "scheduledDate": "2026-02-12", "risk": "medium", "serviceName": "AI & Data Analytics Platform", "status": "approved" },
       { "id": "CHG-102", "title": "IoT Hub firmware rollout", "scheduledDate": "2026-02-15", "risk": "high", "serviceName": "IoT Hub", "status": "pending" },
-      { "id": "CHG-103", "title": "Cloud network policy update", "scheduledDate": "2026-02-11", "risk": "low", "serviceName": "Open Telekom Cloud", "status": "approved" }
+      { "id": "CHG-103", "title": "Cloud network policy update", "scheduledDate": "2026-02-11", "risk": "low", "serviceName": "Cloud Platform", "status": "approved" }
     ],
     "projects": [
       { "id": "PRJ-101", "name": "AI Model Deployment Pipeline", "progress": 60, "status": "on-track", "dueDate": "2026-05-15", "owner": "AI Engineering" },
@@ -263,7 +263,7 @@
       { "name": "Cloud Native Migration", "progress": 45, "target": 100, "status": "on-track" }
     ],
     "serviceUtilization": [
-      { "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "category": "Cloud", "months": [
+      { "serviceId": "svc-cloud-001", "serviceName": "Cloud Platform", "category": "Cloud", "months": [
         { "month": "2025-10", "usage": 70, "capacity": 100 }, { "month": "2025-11", "usage": 72, "capacity": 100 }, { "month": "2025-12", "usage": 78, "capacity": 100 }, { "month": "2026-01", "usage": 82, "capacity": 100 }
       ]},
       { "serviceId": "svc-ai-001", "serviceName": "AI & Data Analytics Platform", "category": "AI & Data", "months": [

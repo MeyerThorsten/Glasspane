@@ -1,13 +1,13 @@
 {
   "cust-001": {
     "incidents": [
-      { "id": "INC-001", "title": "Cloud storage latency spike", "severity": "P2", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-01-15T08:30:00Z", "resolvedAt": "2026-01-15T09:45:00Z", "mttrMinutes": 75 },
+      { "id": "INC-001", "title": "Cloud storage latency spike", "severity": "P2", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Cloud Platform", "createdAt": "2026-01-15T08:30:00Z", "resolvedAt": "2026-01-15T09:45:00Z", "mttrMinutes": 75 },
       { "id": "INC-002", "title": "SAP batch job failure", "severity": "P3", "status": "resolved", "serviceId": "svc-sap-001", "serviceName": "SAP S/4HANA Managed", "createdAt": "2026-01-18T14:20:00Z", "resolvedAt": "2026-01-18T15:00:00Z", "mttrMinutes": 40 },
       { "id": "INC-003", "title": "MPLS link degradation Frankfurt", "severity": "P2", "status": "investigating", "serviceId": "svc-conn-001", "serviceName": "MPLS WAN", "createdAt": "2026-02-08T11:00:00Z", "resolvedAt": null, "mttrMinutes": null },
       { "id": "INC-004", "title": "Firewall rule sync delay", "severity": "P3", "status": "resolved", "serviceId": "svc-sec-001", "serviceName": "Managed Security (SOC)", "createdAt": "2026-01-22T03:15:00Z", "resolvedAt": "2026-01-22T03:45:00Z", "mttrMinutes": 30 },
       { "id": "INC-005", "title": "Email gateway slowdown", "severity": "P3", "status": "resolved", "serviceId": "svc-work-001", "serviceName": "Digital Workplace", "createdAt": "2026-01-25T09:00:00Z", "resolvedAt": "2026-01-25T10:30:00Z", "mttrMinutes": 90 },
-      { "id": "INC-006", "title": "VM provisioning timeout", "severity": "P4", "status": "closed", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-01-10T16:00:00Z", "resolvedAt": "2026-01-10T16:20:00Z", "mttrMinutes": 20 },
-      { "id": "INC-007", "title": "SSL certificate near expiry warning", "severity": "P4", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-02-01T08:00:00Z", "resolvedAt": "2026-02-01T10:00:00Z", "mttrMinutes": 120 }
+      { "id": "INC-006", "title": "VM provisioning timeout", "severity": "P4", "status": "closed", "serviceId": "svc-cloud-001", "serviceName": "Cloud Platform", "createdAt": "2026-01-10T16:00:00Z", "resolvedAt": "2026-01-10T16:20:00Z", "mttrMinutes": 20 },
+      { "id": "INC-007", "title": "SSL certificate near expiry warning", "severity": "P4", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Cloud Platform", "createdAt": "2026-02-01T08:00:00Z", "resolvedAt": "2026-02-01T10:00:00Z", "mttrMinutes": 120 }
     ],
     "summary": [
       { "severity": "P1", "open": 0, "resolved": 0, "total": 0 },
@@ -48,7 +48,7 @@
     "incidents": [
       { "id": "INC-101", "title": "AI model serving timeout", "severity": "P2", "status": "resolved", "serviceId": "svc-ai-001", "serviceName": "AI & Data Analytics Platform", "createdAt": "2026-01-20T10:00:00Z", "resolvedAt": "2026-01-20T12:30:00Z", "mttrMinutes": 150 },
       { "id": "INC-102", "title": "IoT data ingestion backlog", "severity": "P3", "status": "resolved", "serviceId": "svc-iot-001", "serviceName": "IoT Hub", "createdAt": "2026-01-22T06:00:00Z", "resolvedAt": "2026-01-22T08:00:00Z", "mttrMinutes": 120 },
-      { "id": "INC-103", "title": "Cloud VM autoscaling failure", "severity": "P1", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Open Telekom Cloud", "createdAt": "2026-02-01T03:00:00Z", "resolvedAt": "2026-02-01T04:15:00Z", "mttrMinutes": 75 },
+      { "id": "INC-103", "title": "Cloud VM autoscaling failure", "severity": "P1", "status": "resolved", "serviceId": "svc-cloud-001", "serviceName": "Cloud Platform", "createdAt": "2026-02-01T03:00:00Z", "resolvedAt": "2026-02-01T04:15:00Z", "mttrMinutes": 75 },
       { "id": "INC-104", "title": "IoT Hub firmware update stall", "severity": "P3", "status": "open", "serviceId": "svc-iot-001", "serviceName": "IoT Hub", "createdAt": "2026-02-09T14:00:00Z", "resolvedAt": null, "mttrMinutes": null },
       { "id": "INC-105", "title": "GPU cluster scheduling delay", "severity": "P4", "status": "resolved", "serviceId": "svc-ai-001", "serviceName": "AI & Data Analytics Platform", "createdAt": "2026-01-28T11:00:00Z", "resolvedAt": "2026-01-28T11:45:00Z", "mttrMinutes": 45 }
     ],

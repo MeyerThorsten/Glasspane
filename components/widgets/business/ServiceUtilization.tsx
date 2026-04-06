@@ -20,7 +20,7 @@ export default function ServiceUtilization() {
   const chartData = data.map((svc) => {
     const lastMonth = svc.months[svc.months.length - 1];
     const shortName = svc.serviceName
-      .replace("Open Telekom Cloud", "OTC")
+      .replace("Cloud Platform", "Cloud")
       .replace("SAP S/4HANA Managed", "SAP S/4HANA")
       .replace("Managed Security (SOC)", "Security SOC")
       .replace("Digital Workplace", "Workplace")
