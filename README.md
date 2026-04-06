@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to the C-Level
 | Framework | Next.js 16 (App Router) + TypeScript | SSR-ready, file-based routing |
 | UI Components | Tremor + shadcn/ui primitives | Dashboard charts and UI elements |
 | Charts | Recharts (via Tremor) | AreaChart, BarChart, DonutChart, LineChart |
-| Styling | Tailwind CSS 4 | Utility-first CSS with T-Systems theme |
+| Styling | Tailwind CSS 4 | Utility-first CSS with custom indigo theme |
 | Layout | CSS Grid (12-column) | Responsive widget grid |
 | Icons | @remixicon/react | Tremor's default icon set |
 
@@ -107,7 +107,7 @@ Transparency/
 ├── app/
 │   ├── layout.tsx                    # Root layout (html, body, metadata)
 │   ├── page.tsx                      # Landing → redirect to /dashboard
-│   ├── globals.css                   # Tailwind + T-Systems CSS variables
+│   ├── globals.css                   # Tailwind + brand CSS variables
 │   └── dashboard/
 │       ├── layout.tsx                # Sidebar + Header + CustomerProvider
 │       ├── page.tsx                  # Widget grid (reads ?view= param)
@@ -336,3 +336,9 @@ export async function getCurrentSla(customerId: string): Promise<number> {
 | `npm run build` | Production build (TypeScript check + optimize) |
 | `npm run start` | Serve production build |
 | `npm run lint` | Run ESLint |
+
+## License
+
+This project is licensed under the [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0-only).
+
+Copyright (c) 2026 Thorsten Meyer

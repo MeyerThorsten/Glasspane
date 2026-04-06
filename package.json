@@ -1,7 +1,9 @@
 {
   "name": "all-is-well",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "AGPL-3.0-only",
+  "author": "Thorsten Meyer",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
