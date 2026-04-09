@@ -10,7 +10,7 @@ const categoryIcon: Record<string, string> = {
 };
 
 export default function AiPredictionsWidget() {
-  const { predictions, loading } = useAnomalies();
+  const { predictions, loading, providerLabel } = useAnomalies();
 
   if (loading) {
     return (
@@ -44,7 +44,7 @@ export default function AiPredictionsWidget() {
           </div>
         </div>
       ))}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">Powered by watsonx.ai</p>
+      <p className="text-[10px] text-gray-400 dark:text-gray-500">Powered by {providerLabel}</p>
     </div>
   );
 }

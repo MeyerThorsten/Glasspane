@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useEffectEvent, useState, ReactNode, startTransition } from "react";
 import { useCustomer } from "@/lib/customer-context";
 import type { AiInsightsResponse, Anomaly, Prediction } from "@/types";
 
@@ -70,12 +70,14 @@ function getFallbackInsights(): AiInsightsResponse {
       },
     ],
     generatedAt: new Date().toISOString(),
+    providerLabel: "Mock AI",
   };
 }
 
 interface AnomalyContextValue {
   anomalies: Anomaly[];
   predictions: Prediction[];
+  providerLabel: string;
   loading: boolean;
   getAnomaliesForWidget: (widgetId: string) => Anomaly[];
 }
@@ -83,6 +85,7 @@ interface AnomalyContextValue {
 const AnomalyCtx = createContext<AnomalyContextValue>({
   anomalies: [],
   predictions: [],
+  providerLabel: "AI",
   loading: false,
   getAnomaliesForWidget: () => [],
 });
@@ -91,10 +94,15 @@ export function AnomalyProvider({ children }: { children: ReactNode }) {
   const { customer } = useCustomer();
   const [data, setData] = useState<AiInsightsResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const beginFetch = useEffectEvent(() => {
+    startTransition(() => {
+      setLoading(true);
+    });
+  });
 
   useEffect(() => {
     if (!customer) return;
-    setLoading(true);
+    beginFetch();
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000);
     fetch("/api/ai/insights", {
@@ -128,6 +136,7 @@ export function AnomalyProvider({ children }: { children: ReactNode }) {
     <AnomalyCtx.Provider value={{
       anomalies: data?.anomalies ?? [],
       predictions: data?.predictions ?? [],
+      providerLabel: data?.providerLabel ?? "AI",
       loading,
       getAnomaliesForWidget,
     }}>

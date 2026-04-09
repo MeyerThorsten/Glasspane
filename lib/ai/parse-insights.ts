@@ -1,17 +1,18 @@
 import type { AiInsightsResponse, Anomaly, Prediction } from "@/types";
+import { extractFirstJsonObject } from "./extract-json-object";
 
 const VALID_SEVERITIES = new Set(["info", "warning", "critical"]);
 const VALID_CATEGORIES = new Set(["sla", "cost", "capacity"]);
 const VALID_CONFIDENCES = new Set(["low", "medium", "high"]);
 
 export function parseInsightsResponse(raw: string): AiInsightsResponse {
-  const jsonMatch = raw.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
+  const jsonObject = extractFirstJsonObject(raw);
+  if (!jsonObject) {
     return { anomalies: [], predictions: [], generatedAt: new Date().toISOString() };
   }
 
   try {
-    const parsed = JSON.parse(jsonMatch[0]);
+    const parsed = JSON.parse(jsonObject);
 
     const anomalies: Anomaly[] = (parsed.anomalies ?? [])
       .filter((a: Record<string, unknown>) =>

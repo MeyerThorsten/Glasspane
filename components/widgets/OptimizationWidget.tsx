@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { useCustomer } from "@/lib/customer-context";
 
 const recommendations = [
@@ -60,15 +60,20 @@ function getStorageKey(customerId: string) {
 export default function OptimizationWidget() {
   const { customer } = useCustomer();
   const [states, setStates] = useState<Record<string, RecState>>({});
+  const restoreStates = useEffectEvent((nextStates: Record<string, RecState>) => {
+    startTransition(() => {
+      setStates(nextStates);
+    });
+  });
 
   useEffect(() => {
     if (!customer) return;
     try {
       const saved = localStorage.getItem(getStorageKey(customer.id));
-      if (saved) setStates(JSON.parse(saved));
-      else setStates({});
+      if (saved) restoreStates(JSON.parse(saved));
+      else restoreStates({});
     } catch {
-      setStates({});
+      restoreStates({});
     }
   }, [customer]);
 
@@ -177,7 +182,7 @@ export default function OptimizationWidget() {
       })}
 
       <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Analyzed on {new Date().toLocaleDateString()} · Powered by watsonx.ai
+        Analyzed on {new Date().toLocaleDateString()} · Scenario-based example
       </p>
     </div>
   );

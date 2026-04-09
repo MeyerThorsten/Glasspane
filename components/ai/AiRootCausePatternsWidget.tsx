@@ -1,41 +1,83 @@
 "use client";
 
-const patterns = [
-  {
-    id: 1,
-    category: "Network-related",
-    percentage: 40,
-    description: "40% of P2 incidents concentrated after change windows — network config drift suspected",
-    recommendation: "Add automated config validation to post-change checks",
-    color: "bg-red-500",
-  },
-  {
-    id: 2,
-    category: "Storage I/O",
-    percentage: 25,
-    description: "Recurring latency spikes on shared storage during backup windows",
-    recommendation: "Stagger backup schedules across storage arrays",
-    color: "bg-amber-500",
-  },
-  {
-    id: 3,
-    category: "Authentication",
-    percentage: 20,
-    description: "SSO timeout errors correlate with certificate renewal cycles",
-    recommendation: "Implement certificate pre-renewal 30 days before expiry",
-    color: "bg-blue-500",
-  },
-  {
-    id: 4,
-    category: "Resource Exhaustion",
-    percentage: 15,
-    description: "Memory leak pattern in app tier every 14 days, triggers auto-restart",
-    recommendation: "Schedule proactive app pool recycling on 7-day cadence",
-    color: "bg-purple-500",
-  },
-];
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
+import { useCustomer } from "@/lib/customer-context";
+import type { AiRootCausePatternsResponse } from "@/types";
+
+const patternColors = ["bg-red-500", "bg-amber-500", "bg-blue-500", "bg-fuchsia-500"];
 
 export default function AiRootCausePatternsWidget() {
+  const { customer } = useCustomer();
+  const [data, setData] = useState<AiRootCausePatternsResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const beginRequest = useEffectEvent(() => {
+    startTransition(() => {
+      setLoading(true);
+      setError(null);
+    });
+  });
+
+  useEffect(() => {
+    if (!customer) return;
+
+    let active = true;
+    const controller = new AbortController();
+    beginRequest();
+
+    fetch("/api/ai/root-cause-patterns", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ customerId: customer.id }),
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Failed to generate root cause patterns");
+        }
+        return response.json() as Promise<AiRootCausePatternsResponse>;
+      })
+      .then((responseData) => {
+        if (active) {
+          setData(responseData);
+        }
+      })
+      .catch((fetchError) => {
+        if (!active || controller.signal.aborted) {
+          return;
+        }
+
+        setError(fetchError instanceof Error ? fetchError.message : "Failed to generate root cause patterns");
+      })
+      .finally(() => {
+        if (active) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [customer]);
+
+  const patterns = data?.patterns ?? [];
+  const providerLabel = data?.providerLabel ?? "AI";
+
+  if (loading) {
+    return (
+      <div className="space-y-4 animate-pulse">
+        <div className="h-12 bg-gray-100 dark:bg-[#262633] rounded" />
+        <div className="h-12 bg-gray-100 dark:bg-[#262633] rounded" />
+        <div className="h-12 bg-gray-100 dark:bg-[#262633] rounded" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="text-sm text-red-500">{error}</p>;
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2 mb-1">
@@ -44,27 +86,33 @@ export default function AiRootCausePatternsWidget() {
           AI Pattern Analysis
         </span>
       </div>
-      {patterns.map((p) => (
-        <div key={p.id} className="space-y-1.5">
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${p.color}`} />
-            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-              {p.category}
-            </span>
-            <span className="text-xs text-gray-400 dark:text-gray-500">
-              {p.percentage}%
-            </span>
+      {patterns.length === 0 ? (
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          No dominant root-cause patterns identified.
+        </p>
+      ) : (
+        patterns.map((pattern, index) => (
+          <div key={pattern.id} className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <div className={`w-2 h-2 rounded-full ${patternColors[index % patternColors.length]}`} />
+              <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                {pattern.category}
+              </span>
+              <span className="text-xs text-gray-400 dark:text-gray-500">
+                {pattern.percentage}%
+              </span>
+            </div>
+            <p className="text-xs text-gray-600 dark:text-gray-400 pl-4">
+              {pattern.description}
+            </p>
+            <p className="text-xs text-blue-600 dark:text-blue-400 pl-4">
+              → {pattern.recommendation}
+            </p>
           </div>
-          <p className="text-xs text-gray-600 dark:text-gray-400 pl-4">
-            {p.description}
-          </p>
-          <p className="text-xs text-blue-600 dark:text-blue-400 pl-4">
-            → {p.recommendation}
-          </p>
-        </div>
-      ))}
+        ))
+      )}
       <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Powered by watsonx.ai
+        Powered by {providerLabel}
       </p>
     </div>
   );

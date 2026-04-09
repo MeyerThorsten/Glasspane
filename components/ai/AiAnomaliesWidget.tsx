@@ -16,7 +16,7 @@ const severityLabel: Record<AnomalySeverity, string> = {
 };
 
 export default function AiAnomaliesWidget() {
-  const { anomalies, loading } = useAnomalies();
+  const { anomalies, loading, providerLabel } = useAnomalies();
 
   if (loading) {
     return (
@@ -48,7 +48,7 @@ export default function AiAnomaliesWidget() {
           </div>
         </div>
       ))}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">Powered by watsonx.ai</p>
+      <p className="text-[10px] text-gray-400 dark:text-gray-500">Powered by {providerLabel}</p>
     </div>
   );
 }

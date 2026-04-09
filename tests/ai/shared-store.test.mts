@@ -31,11 +31,35 @@ test("upstash shared store sends command bodies expected by the REST API", async
     await store.incrementFixedWindow("quota:chat:cust-001", 60000);
 
     assert.equal(requests[0].url, "https://cache.example.test");
-    assert.match(requests[0].body, /\["SET","glasspane:ai:cache:key-1","\\\{"value\\":1\\\}","PX",1000\]/);
+    const setCommand = JSON.parse(requests[0].body);
+    assert.deepEqual(setCommand, [
+      "SET",
+      `${setCommand[1].split(":cache:")[0]}:cache:key-1`,
+      "{\"value\":1}",
+      "PX",
+      1000,
+    ]);
+
     assert.equal(requests[1].url, "https://cache.example.test/multi-exec");
-    assert.match(requests[1].body, /\["SET","glasspane:ai:quota:chat:cust-001","0","PX",60000,"NX"\]/);
-    assert.match(requests[1].body, /\["INCR","glasspane:ai:quota:chat:cust-001"\]/);
-    assert.match(requests[1].body, /\["PTTL","glasspane:ai:quota:chat:cust-001"\]/);
+    const transaction = JSON.parse(requests[1].body);
+    assert.deepEqual(transaction, [
+      [
+        "SET",
+        `${transaction[0][1].split(":quota:")[0]}:quota:chat:cust-001`,
+        "0",
+        "PX",
+        60000,
+        "NX",
+      ],
+      [
+        "INCR",
+        `${transaction[1][1].split(":quota:")[0]}:quota:chat:cust-001`,
+      ],
+      [
+        "PTTL",
+        `${transaction[2][1].split(":quota:")[0]}:quota:chat:cust-001`,
+      ],
+    ]);
   } finally {
     restoreFetch();
     restoreEnv();

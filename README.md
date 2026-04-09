@@ -86,6 +86,18 @@ AI_SUMMARY_MODEL=gemini-2.5-flash
 AI_CHAT_PROVIDER=bedrock
 AI_CHAT_MODEL=openai.gpt-oss-20b-1:0
 AI_CHAT_FALLBACKS=openai,mock
+
+AI_SHARED_CACHE_BACKEND=upstash
+AI_SHARED_CACHE_URL=https://<your-upstash-host>
+AI_SHARED_CACHE_TOKEN=<your-upstash-token>
+AI_SHARED_CACHE_PREFIX=glasspane:ai
+
+AI_ROUTE_AUTH_ENABLED=true
+AI_ROUTE_API_KEYS_JSON=[{"id":"ops-team","token":"replace-me","allowedCustomers":["cust-001"],"requestsPerMinute":60,"routeLimits":{"chat":20}}]
+AI_ROUTE_STANDARD_LIMIT_PER_MINUTE=20
+AI_ROUTE_ENTERPRISE_LIMIT_PER_MINUTE=60
+AI_ROUTE_ENTERPRISE_PREMIUM_LIMIT_PER_MINUTE=120
+AI_ROUTE_QUOTA_WINDOW_MS=60000
 ```
 
 Provider-specific env vars:
@@ -98,14 +110,18 @@ Provider-specific env vars:
 - `ANTHROPIC_API_KEY`, `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL_ID`, `ANTHROPIC_VERSION`
 - `GEMINI_API_KEY`, `GEMINI_BASE_URL`, `GEMINI_MODEL_ID`
 - `BEDROCK_API_KEY`, `BEDROCK_BASE_URL`, `BEDROCK_MODEL_ID`, `BEDROCK_REGION`
+- `AI_SHARED_CACHE_BACKEND`, `AI_SHARED_CACHE_URL`, `AI_SHARED_CACHE_TOKEN`, `AI_SHARED_CACHE_PREFIX`
+- `AI_ROUTE_AUTH_ENABLED`, `AI_ROUTE_API_KEYS_JSON`, `AI_ROUTE_QUOTA_WINDOW_MS`
+- `AI_ROUTE_STANDARD_LIMIT_PER_MINUTE`, `AI_ROUTE_ENTERPRISE_LIMIT_PER_MINUTE`, `AI_ROUTE_ENTERPRISE_PREMIUM_LIMIT_PER_MINUTE`
+- `AI_ROUTE_SUMMARY_LIMIT_PER_MINUTE`, `AI_ROUTE_CHAT_LIMIT_PER_MINUTE`, `AI_ROUTE_INSIGHTS_LIMIT_PER_MINUTE`, and the equivalent per-task `AI_ROUTE_*_LIMIT_PER_MINUTE` overrides
 
 The UI talks only to internal routes, so provider credentials remain server-side.
 
-All `/app/api/ai/*` routes now add a request ID to responses and apply a basic in-memory per-route rate limit. Provider timing is logged server-side for debugging and fallback visibility.
+All `/app/api/ai/*` routes now add a request ID to responses. When `AI_ROUTE_AUTH_ENABLED=true` or `AI_ROUTE_API_KEYS_JSON` is configured, the routes require `Authorization: Bearer <token>` or `x-ai-api-key`, validate the requested `customerId`, and apply tenant-aware quotas per `route + customerId`.
 
 `/app/api/ai/chat` now supports Server-Sent Events. `AiChatPanel` opts into streaming automatically, and the router falls back to chunked non-stream responses when the selected provider does not expose a native streaming API.
 
-The AI task layer now uses a shared cache helper in `/Users/thorstenmeyer/Dev/Transparency/lib/ai/cache.ts`. It is still memory-backed in this MVP, but TTL, request dedupe, and expiry behavior are now centralized instead of duplicated per task.
+The AI task layer now uses a shared cache helper in `/Users/thorstenmeyer/Dev/Transparency/lib/ai/cache.ts` backed by `/Users/thorstenmeyer/Dev/Transparency/lib/ai/shared-store.ts`. By default it uses in-process memory, and it can switch to Upstash Redis REST for multi-instance shared caching without changing task code.
 
 Run the lightweight AI regression suite with:
 

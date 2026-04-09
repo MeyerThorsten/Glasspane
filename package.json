@@ -1,6 +1,7 @@
 {
   "name": "glasspane",
   "version": "0.1.0",
+  "type": "module",
   "private": false,
   "license": "AGPL-3.0-only",
   "author": "Thorsten Meyer",
@@ -9,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:ai": "tsx --test tests/ai/*.test.mts tests/ai/providers/*.test.mts"
+    "test:ai": "node --import tsx --test tests/ai/*.test.mts tests/ai/providers/*.test.mts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

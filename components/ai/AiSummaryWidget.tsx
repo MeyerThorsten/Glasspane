@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { useCustomer } from "@/lib/customer-context";
 import { useSearchParams } from "next/navigation";
 import type { ViewType } from "@/types";
@@ -10,14 +10,20 @@ export default function AiSummaryWidget() {
   const searchParams = useSearchParams();
   const view = (searchParams.get("view") as ViewType) || "c-level";
   const [summary, setSummary] = useState<string | null>(null);
+  const [providerLabel, setProviderLabel] = useState("AI");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const resetRequestState = useEffectEvent(() => {
+    startTransition(() => {
+      setLoading(true);
+      setError(null);
+    });
+  });
 
   useEffect(() => {
     if (!customer) return;
 
-    setLoading(true);
-    setError(null);
+    resetRequestState();
 
     fetch("/api/ai/summary", {
       method: "POST",
@@ -28,6 +34,7 @@ export default function AiSummaryWidget() {
         if (!res.ok) throw new Error("Failed to generate summary");
         const data = await res.json();
         setSummary(data.summary);
+        setProviderLabel(data.providerLabel || "AI");
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -49,7 +56,7 @@ export default function AiSummaryWidget() {
             {summary}
           </p>
           <p className="text-[10px] text-gray-400 dark:text-gray-500">
-            Powered by watsonx.ai
+            Powered by {providerLabel}
           </p>
         </>
       )}

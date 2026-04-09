@@ -1,37 +1,49 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { generateSummary } from "@/lib/ai/generate";
+import { aiErrorResponse, aiSuccess, aiValidationError, authorizeAiRoute, getAiRequestId, logAiRoute } from "@/lib/ai/route-utils";
 import type { ViewType } from "@/types";
 
 const VALID_VIEWS: ViewType[] = ["c-level", "business", "technical"];
 
 export async function POST(request: NextRequest) {
+  const requestId = getAiRequestId(request);
+  const startedAt = Date.now();
+
   try {
     const body = await request.json();
     const { customerId, view } = body;
 
     if (!customerId || typeof customerId !== "string") {
-      return NextResponse.json(
-        { error: "customerId is required" },
-        { status: 400 },
-      );
+      return aiValidationError(requestId, "customerId is required");
     }
 
     if (!view || !VALID_VIEWS.includes(view)) {
-      return NextResponse.json(
-        { error: `view must be one of: ${VALID_VIEWS.join(", ")}` },
-        { status: 400 },
-      );
+      return aiValidationError(requestId, `view must be one of: ${VALID_VIEWS.join(", ")}`);
+    }
+
+    const access = await authorizeAiRoute(request, "summary", requestId, customerId);
+    if ("response" in access) {
+      return access.response;
     }
 
     const summary = await generateSummary(customerId, view);
+    logAiRoute("summary", requestId, "success", {
+      durationMs: Date.now() - startedAt,
+      providerLabel: summary.providerLabel,
+      customerId,
+      authSubject: access.context.authSubject,
+      quotaRemaining: access.context.quotaRemaining,
+    });
 
-    return NextResponse.json({ summary });
+    return aiSuccess(requestId, {
+      summary: summary.text,
+      providerLabel: summary.providerLabel,
+    }, 200, access.context);
   } catch (error) {
-    console.error("AI summary error:", error);
-    const message = error instanceof Error ? error.message : String(error);
-    return NextResponse.json(
-      { error: "Failed to generate summary", detail: message },
-      { status: 500 },
-    );
+    logAiRoute("summary", requestId, "error", {
+      durationMs: Date.now() - startedAt,
+      detail: error instanceof Error ? error.message : String(error),
+    });
+    return aiErrorResponse(requestId, "Failed to generate summary", error);
   }
 }

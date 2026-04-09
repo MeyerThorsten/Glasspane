@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { readSseEvents } from "@/lib/ai/sse";
 import { useCustomer } from "@/lib/customer-context";
 import type { ViewType } from "@/types";
 
 interface Message {
+  id: string;
   role: "user" | "assistant";
   content: string;
 }
@@ -16,46 +18,129 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
+  const [providerLabel, setProviderLabel] = useState("AI");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const activeRequestRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => () => {
+    activeRequestRef.current?.abort();
+  }, []);
+
+  function createMessage(role: Message["role"], content: string): Message {
+    return {
+      id: crypto.randomUUID(),
+      role,
+      content,
+    };
+  }
+
+  function appendAssistantChunk(messageId: string, chunk: string) {
+    setMessages((prev) =>
+      prev.map((message) =>
+        message.id === messageId
+          ? { ...message, content: `${message.content}${chunk}` }
+          : message,
+      ),
+    );
+  }
+
+  function replaceAssistantMessage(messageId: string, content: string) {
+    setMessages((prev) =>
+      prev.map((message) =>
+        message.id === messageId
+          ? { ...message, content }
+          : message,
+      ),
+    );
+  }
 
   async function handleSend() {
     if (!input.trim() || !customer || sending) return;
 
     const question = input.trim();
     setInput("");
-    const userMsg: Message = { role: "user", content: question };
-    setMessages((prev) => [...prev, userMsg]);
+    const userMsg = createMessage("user", question);
+    const assistantMsg = createMessage("assistant", "");
+    const history = messages.map(({ role, content }) => ({ role, content }));
+    setMessages((prev) => [...prev, userMsg, assistantMsg]);
     setSending(true);
 
     try {
+      const controller = new AbortController();
+      activeRequestRef.current = controller;
       const res = await fetch("/api/ai/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "text/event-stream",
+        },
         body: JSON.stringify({
           customerId: customer.id,
           view,
           question,
-          history: messages,
+          history,
+          stream: true,
         }),
+        signal: controller.signal,
       });
 
-      if (!res.ok) throw new Error("Failed to get response");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Failed to get response");
+      }
 
-      const data = await res.json();
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: data.answer },
-      ]);
+      const contentType = res.headers.get("content-type") || "";
+
+      if (contentType.includes("text/event-stream") && res.body) {
+        let receivedText = false;
+
+        for await (const event of readSseEvents(res.body)) {
+          if (event.event === "meta") {
+            const data = JSON.parse(event.data) as { providerLabel?: string };
+            setProviderLabel(data.providerLabel || "AI");
+            continue;
+          }
+
+          if (event.event === "delta") {
+            const data = JSON.parse(event.data) as { text?: string };
+            if (data.text) {
+              receivedText = true;
+              appendAssistantChunk(assistantMsg.id, data.text);
+            }
+            continue;
+          }
+
+          if (event.event === "error") {
+            replaceAssistantMessage(
+              assistantMsg.id,
+              "Sorry, I couldn't process your request. Please try again.",
+            );
+            receivedText = true;
+          }
+        }
+
+        if (!receivedText) {
+          replaceAssistantMessage(
+            assistantMsg.id,
+            "Sorry, I couldn't process your request. Please try again.",
+          );
+        }
+      } else {
+        const data = await res.json();
+        setProviderLabel(data.providerLabel || "AI");
+        replaceAssistantMessage(assistantMsg.id, data.answer);
+      }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Sorry, I couldn't process your request. Please try again." },
-      ]);
+      replaceAssistantMessage(
+        assistantMsg.id,
+        "Sorry, I couldn't process your request. Please try again.",
+      );
     } finally {
+      activeRequestRef.current = null;
       setSending(false);
     }
   }
@@ -101,8 +186,8 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
                 Ask a question about your dashboard data
               </p>
             )}
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+            {messages.map((msg) => (
+              <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div
                   className={`max-w-[85%] px-3 py-2 rounded-lg text-sm ${
                     msg.role === "user"
@@ -110,17 +195,10 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
                       : "bg-gray-100 dark:bg-[#262633] text-gray-800 dark:text-gray-200"
                   }`}
                 >
-                  {msg.content}
+                  {msg.content || (sending ? <span className="animate-pulse text-gray-500">Thinking...</span> : null)}
                 </div>
               </div>
             ))}
-            {sending && (
-              <div className="flex justify-start">
-                <div className="bg-gray-100 dark:bg-[#262633] px-3 py-2 rounded-lg text-sm text-gray-500">
-                  <span className="animate-pulse">Thinking...</span>
-                </div>
-              </div>
-            )}
             <div ref={messagesEndRef} />
           </div>
 
@@ -153,7 +231,7 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
               </button>
             </form>
             <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-2 text-center">
-              Powered by watsonx.ai
+              Powered by {providerLabel}
             </p>
           </div>
         </div>
