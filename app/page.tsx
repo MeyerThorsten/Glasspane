@@ -16,9 +16,18 @@ import {
   RiChat3Line,
   RiRadarLine,
   RiBrainLine,
+  RiErrorWarningLine,
+  RiPulseLine,
+  RiExchangeFundsLine,
+  RiDatabaseLine,
+  RiGitBranchLine,
+  RiCodeSSlashLine,
+  RiOpenSourceLine,
+  RiGithubLine,
+  RiSwitchLine,
 } from "@remixicon/react";
 
-const features = [
+const platformFeatures = [
   {
     icon: RiDashboardLine,
     title: "Real-Time Monitoring",
@@ -43,6 +52,9 @@ const features = [
     description:
       "Budget vs. actual spending, month-over-month trends, and per-service breakdown.",
   },
+];
+
+const aiFeatures = [
   {
     icon: RiSparklingLine,
     title: "AI-Powered Summaries",
@@ -51,9 +63,9 @@ const features = [
   },
   {
     icon: RiChat3Line,
-    title: "Intelligent Chat Assistant",
+    title: "Streaming Chat Assistant",
     description:
-      "Ask questions about your infrastructure data in plain English and get instant, data-driven answers.",
+      "Ask questions in plain English and get real-time streamed answers via Server-Sent Events.",
   },
   {
     icon: RiRadarLine,
@@ -67,6 +79,53 @@ const features = [
     description:
       "Forecasts SLA risks, cost overruns, and capacity thresholds before they become problems.",
   },
+  {
+    icon: RiErrorWarningLine,
+    title: "Risk Briefing",
+    description:
+      "AI-generated threat assessments with severity levels, affected services, and recommended actions.",
+  },
+  {
+    icon: RiPulseLine,
+    title: "SLA Risk Advisor",
+    description:
+      "Predicts SLA breach probability with trend analysis and proactive mitigation recommendations.",
+  },
+  {
+    icon: RiExchangeFundsLine,
+    title: "Cost Forecast",
+    description:
+      "AI-driven spending trajectory analysis with trend charts and budget impact projections.",
+  },
+  {
+    icon: RiDatabaseLine,
+    title: "Capacity Planner",
+    description:
+      "Resource utilization predictions that flag capacity thresholds before they become critical.",
+  },
+  {
+    icon: RiGitBranchLine,
+    title: "Root Cause Patterns",
+    description:
+      "Incident pattern analysis that identifies systemic issues across your infrastructure.",
+  },
+  {
+    icon: RiCodeSSlashLine,
+    title: "Change Impact",
+    description:
+      "Deployment risk assessment that evaluates how changes affect service stability.",
+  },
+];
+
+const providers = [
+  "OpenAI",
+  "Anthropic",
+  "Google Gemini",
+  "IBM watsonx",
+  "OpenRouter",
+  "AWS Bedrock",
+  "Ollama",
+  "LM Studio",
 ];
 
 const views = [
@@ -128,8 +187,8 @@ const pages = [
 
 const stats = [
   { value: "99.999%", label: "Availability Target" },
-  { value: "44+", label: "Dashboard Widgets" },
-  { value: "10", label: "AI Features" },
+  { value: "8", label: "AI Providers" },
+  { value: "14", label: "AI Features" },
   { value: "3", label: "Role-Based Views" },
 ];
 
@@ -243,7 +302,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Features Grid ────────────────────────────────────── */}
+      {/* ── Platform Features ───────────────────────────────── */}
       <section id="features" className="bg-gray-50 dark:bg-[#111118] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
@@ -254,13 +313,9 @@ export default function Home() {
               A single portal for availability, security, cost, and operational
               insights — built on Zero Outage standards.
             </p>
-            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-950/30 px-4 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-              Powered by IBM watsonx.ai
-            </p>
           </div>
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((f) => (
+            {platformFeatures.map((f) => (
               <div
                 key={f.title}
                 className="rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-6 shadow-sm transition hover:shadow-md"
@@ -276,6 +331,91 @@ export default function Home() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── AI-Powered Intelligence ─────────────────────────── */}
+      <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+              AI-powered intelligence
+            </h2>
+            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+              10 AI features that turn raw infrastructure data into actionable
+              insights — from natural language chat to predictive risk analysis.
+            </p>
+            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-950/30 px-4 py-1.5 text-xs font-medium text-indigo-700 dark:text-indigo-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+              Supports 8 AI providers — OpenAI, Anthropic, Gemini, watsonx, and more
+            </p>
+          </div>
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {aiFeatures.map((f) => (
+              <div
+                key={f.title}
+                className="rounded-xl border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] p-5 shadow-sm transition hover:shadow-md"
+              >
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 dark:bg-[#1e1b4b] text-indigo-600 dark:text-indigo-400">
+                  <f.icon className="h-4.5 w-4.5" />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {f.title}
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+                  {f.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── AI Providers ─────────────────────────────────────── */}
+      <section className="bg-gray-50 dark:bg-[#111118] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+              No vendor lock-in
+            </h2>
+            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+              Choose the right AI model for each task. Assign different providers
+              per feature, with automatic fallback chains if one goes down.
+            </p>
+          </div>
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            {providers.map((name) => (
+              <div
+                key={name}
+                className="rounded-lg border border-gray-200 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] px-5 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm"
+              >
+                {name}
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 grid gap-8 sm:grid-cols-3">
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 dark:bg-[#1e1b4b] text-indigo-600 dark:text-indigo-400">
+                <RiSwitchLine className="h-5 w-5" />
+              </div>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Per-Task Assignment</h3>
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Use Gemini for summaries, Anthropic for chat, OpenAI for risk analysis — one env var each.</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 dark:bg-[#1e1b4b] text-indigo-600 dark:text-indigo-400">
+                <RiShieldCheckLine className="h-5 w-5" />
+              </div>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Automatic Fallback</h3>
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Define fallback chains per task. If the primary provider fails, the next one takes over transparently.</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 dark:bg-[#1e1b4b] text-indigo-600 dark:text-indigo-400">
+                <RiServerLine className="h-5 w-5" />
+              </div>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Local Models</h3>
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Run Ollama or LM Studio for full data sovereignty — your infrastructure data never leaves your network.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -399,23 +539,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────── */}
+      {/* ── Open Source ──────────────────────────────────────── */}
       <section className="py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-[#1C1C27] text-gray-700 dark:text-gray-300">
+              <RiOpenSourceLine className="h-6 w-6" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+              Open source. Fully transparent.
+            </h2>
+            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+              A transparency tool should itself be transparent. Glasspane is
+              licensed under AGPL-3.0 — inspect every line of code, self-host on
+              your own infrastructure, or contribute improvements back.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <a
+                href="https://github.com/MeyerThorsten/Glasspane"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-gray-900 dark:bg-white px-6 py-3 text-sm font-semibold text-white dark:text-gray-900 shadow-lg transition hover:bg-gray-800 dark:hover:bg-gray-100"
+              >
+                <RiGithubLine className="h-4 w-4" />
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────── */}
+      <section className="bg-gray-50 dark:bg-[#111118] py-20 sm:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
             Ready to see your services?
           </h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            Explore the live dashboard demo with 44+ widgets and AI-powered
-            insights across three role-based views.
+            Explore the live dashboard with 14 AI-powered features, 8 provider
+            options, and three role-based views — fully open source.
           </p>
-          <Link
-            href="/dashboard?view=c-level"
-            className="mt-10 inline-flex items-center gap-2 rounded-lg bg-magenta px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:bg-magenta-hover"
-          >
-            Launch Demo
-            <RiArrowRightLine className="h-4 w-4" />
-          </Link>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link
+              href="/dashboard?view=c-level"
+              className="inline-flex items-center gap-2 rounded-lg bg-magenta px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:bg-magenta-hover"
+            >
+              Launch Demo
+              <RiArrowRightLine className="h-4 w-4" />
+            </Link>
+            <a
+              href="https://github.com/MeyerThorsten/Glasspane"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-gray-300 dark:border-[#2E2E3D] bg-white dark:bg-[#1C1C27] px-8 py-3.5 text-sm font-semibold text-gray-700 dark:text-gray-300 shadow-sm transition hover:bg-gray-50 dark:hover:bg-[#252533]"
+            >
+              <RiGithubLine className="h-4 w-4" />
+              GitHub
+            </a>
+          </div>
         </div>
       </section>
 
@@ -423,7 +604,21 @@ export default function Home() {
       <footer className="border-t border-gray-200 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#111118] py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 text-center text-sm text-gray-400 dark:text-gray-500">
           <span className="text-xl font-bold text-gray-600 dark:text-gray-300">Glasspane</span>
-          <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
+          <div className="flex items-center gap-4">
+            <p>&copy; {new Date().getFullYear()} Thorsten Meyer</p>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <a
+              href="https://github.com/MeyerThorsten/Glasspane"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 transition hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              <RiGithubLine className="h-4 w-4" />
+              GitHub
+            </a>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <span>AGPL-3.0</span>
+          </div>
         </div>
       </footer>
     </main>
