@@ -214,6 +214,15 @@ export default function Home() {
                 predictive insights — designed for executives, operations,
                 and engineering teams.
               </p>
+              <a
+                href="https://thorstenmeyerai.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-sm transition hover:bg-white/20 hover:text-white"
+              >
+                <RiSparklingLine className="h-3.5 w-3.5" />
+                Powered by Thorsten Meyer AI
+              </a>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/dashboard?view=c-level"
@@ -346,10 +355,15 @@ export default function Home() {
               10 AI features that turn raw infrastructure data into actionable
               insights — from natural language chat to predictive risk analysis.
             </p>
-            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-950/30 px-4 py-1.5 text-xs font-medium text-indigo-700 dark:text-indigo-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-              Supports 8 AI providers — OpenAI, Anthropic, Gemini, watsonx, and more
-            </p>
+            <a
+              href="https://thorstenmeyerai.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-50 dark:bg-indigo-950/30 px-4 py-1.5 text-xs font-medium text-indigo-700 dark:text-indigo-300 transition hover:bg-indigo-100 dark:hover:bg-indigo-950/50"
+            >
+              <RiSparklingLine className="h-3.5 w-3.5" />
+              Powered by Thorsten Meyer AI — supports 8 providers including OpenAI, Anthropic, Gemini, and more
+            </a>
           </div>
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {aiFeatures.map((f) => (
