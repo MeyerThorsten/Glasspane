@@ -22,6 +22,7 @@ export async function generateSlaRiskAdvisor(customerId: string): Promise<AiSlaR
 
     const data = parseSlaRiskResponse(result.text);
     data.providerLabel = result.providerLabel;
+    data.modelInfo = result.modelInfo;
     return data;
   });
 }

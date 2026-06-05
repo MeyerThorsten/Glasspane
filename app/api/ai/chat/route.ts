@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
                     encodeSseEvent("meta", {
                       requestId,
                       providerLabel: result.providerLabel,
+                      modelInfo: result.modelInfo,
                     }),
                   ),
                 );
@@ -74,6 +75,7 @@ export async function POST(request: NextRequest) {
                     encodeSseEvent("done", {
                       requestId,
                       providerLabel: result.providerLabel,
+                      modelInfo: result.modelInfo,
                     }),
                   ),
                 );
@@ -135,6 +137,7 @@ export async function POST(request: NextRequest) {
     return aiSuccess(requestId, {
       answer: answer.text,
       providerLabel: answer.providerLabel,
+      modelInfo: answer.modelInfo,
     }, 200, access.context);
   } catch (error) {
     logAiRoute("chat", requestId, "error", {

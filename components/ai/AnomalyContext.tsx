@@ -2,7 +2,8 @@
 
 import { createContext, useContext, useEffect, useEffectEvent, useState, ReactNode, startTransition } from "react";
 import { useCustomer } from "@/lib/customer-context";
-import type { AiInsightsResponse, Anomaly, Prediction } from "@/types";
+import { readAiJson } from "./ai-client";
+import type { AiInsightsResponse, AiModelInfo, Anomaly, Prediction } from "@/types";
 
 function getFallbackInsights(): AiInsightsResponse {
   return {
@@ -78,7 +79,9 @@ interface AnomalyContextValue {
   anomalies: Anomaly[];
   predictions: Prediction[];
   providerLabel: string;
+  modelInfo?: AiModelInfo;
   loading: boolean;
+  error: string | null;
   getAnomaliesForWidget: (widgetId: string) => Anomaly[];
 }
 
@@ -86,7 +89,9 @@ const AnomalyCtx = createContext<AnomalyContextValue>({
   anomalies: [],
   predictions: [],
   providerLabel: "AI",
+  modelInfo: undefined,
   loading: false,
+  error: null,
   getAnomaliesForWidget: () => [],
 });
 
@@ -94,9 +99,11 @@ export function AnomalyProvider({ children }: { children: ReactNode }) {
   const { customer } = useCustomer();
   const [data, setData] = useState<AiInsightsResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const beginFetch = useEffectEvent(() => {
     startTransition(() => {
       setLoading(true);
+      setError(null);
     });
   });
 
@@ -113,8 +120,7 @@ export function AnomalyProvider({ children }: { children: ReactNode }) {
     })
       .then(async (res) => {
         clearTimeout(timeout);
-        if (!res.ok) throw new Error("Failed to fetch insights");
-        const json = await res.json() as AiInsightsResponse;
+        const json = await readAiJson<AiInsightsResponse>(res, "Failed to fetch insights");
         // Use fallback if API returned empty results
         if ((!json.anomalies || json.anomalies.length === 0) && (!json.predictions || json.predictions.length === 0)) {
           return getFallbackInsights();
@@ -123,6 +129,13 @@ export function AnomalyProvider({ children }: { children: ReactNode }) {
       })
       .then(setData)
       .catch((err) => {
+        const message = err instanceof Error ? err.message : "Failed to fetch insights";
+        if (message.includes("All configured AI providers failed")) {
+          setError(message);
+          setData(null);
+          return;
+        }
+
         console.error("AI insights fetch failed, using fallback:", err);
         setData(getFallbackInsights());
       })
@@ -137,7 +150,9 @@ export function AnomalyProvider({ children }: { children: ReactNode }) {
       anomalies: data?.anomalies ?? [],
       predictions: data?.predictions ?? [],
       providerLabel: data?.providerLabel ?? "AI",
+      modelInfo: data?.modelInfo,
       loading,
+      error,
       getAnomaliesForWidget,
     }}>
       {children}

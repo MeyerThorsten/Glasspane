@@ -1,6 +1,7 @@
 "use client";
 
 import Sidebar from "@/components/layout/Sidebar";
+import PoweredByFooter from "@/components/layout/PoweredByFooter";
 import NotificationPanel from "@/components/layout/NotificationPanel";
 import { CustomerProvider } from "@/lib/customer-context";
 import { SidebarProvider, useSidebar } from "@/lib/sidebar-context";
@@ -15,6 +16,7 @@ function ContentArea({ children }: { children: React.ReactNode }) {
       className={`transition-[margin] duration-200 ${collapsed ? "lg:ml-[68px]" : "lg:ml-[260px]"}`}
     >
       {children}
+      <PoweredByFooter />
     </div>
   );
 }

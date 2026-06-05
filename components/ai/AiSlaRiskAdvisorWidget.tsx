@@ -1,7 +1,10 @@
 "use client";
 
 import { startTransition, useEffect, useEffectEvent, useState } from "react";
+import { AreaChart } from "@tremor/react";
 import { useCustomer } from "@/lib/customer-context";
+import AiModelFootnote from "./AiModelFootnote";
+import { readAiJson } from "./ai-client";
 import type { AiSlaRiskAdvisorResponse, SlaRiskLevel, SlaRiskTrend } from "@/types";
 
 const riskColors: Record<SlaRiskLevel, string> = {
@@ -48,10 +51,7 @@ export default function AiSlaRiskAdvisorWidget() {
       signal: controller.signal,
     })
       .then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Lost API access");
-        }
-        return response.json() as Promise<AiSlaRiskAdvisorResponse>;
+        return readAiJson<AiSlaRiskAdvisorResponse>(response);
       })
       .then((responseData) => {
         if (active) {
@@ -86,6 +86,7 @@ export default function AiSlaRiskAdvisorWidget() {
   }, [customer]);
 
   const services = data?.services ?? [];
+  const trendData = data?.trend ?? [];
   const providerLabel = data?.providerLabel ?? "AI";
 
   if (loading) {
@@ -110,6 +111,22 @@ export default function AiSlaRiskAdvisorWidget() {
           30-Day SLA Risk Forecast
         </span>
       </div>
+      {trendData.length > 0 ? (
+        <AreaChart
+          className="h-36"
+          data={trendData}
+          index="month"
+          categories={["Historical", "Projected", "Target"]}
+          colors={["blue", "amber", "gray"]}
+          valueFormatter={(value) => `${value.toFixed(3)}%`}
+          minValue={99.9}
+          maxValue={100}
+          yAxisWidth={72}
+          showLegend={true}
+          showGridLines={false}
+          curveType="monotone"
+        />
+      ) : null}
       {services.length === 0 ? (
         <p className="text-sm text-gray-500 dark:text-gray-400">
           No SLA risks flagged for the current service set.
@@ -146,9 +163,7 @@ export default function AiSlaRiskAdvisorWidget() {
           ))}
         </div>
       )}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Powered by {providerLabel}
-      </p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={data?.modelInfo} />
     </div>
   );
 }

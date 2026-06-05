@@ -20,7 +20,7 @@ import {
   computeDaysUntilExpiry,
   computeCertificateStatus,
 } from "@/lib/utils/date-shift";
-import { perturb, perturbInt, perturbAbsolute, extendMonthlyData, extendDailyData, weekdayFactor, spikeMultiplier, correlateMetric } from "@/lib/utils/data-variation";
+import { perturb, perturbAbsolute, extendMonthlyData, extendDailyData, weekdayFactor, spikeMultiplier, correlateMetric } from "@/lib/utils/data-variation";
 
 type InfraData = {
   resourceUtilization: ResourceUtilization[];

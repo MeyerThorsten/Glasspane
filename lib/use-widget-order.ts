@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { startTransition, useState, useCallback, useEffect } from "react";
 import { WidgetConfig } from "@/types";
 import { arrayMove } from "@dnd-kit/sortable";
 
@@ -8,42 +8,50 @@ function getStorageKey(view: string) {
   return `widget-order:${view}`;
 }
 
-export function useWidgetOrder(view: string, defaults: WidgetConfig[]) {
-  const [widgets, setWidgets] = useState<WidgetConfig[]>(defaults);
-  const [hasCustomOrder, setHasCustomOrder] = useState(false);
+function resolveStoredOrder(view: string, defaults: WidgetConfig[]) {
+  if (typeof window === "undefined") {
+    return { widgets: defaults, hasCustomOrder: false };
+  }
 
-  // Load saved order from localStorage on mount and when view changes
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(getStorageKey(view));
-      if (saved) {
-        const savedIds: string[] = JSON.parse(saved);
-        const defaultMap = new Map(defaults.map((w) => [w.id, w]));
-
-        // Reconstruct from saved order, dropping removed widgets
-        const ordered: WidgetConfig[] = [];
-        for (const id of savedIds) {
-          const config = defaultMap.get(id);
-          if (config) {
-            ordered.push(config);
-            defaultMap.delete(id);
-          }
-        }
-        // Append any new defaults not in saved order
-        for (const config of defaultMap.values()) {
-          ordered.push(config);
-        }
-
-        setWidgets(ordered);
-        setHasCustomOrder(true);
-      } else {
-        setWidgets(defaults);
-        setHasCustomOrder(false);
-      }
-    } catch {
-      setWidgets(defaults);
-      setHasCustomOrder(false);
+  try {
+    const saved = localStorage.getItem(getStorageKey(view));
+    if (!saved) {
+      return { widgets: defaults, hasCustomOrder: false };
     }
+
+    const savedIds: string[] = JSON.parse(saved);
+    const defaultMap = new Map(defaults.map((w) => [w.id, w]));
+    const ordered: WidgetConfig[] = [];
+
+    for (const id of savedIds) {
+      const config = defaultMap.get(id);
+      if (config) {
+        ordered.push(config);
+        defaultMap.delete(id);
+      }
+    }
+
+    for (const config of defaultMap.values()) {
+      ordered.push(config);
+    }
+
+    return { widgets: ordered, hasCustomOrder: true };
+  } catch {
+    return { widgets: defaults, hasCustomOrder: false };
+  }
+}
+
+export function useWidgetOrder(view: string, defaults: WidgetConfig[]) {
+  const [initialState] = useState(() => resolveStoredOrder(view, defaults));
+  const [widgets, setWidgets] = useState<WidgetConfig[]>(initialState.widgets);
+  const [hasCustomOrder, setHasCustomOrder] = useState(initialState.hasCustomOrder);
+
+  useEffect(() => {
+    startTransition(() => {
+      const next = resolveStoredOrder(view, defaults);
+      setWidgets(next.widgets);
+      setHasCustomOrder(next.hasCustomOrder);
+    });
   }, [view, defaults]);
 
   const reorder = useCallback(

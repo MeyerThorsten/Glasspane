@@ -6,13 +6,6 @@ import { getSecurityPosture } from "@/lib/services/security-service";
 import { DonutChart } from "@tremor/react";
 import { SecurityPosture as SecurityPostureType } from "@/types";
 
-const severityColors: Record<string, string> = {
-  critical: "red",
-  high: "orange",
-  medium: "amber",
-  low: "blue",
-};
-
 export default function SecurityPosture() {
   const { customer } = useCustomer();
   const [data, setData] = useState<SecurityPostureType | null>(null);

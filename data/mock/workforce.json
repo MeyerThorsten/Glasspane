@@ -1,0 +1,117 @@
+{
+  "employees": [
+    {
+      "id": "emp-001",
+      "name": "Mira Hoffmann",
+      "role": "Platform Engineer",
+      "track": "Engineering",
+      "level": "L3",
+      "manager": "Jonas Keller",
+      "skills": ["Kubernetes", "Incident response", "Terraform", "Observability"],
+      "goals": ["Lead a production readiness review", "Mentor a new engineer", "Improve SLO automation"],
+      "engagementScore": 82,
+      "opportunityReadiness": 76,
+      "recentSignals": [
+        "Resolved two P2 incidents with strong postmortem notes",
+        "Completed Kubernetes security hardening workshop",
+        "Asked for more architecture ownership in the last growth check-in"
+      ]
+    },
+    {
+      "id": "emp-002",
+      "name": "Daniel Weber",
+      "role": "Service Manager",
+      "track": "Customer Operations",
+      "level": "L4",
+      "manager": "Lea Schneider",
+      "skills": ["SLA governance", "Stakeholder communication", "Change coordination", "Financial tracking"],
+      "goals": ["Own quarterly service review", "Standardize customer escalation playbook", "Coach two junior service owners"],
+      "engagementScore": 88,
+      "opportunityReadiness": 84,
+      "recentSignals": [
+        "Improved renewal-risk account from red to amber",
+        "Reduced overdue action items across three customer reviews",
+        "Requested a path toward portfolio leadership"
+      ]
+    },
+    {
+      "id": "emp-003",
+      "name": "Aylin Demir",
+      "role": "Security Analyst",
+      "track": "Security",
+      "level": "L2",
+      "manager": "Nora Lang",
+      "skills": ["Vulnerability triage", "SIEM analysis", "Patch coordination", "Threat reporting"],
+      "goals": ["Lead one tabletop exercise", "Build executive-ready threat summaries", "Earn cloud security certification"],
+      "engagementScore": 74,
+      "opportunityReadiness": 68,
+      "recentSignals": [
+        "Closed critical CVE triage ahead of SLA twice",
+        "Needs more repetition presenting to non-technical stakeholders",
+        "Completed first draft of cloud security learning plan"
+      ]
+    }
+  ],
+  "ladders": {
+    "Platform Engineer": [
+      {
+        "level": "L2",
+        "title": "Platform Engineer",
+        "expectations": ["Own scoped operational tasks", "Document changes clearly", "Escalate risks early"],
+        "skills": ["Linux", "Monitoring", "Runbooks"]
+      },
+      {
+        "level": "L3",
+        "title": "Platform Engineer II",
+        "expectations": ["Own service reliability improvements", "Lead incident workstreams", "Automate recurring toil"],
+        "skills": ["Kubernetes", "Infrastructure as code", "SLO analysis"]
+      },
+      {
+        "level": "L4",
+        "title": "Senior Platform Engineer",
+        "expectations": ["Design cross-service resilience patterns", "Mentor engineers", "Drive production readiness standards"],
+        "skills": ["Architecture review", "Reliability strategy", "Technical leadership"]
+      }
+    ],
+    "Service Manager": [
+      {
+        "level": "L3",
+        "title": "Service Manager",
+        "expectations": ["Run service reviews", "Track SLA actions", "Coordinate customer communications"],
+        "skills": ["SLA reporting", "Action tracking", "Customer communication"]
+      },
+      {
+        "level": "L4",
+        "title": "Senior Service Manager",
+        "expectations": ["Own complex accounts", "Manage escalation posture", "Coach service owners"],
+        "skills": ["Escalation leadership", "Commercial awareness", "Executive communication"]
+      },
+      {
+        "level": "L5",
+        "title": "Portfolio Service Lead",
+        "expectations": ["Set portfolio operating standards", "Guide strategic accounts", "Lead manager calibration"],
+        "skills": ["Portfolio governance", "People leadership", "Strategic planning"]
+      }
+    ],
+    "Security Analyst": [
+      {
+        "level": "L2",
+        "title": "Security Analyst",
+        "expectations": ["Triage findings", "Coordinate patch evidence", "Prepare incident notes"],
+        "skills": ["SIEM workflow", "Vulnerability triage", "Evidence collection"]
+      },
+      {
+        "level": "L3",
+        "title": "Security Analyst II",
+        "expectations": ["Lead recurring threat reviews", "Translate risk for service teams", "Improve detection playbooks"],
+        "skills": ["Threat analysis", "Risk communication", "Detection tuning"]
+      },
+      {
+        "level": "L4",
+        "title": "Senior Security Analyst",
+        "expectations": ["Own security posture programs", "Mentor analysts", "Advise leadership on emerging risks"],
+        "skills": ["Program ownership", "Executive reporting", "Security architecture"]
+      }
+    ]
+  }
+}

@@ -2,6 +2,8 @@
 
 import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { useCustomer } from "@/lib/customer-context";
+import AiModelFootnote from "./AiModelFootnote";
+import { readAiJson } from "./ai-client";
 import type { AiRootCausePatternsResponse } from "@/types";
 
 const patternColors = ["bg-red-500", "bg-amber-500", "bg-blue-500", "bg-fuchsia-500"];
@@ -32,10 +34,7 @@ export default function AiRootCausePatternsWidget() {
       signal: controller.signal,
     })
       .then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Lost API access");
-        }
-        return response.json() as Promise<AiRootCausePatternsResponse>;
+        return readAiJson<AiRootCausePatternsResponse>(response);
       })
       .then((responseData) => {
         if (active) {
@@ -111,9 +110,7 @@ export default function AiRootCausePatternsWidget() {
           </div>
         ))
       )}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Powered by {providerLabel}
-      </p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={data?.modelInfo} />
     </div>
   );
 }

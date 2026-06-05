@@ -29,6 +29,7 @@ export interface AiInsightsResponse {
   predictions: Prediction[];
   generatedAt: string;
   providerLabel?: string;
+  modelInfo?: AiModelInfo;
 }
 
 export type RiskBriefingSeverity = "critical" | "warning" | "info";
@@ -43,6 +44,7 @@ export interface AiRiskBriefingResponse {
   items: RiskBriefingItem[];
   generatedAt: string;
   providerLabel?: string;
+  modelInfo?: AiModelInfo;
 }
 
 export type SlaRiskTrend = "declining" | "stable" | "improving";
@@ -58,8 +60,10 @@ export interface SlaRiskAdvisorItem {
 
 export interface AiSlaRiskAdvisorResponse {
   services: SlaRiskAdvisorItem[];
+  trend?: SlaRiskTrendPoint[];
   generatedAt: string;
   providerLabel?: string;
+  modelInfo?: AiModelInfo;
 }
 
 export interface AiCostForecastPoint {
@@ -70,11 +74,19 @@ export interface AiCostForecastPoint {
   Budget: number;
 }
 
+export interface AiCostHistoryPoint {
+  month: string;
+  Actual: number;
+  Budget: number;
+}
+
 export interface AiCostForecastResponse {
   summary: string;
+  history?: AiCostHistoryPoint[];
   forecast: AiCostForecastPoint[];
   generatedAt: string;
   providerLabel?: string;
+  modelInfo?: AiModelInfo;
 }
 
 export interface AiCapacityPlannerItem {
@@ -90,6 +102,7 @@ export interface AiCapacityPlannerResponse {
   resources: AiCapacityPlannerItem[];
   generatedAt: string;
   providerLabel?: string;
+  modelInfo?: AiModelInfo;
 }
 
 export interface AiRootCausePattern {
@@ -104,6 +117,7 @@ export interface AiRootCausePatternsResponse {
   patterns: AiRootCausePattern[];
   generatedAt: string;
   providerLabel?: string;
+  modelInfo?: AiModelInfo;
 }
 
 export interface AiChangeImpactItem {
@@ -120,4 +134,66 @@ export interface AiChangeImpactResponse {
   changes: AiChangeImpactItem[];
   generatedAt: string;
   providerLabel?: string;
+  modelInfo?: AiModelInfo;
+}
+
+export interface AiModelInfo {
+  task: string;
+  provider: string;
+  providerLabel: string;
+  model: string;
+  version: string;
+  latencyMs?: number;
+  fallbackCount?: number;
+  servedAt?: string;
+}
+
+export interface AiModelTelemetryEvent extends AiModelInfo {
+  id: string;
+  status: "success" | "error";
+  error?: string;
+  fallbackTo?: string;
+}
+
+export interface AiModelHealthSummary {
+  id: string;
+  task: string;
+  provider: string;
+  providerLabel: string;
+  model: string;
+  version: string;
+  attempts: number;
+  successes: number;
+  errors: number;
+  fallbackEvents: number;
+  averageLatencyMs: number | null;
+  latestLatencyMs: number | null;
+  errorRate: number;
+  qualityScore: number | null;
+  lastSeenAt: string | null;
+}
+
+export interface AiModelTransparencyAlert {
+  id: string;
+  severity: "warning" | "critical";
+  title: string;
+  detail: string;
+  task: string;
+  provider: string;
+  detectedAt: string;
+}
+
+export interface AiModelTransparencySnapshot {
+  windowMs: number;
+  generatedAt: string;
+  models: AiModelHealthSummary[];
+  alerts: AiModelTransparencyAlert[];
+  latestEvents: AiModelTelemetryEvent[];
+}
+
+export interface SlaRiskTrendPoint {
+  month: string;
+  Historical?: number;
+  Projected?: number;
+  Target: number;
 }

@@ -17,7 +17,13 @@ const CustomerContext = createContext<CustomerContextType>({
   loading: true,
 });
 
-export function CustomerProvider({ children }: { children: ReactNode }) {
+export function CustomerProvider({
+  children,
+  initialCustomerId,
+}: {
+  children: ReactNode;
+  initialCustomerId?: string;
+}) {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [loading, setLoading] = useState(true);
@@ -26,10 +32,10 @@ export function CustomerProvider({ children }: { children: ReactNode }) {
     import("@/data/mock/customers.json").then((mod) => {
       const data = mod.default as Customer[];
       setCustomers(data);
-      setCustomer(data[0]);
+      setCustomer(data.find((item) => item.id === initialCustomerId) ?? data[0]);
       setLoading(false);
     });
-  }, []);
+  }, [initialCustomerId]);
 
   const setCustomerId = (id: string) => {
     const found = customers.find((c) => c.id === id);

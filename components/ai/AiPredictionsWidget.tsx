@@ -2,6 +2,7 @@
 
 import { useAnomalies } from "./AnomalyContext";
 import StatusBadge from "@/components/widgets/shared/StatusBadge";
+import AiModelFootnote from "./AiModelFootnote";
 
 const categoryIcon: Record<string, string> = {
   sla: "ri-shield-check-line",
@@ -10,7 +11,7 @@ const categoryIcon: Record<string, string> = {
 };
 
 export default function AiPredictionsWidget() {
-  const { predictions, loading, providerLabel } = useAnomalies();
+  const { predictions, loading, providerLabel, modelInfo, error } = useAnomalies();
 
   if (loading) {
     return (
@@ -20,6 +21,10 @@ export default function AiPredictionsWidget() {
         <div className="h-4 bg-gray-100 dark:bg-[#262633] rounded w-2/3" />
       </div>
     );
+  }
+
+  if (error) {
+    return <p className="text-sm text-red-500">{error}</p>;
   }
 
   if (predictions.length === 0) {
@@ -44,7 +49,7 @@ export default function AiPredictionsWidget() {
           </div>
         </div>
       ))}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">Powered by {providerLabel}</p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={modelInfo} />
     </div>
   );
 }

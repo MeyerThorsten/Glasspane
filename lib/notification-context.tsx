@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, ReactNode } from "react";
 import { Notification } from "@/types/notification";
 import notificationsData from "@/data/mock/notifications.json";
 
@@ -24,17 +24,27 @@ const NotificationContext = createContext<NotificationContextValue>({
   togglePanel: () => {},
 });
 
+function getInitialReadIds(): Set<string> {
+  if (typeof window === "undefined") {
+    return new Set();
+  }
+
+  const stored = localStorage.getItem("notification-read-state");
+  if (!stored) {
+    return new Set();
+  }
+
+  try {
+    return new Set(JSON.parse(stored));
+  } catch {
+    return new Set();
+  }
+}
+
 export function NotificationProvider({ children }: { children: ReactNode }) {
   const [notifications] = useState<Notification[]>(notificationsData as Notification[]);
-  const [readIds, setReadIds] = useState<Set<string>>(new Set());
+  const [readIds, setReadIds] = useState<Set<string>>(getInitialReadIds);
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("notification-read-state");
-    if (stored) {
-      try { setReadIds(new Set(JSON.parse(stored))); } catch {}
-    }
-  }, []);
 
   const persistReadIds = useCallback((ids: Set<string>) => {
     localStorage.setItem("notification-read-state", JSON.stringify([...ids]));

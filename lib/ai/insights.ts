@@ -21,6 +21,7 @@ export async function generateInsights(customerId: string): Promise<AiInsightsRe
     });
     const data = parseInsightsResponse(result.text);
     data.providerLabel = result.providerLabel;
+    data.modelInfo = result.modelInfo;
     return data;
   });
 }

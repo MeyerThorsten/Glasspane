@@ -22,8 +22,14 @@ export async function gatherCostForecastContext(customerId: string): Promise<str
     date.setUTCMonth(date.getUTCMonth() + index);
     return formatMonthLabel(date);
   });
+  const historyMonths = Array.from({ length: 3 }, (_, index) => {
+    const date = new Date();
+    date.setUTCMonth(date.getUTCMonth() - (2 - index));
+    return formatMonthLabel(date);
+  });
 
   return [
+    `History months: ${historyMonths.join(", ")}`,
     `Forecast months: ${months.join(", ")}`,
     `Total current month cost: €${totalCurrent.toFixed(0)}`,
     `Total previous month cost: €${totalPrevious.toFixed(0)}`,

@@ -7,7 +7,13 @@ export function buildCostForecastMessages(
       content: `You are a FinOps analyst for an IT transparency portal. Use the cost data below and return a JSON object with:
 
 - "summary": 1 short sentence under 170 characters
+- "history": an array of exactly 3 recent monthly objects
 - "forecast": an array of exactly 3 objects, one for each forecast month
+
+Each history object must contain:
+- "month": string
+- "Actual": integer euro amount
+- "Budget": integer euro amount
 
 Each forecast object must contain:
 - "month": string

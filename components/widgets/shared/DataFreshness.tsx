@@ -7,34 +7,32 @@ interface DataFreshnessProps {
 }
 
 export default function DataFreshness({ lastRefreshed }: DataFreshnessProps) {
-  const [display, setDisplay] = useState<{ text: string; color: string }>({ text: "", color: "bg-emerald-500" });
+  const [now, setNow] = useState(() => Date.now());
+
+  function computeDisplay() {
+    if (lastRefreshed) {
+      const seconds = Math.floor((now - lastRefreshed.getTime()) / 1000);
+      if (seconds < 60) {
+        return { text: "Just now", color: "bg-emerald-500" };
+      }
+      const minutes = Math.floor(seconds / 60);
+      const color = minutes <= 5 ? "bg-emerald-500" : minutes <= 10 ? "bg-amber-500" : "bg-red-500";
+      return { text: `${minutes}m ago`, color };
+    }
+
+    const minutes = (new Date(now).getMinutes() % 15) + 1;
+    const color = minutes <= 5 ? "bg-emerald-500" : minutes <= 10 ? "bg-amber-500" : "bg-red-500";
+    return { text: `${minutes}m ago`, color };
+  }
 
   useEffect(() => {
-    function compute() {
-      if (lastRefreshed) {
-        const seconds = Math.floor((Date.now() - lastRefreshed.getTime()) / 1000);
-        if (seconds < 60) {
-          return { text: "Just now", color: "bg-emerald-500" };
-        }
-        const minutes = Math.floor(seconds / 60);
-        const color = minutes <= 5 ? "bg-emerald-500" : minutes <= 10 ? "bg-amber-500" : "bg-red-500";
-        return { text: `${minutes}m ago`, color };
-      } else {
-        const now = new Date();
-        const minutes = (now.getMinutes() % 15) + 1;
-        const color = minutes <= 5 ? "bg-emerald-500" : minutes <= 10 ? "bg-amber-500" : "bg-red-500";
-        return { text: `${minutes}m ago`, color };
-      }
-    }
-
-    setDisplay(compute());
-
     if (lastRefreshed) {
-      const id = setInterval(() => setDisplay(compute()), 15000);
+      const id = setInterval(() => setNow(Date.now()), 15000);
       return () => clearInterval(id);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastRefreshed]);
+
+  const display = computeDisplay();
 
   if (!display.text) return null;
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTheme } from "@/lib/theme-context";
 import { useCustomer } from "@/lib/customer-context";
 import WidgetShell from "@/components/widgets/WidgetShell";
+import TransparencySharing from "@/components/settings/TransparencySharing";
 import { RiSunLine, RiMoonLine } from "@remixicon/react";
 
 function Appearance() {
@@ -121,6 +122,7 @@ export default function SettingsPage() {
     <div className="space-y-6">
       <Appearance />
       <Profile />
+      <TransparencySharing />
       <Notifications />
     </div>
   );

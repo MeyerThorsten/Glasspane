@@ -6,6 +6,7 @@ import { mockGenerateCostForecast } from "../mock-cost-forecast";
 import { mockGenerateCapacityPlanner } from "../mock-capacity-planner";
 import { mockGenerateRootCausePatterns } from "../mock-root-cause-patterns";
 import { mockGenerateChangeImpact } from "../mock-change-impact";
+import { mockGenerateWorkforceGrowthRecommendations } from "../mock-workforce-growth";
 import type { AiProviderClient } from "./types";
 
 export const mockProvider: AiProviderClient = {
@@ -32,6 +33,8 @@ export const mockProvider: AiProviderClient = {
         return JSON.stringify(mockGenerateRootCausePatterns());
       case "change-impact":
         return JSON.stringify(mockGenerateChangeImpact());
+      case "workforce-growth":
+        return JSON.stringify(mockGenerateWorkforceGrowthRecommendations(request.metadata?.employeeId));
       default:
         return "";
     }

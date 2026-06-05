@@ -1,7 +1,7 @@
 "use client";
 
 import { useCustomer } from "@/lib/customer-context";
-import { RiArrowDownSLine, RiBuilding2Line } from "@remixicon/react";
+import { RiArrowDownSLine } from "@remixicon/react";
 import { useState, useRef, useEffect } from "react";
 
 export default function CustomerSelector() {

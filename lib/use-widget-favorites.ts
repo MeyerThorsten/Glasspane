@@ -1,17 +1,29 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { startTransition, useState, useEffect, useCallback } from "react";
+
+function getStoredFavorites(view: string): Set<string> {
+  if (typeof window === "undefined") {
+    return new Set();
+  }
+
+  const stored = localStorage.getItem(`widget-favorites:${view}`);
+  if (!stored) {
+    return new Set();
+  }
+
+  try {
+    return new Set(JSON.parse(stored));
+  } catch {
+    return new Set();
+  }
+}
 
 export function useFavorites(view: string) {
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [favorites, setFavorites] = useState<Set<string>>(() => getStoredFavorites(view));
 
   useEffect(() => {
-    const stored = localStorage.getItem(`widget-favorites:${view}`);
-    if (stored) {
-      try {
-        setFavorites(new Set(JSON.parse(stored)));
-      } catch {}
-    }
+    startTransition(() => setFavorites(getStoredFavorites(view)));
   }, [view]);
 
   const toggleFavorite = useCallback((id: string) => {

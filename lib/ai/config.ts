@@ -78,6 +78,7 @@ const AI_TASKS: AiTask[] = [
   "capacity-planner",
   "root-cause-patterns",
   "change-impact",
+  "workforce-growth",
 ];
 const TASK_ENV_PREFIX: Record<AiTask, string> = {
   summary: "SUMMARY",
@@ -89,6 +90,7 @@ const TASK_ENV_PREFIX: Record<AiTask, string> = {
   "capacity-planner": "CAPACITY_PLANNER",
   "root-cause-patterns": "ROOT_CAUSE_PATTERNS",
   "change-impact": "CHANGE_IMPACT",
+  "workforce-growth": "WORKFORCE_GROWTH",
 };
 
 function isAiProvider(value: string | undefined): value is AiProvider {
@@ -109,7 +111,7 @@ function parseProviderList(value: string | undefined): AiProvider[] {
     .filter((item, index, list) => list.indexOf(item) === index);
 }
 
-function getTaskEnvPrefix(task: AiTask): string {
+export function getTaskEnvPrefix(task: AiTask): string {
   return TASK_ENV_PREFIX[task];
 }
 
@@ -210,6 +212,7 @@ export function getModelForTask(provider: AiProvider, task: AiTask, config = get
     case "bedrock":
       return config.bedrock.modelId;
     case "mock":
+      return process.env.MOCK_MODEL_ID || "glasspane-mock-ai";
     default:
       return "";
   }

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { WidgetConfig, WidgetSize } from "@/types";
-import { getWidgetComponent } from "@/config/widget-registry";
+import { getWidgetElement } from "@/config/widget-registry";
 import WidgetShell from "./WidgetShell";
 import { useRefresh } from "@/lib/refresh-context";
 
@@ -49,8 +49,6 @@ export default function SortableWidget({ config, index, isFavorite, onToggleFavo
     opacity: isDragging ? 0.5 : 1,
   };
 
-  const Component = getWidgetComponent(config.id);
-
   return (
     <div ref={setNodeRef} style={style} className={`${sizeClasses[config.size]}${isFavorite ? " ring-1 ring-amber-400/20" : ""}${dimmed ? " opacity-20 pointer-events-none scale-[0.98] transition-all duration-300" : ""}`} {...attributes}>
       <Suspense fallback={<WidgetFallback title={config.title} size={config.size} />}>
@@ -64,7 +62,7 @@ export default function SortableWidget({ config, index, isFavorite, onToggleFavo
           onToggleFavorite={onToggleFavorite}
           supportsComparison={config.supportsComparison}
         >
-          <Component key={`${config.id}-${refreshKey}`} />
+          {getWidgetElement(config.id, `${config.id}-${refreshKey}`)}
         </WidgetShell>
       </Suspense>
     </div>

@@ -22,6 +22,7 @@ export async function generateCapacityPlanner(customerId: string): Promise<AiCap
 
     const data = parseCapacityPlannerResponse(result.text);
     data.providerLabel = result.providerLabel;
+    data.modelInfo = result.modelInfo;
     return data;
   });
 }

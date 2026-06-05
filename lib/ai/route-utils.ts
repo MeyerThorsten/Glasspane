@@ -50,6 +50,7 @@ const ROUTE_ENV_PREFIX: Record<AiTask, string> = {
   "capacity-planner": "CAPACITY_PLANNER",
   "root-cause-patterns": "ROOT_CAUSE_PATTERNS",
   "change-impact": "CHANGE_IMPACT",
+  "workforce-growth": "WORKFORCE_GROWTH",
 };
 
 function parsePositiveInteger(value: string | undefined, fallback: number): number {
@@ -430,12 +431,24 @@ export function aiErrorResponse(
   access?: AiRouteAccessContext,
 ) {
   const classified = classifyAiError(error);
+  const allProvidersFailed = classified.detail.startsWith("All AI providers failed");
   return createAiResponse(
     requestId,
     {
-      error: fallbackMessage,
+      error: allProvidersFailed ? "All configured AI providers failed" : fallbackMessage,
       detail: classified.detail,
       code: classified.code,
+      ...(allProvidersFailed
+        ? {
+            providerErrors: classified.detail
+              .split(":")
+              .slice(1)
+              .join(":")
+              .split(" | ")
+              .map((item) => item.trim())
+              .filter(Boolean),
+          }
+        : {}),
       requestId,
     },
     classified.status,

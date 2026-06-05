@@ -1,4 +1,4 @@
-import type { AiCostForecastPoint, AiCostForecastResponse } from "@/types";
+import type { AiCostForecastPoint, AiCostForecastResponse, AiCostHistoryPoint } from "@/types";
 import { extractFirstJsonObject } from "./extract-json-object";
 
 function emptyResponse(): AiCostForecastResponse {
@@ -57,11 +57,32 @@ export function parseCostForecastResponse(raw: string): AiCostForecastResponse {
       })
       .filter((point): point is AiCostForecastPoint => !!point)
       .slice(0, 3);
+    const history: AiCostHistoryPoint[] = Array.isArray(parsed.history)
+      ? parsed.history
+          .filter((point): point is Record<string, unknown> => isRecord(point))
+          .map((point) => {
+            const actual = toNumber(point.Actual);
+            const budget = toNumber(point.Budget);
+
+            if (typeof point.month !== "string" || actual === null || budget === null) {
+              return null;
+            }
+
+            return {
+              month: point.month.slice(0, 24),
+              Actual: Math.round(actual),
+              Budget: Math.round(budget),
+            };
+          })
+          .filter((point): point is AiCostHistoryPoint => !!point)
+          .slice(0, 4)
+      : [];
 
     return {
       summary: typeof parsed.summary === "string"
         ? parsed.summary.replace(/\s+/g, " ").trim().slice(0, 170)
         : "",
+      history,
       forecast,
       generatedAt: new Date().toISOString(),
     };

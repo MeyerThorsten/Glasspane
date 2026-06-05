@@ -3,6 +3,8 @@
 import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { BarChart } from "@tremor/react";
 import { useCustomer } from "@/lib/customer-context";
+import AiModelFootnote from "./AiModelFootnote";
+import { readAiJson } from "./ai-client";
 import type { AiCapacityPlannerResponse } from "@/types";
 
 function getBarColor(current: number) {
@@ -37,10 +39,7 @@ export default function AiCapacityPlannerWidget() {
       signal: controller.signal,
     })
       .then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Lost API access");
-        }
-        return response.json() as Promise<AiCapacityPlannerResponse>;
+        return readAiJson<AiCapacityPlannerResponse>(response);
       })
       .then((responseData) => {
         if (active) {
@@ -131,9 +130,7 @@ export default function AiCapacityPlannerWidget() {
           </div>
         ))}
       </div>
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Powered by {providerLabel}
-      </p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={data?.modelInfo} />
     </div>
   );
 }

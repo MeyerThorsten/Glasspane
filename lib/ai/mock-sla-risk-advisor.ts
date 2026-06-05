@@ -25,6 +25,15 @@ export function mockGenerateSlaRiskAdvisor(): AiSlaRiskAdvisorResponse {
         note: "Current posture is stable with enough SLA margin to absorb routine variation.",
       },
     ],
+    trend: [
+      { month: "Feb 2026", Historical: 99.997, Target: 99.999 },
+      { month: "Mar 2026", Historical: 99.998, Target: 99.999 },
+      { month: "Apr 2026", Historical: 99.996, Target: 99.999 },
+      { month: "May 2026", Historical: 99.998, Target: 99.999 },
+      { month: "Jun 2026", Projected: 99.997, Target: 99.999 },
+      { month: "Jul 2026", Projected: 99.996, Target: 99.999 },
+      { month: "Aug 2026", Projected: 99.995, Target: 99.999 },
+    ],
     generatedAt: new Date().toISOString(),
   };
 }

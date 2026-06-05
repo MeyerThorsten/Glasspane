@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
     return aiSuccess(requestId, {
       summary: summary.text,
       providerLabel: summary.providerLabel,
+      modelInfo: summary.modelInfo,
     }, 200, access.context);
   } catch (error) {
     logAiRoute("summary", requestId, "error", {

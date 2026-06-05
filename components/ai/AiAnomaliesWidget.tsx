@@ -1,6 +1,7 @@
 "use client";
 
 import { useAnomalies } from "./AnomalyContext";
+import AiModelFootnote from "./AiModelFootnote";
 import type { AnomalySeverity } from "@/types";
 
 const severityDot: Record<AnomalySeverity, string> = {
@@ -16,7 +17,7 @@ const severityLabel: Record<AnomalySeverity, string> = {
 };
 
 export default function AiAnomaliesWidget() {
-  const { anomalies, loading, providerLabel } = useAnomalies();
+  const { anomalies, loading, providerLabel, modelInfo, error } = useAnomalies();
 
   if (loading) {
     return (
@@ -26,6 +27,10 @@ export default function AiAnomaliesWidget() {
         <div className="h-4 bg-gray-100 dark:bg-[#262633] rounded w-2/3" />
       </div>
     );
+  }
+
+  if (error) {
+    return <p className="text-sm text-red-500">{error}</p>;
   }
 
   if (anomalies.length === 0) {
@@ -48,7 +53,7 @@ export default function AiAnomaliesWidget() {
           </div>
         </div>
       ))}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">Powered by {providerLabel}</p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={modelInfo} />
     </div>
   );
 }

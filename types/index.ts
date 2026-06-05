@@ -8,3 +8,4 @@ export * from "./infrastructure";
 export * from "./security";
 export * from "./ai";
 export * from "./notification";
+export * from "./workforce";

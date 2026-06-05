@@ -22,6 +22,7 @@ export async function generateCostForecast(customerId: string): Promise<AiCostFo
 
     const data = parseCostForecastResponse(result.text);
     data.providerLabel = result.providerLabel;
+    data.modelInfo = result.modelInfo;
     return data;
   });
 }

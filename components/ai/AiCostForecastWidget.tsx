@@ -3,6 +3,8 @@
 import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { AreaChart } from "@tremor/react";
 import { useCustomer } from "@/lib/customer-context";
+import AiModelFootnote from "./AiModelFootnote";
+import { readAiJson } from "./ai-client";
 import type { AiCostForecastResponse } from "@/types";
 
 export default function AiCostForecastWidget() {
@@ -31,10 +33,7 @@ export default function AiCostForecastWidget() {
       signal: controller.signal,
     })
       .then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Lost API access");
-        }
-        return response.json() as Promise<AiCostForecastResponse>;
+        return readAiJson<AiCostForecastResponse>(response);
       })
       .then((responseData) => {
         if (active) {
@@ -60,7 +59,20 @@ export default function AiCostForecastWidget() {
     };
   }, [customer]);
 
-  const forecastData = data?.forecast ?? [];
+  const forecastData = [
+    ...(data?.history ?? []).map((point) => ({
+      month: point.month,
+      Actual: point.Actual,
+      Budget: point.Budget,
+    })),
+    ...(data?.forecast ?? []).map((point) => ({
+      month: point.month,
+      Projected: point.Projected,
+      Optimistic: point.Optimistic,
+      Pessimistic: point.Pessimistic,
+      Budget: point.Budget,
+    })),
+  ];
   const providerLabel = data?.providerLabel ?? "AI";
 
   if (loading) {
@@ -91,16 +103,14 @@ export default function AiCostForecastWidget() {
         className="h-44"
         data={forecastData}
         index="month"
-        categories={["Pessimistic", "Projected", "Optimistic", "Budget"]}
-        colors={["rose", "blue", "emerald", "gray"]}
+        categories={["Actual", "Pessimistic", "Projected", "Optimistic", "Budget"]}
+        colors={["slate", "rose", "blue", "emerald", "gray"]}
         valueFormatter={(v) => `€${(v / 1000).toFixed(0)}K`}
         showLegend={true}
         showGridLines={false}
         curveType="monotone"
       />
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Powered by {providerLabel}
-      </p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={data?.modelInfo} />
     </div>
   );
 }

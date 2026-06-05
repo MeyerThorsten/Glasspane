@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import type { DraggableSyntheticListeners } from "@dnd-kit/core";
 import { WidgetSize } from "@/types";
 import AnomalyBadge from "@/components/ai/AnomalyBadge";
 import DataFreshness from "@/components/widgets/shared/DataFreshness";
@@ -17,7 +18,7 @@ interface WidgetShellProps {
   loading?: boolean;
   error?: string | null;
   widgetId?: string;
-  dragListeners?: Record<string, Function>;
+  dragListeners?: DraggableSyntheticListeners;
   animationDelay?: number;
   onRefresh?: () => void;
   isFavorite?: boolean;

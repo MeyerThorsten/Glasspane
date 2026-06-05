@@ -1,4 +1,4 @@
-import type { AiSlaRiskAdvisorResponse, SlaRiskAdvisorItem } from "@/types";
+import type { AiSlaRiskAdvisorResponse, SlaRiskAdvisorItem, SlaRiskTrendPoint } from "@/types";
 import { extractFirstJsonObject } from "./extract-json-object";
 
 const VALID_TRENDS = new Set(["declining", "stable", "improving"]);
@@ -13,6 +13,10 @@ function emptyResponse(): AiSlaRiskAdvisorResponse {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function toNumber(value: unknown): number | null {
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
 export function parseSlaRiskResponse(raw: string): AiSlaRiskAdvisorResponse {
@@ -45,9 +49,32 @@ export function parseSlaRiskResponse(raw: string): AiSlaRiskAdvisorResponse {
           : undefined,
       }))
       .slice(0, 5);
+    const trend: SlaRiskTrendPoint[] = Array.isArray(parsed.trend)
+      ? parsed.trend
+          .filter((point): point is Record<string, unknown> => isRecord(point))
+          .map((point) => {
+            const target = toNumber(point.Target);
+            const historical = toNumber(point.Historical);
+            const projected = toNumber(point.Projected);
+
+            if (typeof point.month !== "string" || target === null) {
+              return null;
+            }
+
+            return {
+              month: point.month.slice(0, 24),
+              Target: Math.max(0, Math.min(100, target)),
+              ...(historical === null ? {} : { Historical: Math.max(0, Math.min(100, historical)) }),
+              ...(projected === null ? {} : { Projected: Math.max(0, Math.min(100, projected)) }),
+            };
+          })
+          .filter((point): point is SlaRiskTrendPoint => !!point)
+          .slice(0, 8)
+      : [];
 
     return {
       services,
+      trend,
       generatedAt: new Date().toISOString(),
     };
   } catch {

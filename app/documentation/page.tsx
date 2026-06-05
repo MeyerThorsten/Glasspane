@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import WidgetShell from "@/components/widgets/WidgetShell";
 import { RiFilePdf2Line, RiDownloadLine, RiEyeLine, RiCloseLine, RiPlayCircleLine } from "@remixicon/react";
 
@@ -60,10 +61,12 @@ export default function DocumentationPage() {
                 className="group flex flex-col gap-3 p-4 rounded-lg border border-gray-100 dark:border-[#2E2E3D] bg-gray-50 dark:bg-[#262633] text-left hover:border-magenta/40 hover:shadow-md transition-all"
               >
                 <div className="relative w-full aspect-video rounded-md overflow-hidden bg-gray-200 dark:bg-[#1C1C27]">
-                  <img
+                  <Image
                     src={`https://img.youtube.com/vi/${video.embedUrl.split("/").pop()}/hqdefault.jpg`}
                     alt={video.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
                     <RiPlayCircleLine className="w-12 h-12 text-white drop-shadow-lg opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />

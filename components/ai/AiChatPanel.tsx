@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import { readSseEvents } from "@/lib/ai/sse";
 import { useCustomer } from "@/lib/customer-context";
-import type { ViewType } from "@/types";
+import AiModelFootnote from "./AiModelFootnote";
+import { readAiErrorMessage } from "./ai-client";
+import type { AiModelInfo, ViewType } from "@/types";
 
 interface Message {
   id: string;
@@ -19,6 +21,7 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [providerLabel, setProviderLabel] = useState("AI");
+  const [modelInfo, setModelInfo] = useState<AiModelInfo | undefined>(undefined);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const activeRequestRef = useRef<AbortController | null>(null);
 
@@ -89,8 +92,7 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
       });
 
       if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.error || "Failed to get response");
+        throw new Error(await readAiErrorMessage(res, "Failed to get response"));
       }
 
       const contentType = res.headers.get("content-type") || "";
@@ -100,8 +102,9 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
 
         for await (const event of readSseEvents(res.body)) {
           if (event.event === "meta") {
-            const data = JSON.parse(event.data) as { providerLabel?: string };
+            const data = JSON.parse(event.data) as { providerLabel?: string; modelInfo?: AiModelInfo };
             setProviderLabel(data.providerLabel || "AI");
+            setModelInfo(data.modelInfo);
             continue;
           }
 
@@ -132,12 +135,15 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
       } else {
         const data = await res.json();
         setProviderLabel(data.providerLabel || "AI");
+        setModelInfo(data.modelInfo);
         replaceAssistantMessage(assistantMsg.id, data.answer);
       }
-    } catch {
+    } catch (error) {
       replaceAssistantMessage(
         assistantMsg.id,
-        "Sorry, I couldn't process your request. Please try again.",
+        error instanceof Error
+          ? error.message
+          : "Sorry, I couldn't process your request. Please try again.",
       );
     } finally {
       activeRequestRef.current = null;
@@ -230,9 +236,9 @@ export default function AiChatPanel({ view = "c-level" as ViewType }: { view?: V
                 </svg>
               </button>
             </form>
-            <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-2 text-center">
-              Powered by {providerLabel}
-            </p>
+            <div className="mt-2 text-center">
+              <AiModelFootnote providerLabel={providerLabel} modelInfo={modelInfo} />
+            </div>
           </div>
         </div>
       )}

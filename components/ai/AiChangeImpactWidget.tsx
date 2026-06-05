@@ -2,6 +2,8 @@
 
 import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { useCustomer } from "@/lib/customer-context";
+import AiModelFootnote from "./AiModelFootnote";
+import { readAiJson } from "./ai-client";
 import type { AiChangeImpactResponse } from "@/types";
 
 function getRiskColor(score: number) {
@@ -43,10 +45,7 @@ export default function AiChangeImpactWidget() {
       signal: controller.signal,
     })
       .then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Lost API access");
-        }
-        return response.json() as Promise<AiChangeImpactResponse>;
+        return readAiJson<AiChangeImpactResponse>(response);
       })
       .then((responseData) => {
         if (active) {
@@ -138,9 +137,7 @@ export default function AiChangeImpactWidget() {
         ))}
       </div>
       )}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Powered by {providerLabel}
-      </p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={data?.modelInfo} />
     </div>
   );
 }

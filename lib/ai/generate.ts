@@ -5,16 +5,19 @@ import { createAiCache } from "./cache";
 import { gatherContext } from "./gather-context";
 import { executeTextForTask, executeTextStreamForTask, getPrimaryProviderForTask } from "./router";
 import type { AiProvider } from "./providers/types";
+import type { AiModelInfo } from "@/types";
 
 export interface GeneratedTextResult {
   text: string;
   provider: AiProvider;
   providerLabel: string;
+  modelInfo: AiModelInfo;
 }
 
 export interface GeneratedTextStreamResult {
   provider: AiProvider;
   providerLabel: string;
+  modelInfo: AiModelInfo;
   stream: AsyncIterable<string>;
 }
 
@@ -37,6 +40,7 @@ export async function generateSummary(customerId: string, view: ViewType): Promi
       text: result.text,
       provider: result.provider,
       providerLabel: result.providerLabel,
+      modelInfo: result.modelInfo,
     };
   });
 }
@@ -59,6 +63,7 @@ export async function generateChatResponse(
     text: result.text,
     provider: result.provider,
     providerLabel: result.providerLabel,
+    modelInfo: result.modelInfo,
   };
 }
 
@@ -80,6 +85,7 @@ export async function streamChatResponse(
   return {
     provider: result.provider,
     providerLabel: result.providerLabel,
+    modelInfo: result.modelInfo,
     stream: result.stream,
   };
 }

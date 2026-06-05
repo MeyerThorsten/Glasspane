@@ -22,6 +22,7 @@ export async function generateChangeImpact(customerId: string): Promise<AiChange
 
     const data = parseChangeImpactResponse(result.text);
     data.providerLabel = result.providerLabel;
+    data.modelInfo = result.modelInfo;
     return data;
   });
 }

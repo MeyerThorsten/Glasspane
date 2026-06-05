@@ -22,6 +22,7 @@ export async function generateRootCausePatterns(customerId: string): Promise<AiR
 
     const data = parseRootCausePatternsResponse(result.text);
     data.providerLabel = result.providerLabel;
+    data.modelInfo = result.modelInfo;
     return data;
   });
 }

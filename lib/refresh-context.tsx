@@ -17,16 +17,19 @@ const RefreshContext = createContext<RefreshContextValue>({
   isRefreshing: false,
 });
 
+function getInitialAutoInterval(): number | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const saved = localStorage.getItem("auto-refresh-interval");
+  return saved ? Number(saved) || null : null;
+}
+
 export function RefreshProvider({ children }: { children: ReactNode }) {
   const [refreshKey, setRefreshKey] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [autoInterval, setAutoIntervalState] = useState<number | null>(null);
-
-  // Load from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem("auto-refresh-interval");
-    if (saved) setAutoIntervalState(Number(saved) || null);
-  }, []);
+  const [autoInterval, setAutoIntervalState] = useState<number | null>(getInitialAutoInterval);
 
   const setAutoInterval = useCallback((ms: number | null) => {
     setAutoIntervalState(ms);

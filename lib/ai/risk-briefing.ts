@@ -22,6 +22,7 @@ export async function generateRiskBriefing(customerId: string): Promise<AiRiskBr
 
     const data = parseRiskBriefingResponse(result.text);
     data.providerLabel = result.providerLabel;
+    data.modelInfo = result.modelInfo;
     return data;
   });
 }

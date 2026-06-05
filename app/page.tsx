@@ -4,7 +4,6 @@ import {
   RiDashboardLine,
   RiUserSettingsLine,
   RiMoneyEuroCircleLine,
-  RiAlarmWarningLine,
   RiLineChartLine,
   RiBarChartGroupedLine,
   RiServerLine,
@@ -25,6 +24,9 @@ import {
   RiOpenSourceLine,
   RiGithubLine,
   RiSwitchLine,
+  RiTeamLine,
+  RiSpeedLine,
+  RiShareForwardLine,
 } from "@remixicon/react";
 
 const platformFeatures = [
@@ -115,6 +117,18 @@ const aiFeatures = [
     description:
       "Deployment risk assessment that evaluates how changes affect service stability.",
   },
+  {
+    icon: RiTeamLine,
+    title: "Workforce Growth",
+    description:
+      "AI maps each engineer's career ladder, growth signals, and goals into personalized, evidence-backed development recommendations.",
+  },
+  {
+    icon: RiSpeedLine,
+    title: "Model Transparency",
+    description:
+      "Live telemetry on every AI provider — latency, error rates, fallback events, and version-drift alerts, all in one observability dashboard.",
+  },
 ];
 
 const providers = [
@@ -183,12 +197,28 @@ const pages = [
     highlights: ["Light / Dark Theme", "Customer Profile", "Notification Preferences"],
     href: "/settings",
   },
+  {
+    icon: RiTeamLine,
+    title: "Workforce",
+    description:
+      "AI-assisted career development — review an engineer's career ladder, growth signals, goals, and get grounded recommendations for their next step.",
+    highlights: ["Career Ladder Progression", "Engagement & Readiness Signals", "AI Growth Recommendations"],
+    href: "/workforce",
+  },
+  {
+    icon: RiShareForwardLine,
+    title: "Transparency Sharing",
+    description:
+      "Generate time-limited, role-based public links that expose a curated, read-only set of widgets to clients and stakeholders — no login required.",
+    highlights: ["Role-Based Widget Curation", "Expiring Secure Links", "Read-Only Public Center"],
+    href: "/settings",
+  },
 ];
 
 const stats = [
   { value: "99.999%", label: "Availability Target" },
   { value: "8", label: "AI Providers" },
-  { value: "14", label: "AI Features" },
+  { value: "16", label: "AI Features" },
   { value: "3", label: "Role-Based Views" },
 ];
 
@@ -352,8 +382,9 @@ export default function Home() {
               AI-powered intelligence
             </h2>
             <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-              10 AI features that turn raw infrastructure data into actionable
-              insights — from natural language chat to predictive risk analysis.
+              12 AI features that turn raw infrastructure data into actionable
+              insights — from natural language chat and predictive risk analysis
+              to workforce growth and live model transparency.
             </p>
             <a
               href="https://thorstenmeyerai.com/"
@@ -590,7 +621,7 @@ export default function Home() {
             Ready to see your services?
           </h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            Explore the live dashboard with 14 AI-powered features, 8 provider
+            Explore the live dashboard with 16 AI-powered features, 8 provider
             options, and three role-based views — fully open source.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -633,6 +664,20 @@ export default function Home() {
             <span className="text-gray-300 dark:text-gray-600">|</span>
             <span>AGPL-3.0</span>
           </div>
+          <a
+            href="https://thorstenmeyerai.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-400 transition hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+          >
+            <RiSparklingLine className="h-3.5 w-3.5" />
+            <span>
+              Powered by{" "}
+              <span className="font-semibold text-indigo-600 dark:text-indigo-400">
+                Thorsten Meyer AI
+              </span>
+            </span>
+          </a>
         </div>
       </footer>
     </main>

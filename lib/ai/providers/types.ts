@@ -20,7 +20,8 @@ export type AiTask =
   | "cost-forecast"
   | "capacity-planner"
   | "root-cause-patterns"
-  | "change-impact";
+  | "change-impact"
+  | "workforce-growth";
 
 export interface AiTextMessage {
   role: "system" | "user" | "assistant";
@@ -29,6 +30,7 @@ export interface AiTextMessage {
 
 export interface AiRequestMetadata {
   customerId?: string;
+  employeeId?: string;
   view?: ViewType;
   question?: string;
 }

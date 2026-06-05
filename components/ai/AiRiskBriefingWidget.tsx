@@ -3,6 +3,8 @@
 import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import StatusBadge from "@/components/widgets/shared/StatusBadge";
 import { useCustomer } from "@/lib/customer-context";
+import AiModelFootnote from "./AiModelFootnote";
+import { readAiJson } from "./ai-client";
 import type { AiRiskBriefingResponse, RiskBriefingSeverity } from "@/types";
 
 const severityColors: Record<RiskBriefingSeverity, "danger" | "warning" | "info"> = {
@@ -49,10 +51,7 @@ export default function AiRiskBriefingWidget() {
       signal: controller.signal,
     })
       .then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Lost API access");
-        }
-        return response.json() as Promise<AiRiskBriefingResponse>;
+        return readAiJson<AiRiskBriefingResponse>(response);
       })
       .then((responseData) => {
         if (active) {
@@ -133,9 +132,7 @@ export default function AiRiskBriefingWidget() {
           </div>
         ))
       )}
-      <p className="text-[10px] text-gray-400 dark:text-gray-500">
-        Powered by {providerLabel}
-      </p>
+      <AiModelFootnote providerLabel={providerLabel} modelInfo={data?.modelInfo} />
     </div>
   );
 }
