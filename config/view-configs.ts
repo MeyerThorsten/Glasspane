@@ -7,6 +7,8 @@ export const viewConfigs: Record<ViewType, WidgetConfig[]> = {
     { id: "ai-risk-briefing", title: "AI Risk Briefing", size: "medium", category: "ai" },
     { id: "ai-model-transparency", title: "AI Model Transparency", size: "full", category: "ai" },
     { id: "ai-cost-forecast", title: "AI Cost Forecast", size: "medium", category: "ai" },
+    { id: "action-center", title: "Recommended Actions", size: "large", category: "operations" },
+    { id: "vertical-benchmark", title: "Industry Benchmark", size: "medium", category: "kpi" },
     { id: "sla-compliance-gauge", title: "SLA Compliance", size: "medium", category: "kpi", supportsComparison: true },
     { id: "zero-outage-score", title: "Zero Outage Score", size: "medium", category: "zero-outage" },
     { id: "service-health-overview", title: "Service Health Overview", size: "large", category: "services" },

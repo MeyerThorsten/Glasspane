@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useCustomer } from "@/lib/customer-context";
-import { getZeroOutageScore } from "@/lib/services/zero-outage-service";
+import { getComputedZeroOutageScore } from "@/lib/services/zero-outage-service";
 import { ZeroOutageScore } from "@/types";
 
 export default function ZeroOutagePillars() {
@@ -11,7 +11,7 @@ export default function ZeroOutagePillars() {
 
   useEffect(() => {
     if (!customer) return;
-    getZeroOutageScore(customer.id).then(setData);
+    getComputedZeroOutageScore(customer.id).then(setData);
   }, [customer]);
 
   if (!data) return <div />;

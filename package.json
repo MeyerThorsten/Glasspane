@@ -11,7 +11,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test:ai": "node --import tsx --test tests/ai/*.test.mts tests/ai/providers/*.test.mts"
+    "test:ai": "node --import tsx --test tests/ai/*.test.mts tests/ai/providers/*.test.mts",
+    "test:platform": "node --import tsx --test tests/platform/*.test.mts",
+    "test": "npm run test:ai && npm run test:platform"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

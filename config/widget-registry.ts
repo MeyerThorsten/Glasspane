@@ -27,6 +27,8 @@ const registry: Record<string, ComponentType> = {
   "major-incidents-summary": lazy(() => import("@/components/widgets/c-level/MajorIncidentsSummary")),
   "digital-transformation": lazy(() => import("@/components/widgets/c-level/DigitalTransformation")),
   "security-posture": lazy(() => import("@/components/widgets/c-level/SecurityPosture")),
+  "vertical-benchmark": lazy(() => import("@/components/widgets/c-level/VerticalBenchmark")),
+  "action-center": lazy(() => import("@/components/widgets/c-level/ActionCenter")),
 
   // Business widgets
   "service-utilization": lazy(() => import("@/components/widgets/business/ServiceUtilization")),

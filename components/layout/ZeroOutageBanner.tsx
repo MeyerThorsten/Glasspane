@@ -3,7 +3,7 @@
 import { useCustomer } from "@/lib/customer-context";
 import { useEffect, useState } from "react";
 import { getCurrentSla } from "@/lib/services/kpi-service";
-import { getZeroOutageScore } from "@/lib/services/zero-outage-service";
+import { getComputedZeroOutageScore } from "@/lib/services/zero-outage-service";
 import { ZeroOutageScore } from "@/types";
 import { RiShieldCheckLine } from "@remixicon/react";
 
@@ -15,7 +15,7 @@ export default function ZeroOutageBanner() {
   useEffect(() => {
     if (!customer) return;
     getCurrentSla(customer.id).then(setSla);
-    getZeroOutageScore(customer.id).then(setScore);
+    getComputedZeroOutageScore(customer.id).then(setScore);
   }, [customer]);
 
   const target = 99.999;

@@ -9,3 +9,6 @@ export * from "./security";
 export * from "./ai";
 export * from "./notification";
 export * from "./workforce";
+export * from "./vertical";
+export * from "./ontology";
+export * from "./action";
