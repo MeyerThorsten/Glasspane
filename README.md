@@ -12,6 +12,15 @@ This MVP uses mock data to demonstrate the look, feel, and interaction model of 
 >
 > See the [Security](#security) section below before deploying with real data.
 
+## Platform Intelligence
+
+Beyond the dashboards, Glasspane ships a decision layer (see [docs/PLATFORM-INTELLIGENCE.md](docs/PLATFORM-INTELLIGENCE.md) for full documentation):
+
+- **Ontology Explorer** (`/explorer`) — a typed entity graph per customer connecting services, incidents, changes, cost categories, certificates, and CVEs. Search, drill down through relations, and inspect the blast radius of any entity.
+- **Vertical Intelligence** — industry packs (Manufacturing, Healthcare, Financial Services, Retail, Public Sector, Energy & Utilities, Technology, Logistics) with compliance frameworks, benchmark targets, and key risks. The C-Level *Industry Benchmark* widget grades actuals against vertical targets.
+- **Action Center** — a deterministic rules engine that converts the operational snapshot into ranked recommended actions (expired certificates, open P1s, SLA shortfalls, budget overruns, patch gaps, critical CVEs, backup degradation) with rationale and suggested steps.
+- **Computed Zero Outage** — People/Processes/Platforms pillar scores derived from live operational signals (engagement, change success, MTTR, patch compliance, SLA error-budget burn, security score, backup success) instead of static values.
+
 ## Quick Start
 
 ```bash
@@ -290,12 +299,14 @@ Transparency/
 
 ## Widget Catalog
 
-44 widgets are registered across 3 role-based views. AI-powered widgets are shared across views and powered by the AI service layer.
+46 widgets are registered across 3 role-based views. AI-powered widgets are shared across views and powered by the AI service layer.
 
-### C-Level View (13 widgets)
+### C-Level View (15 widgets)
 
 | Widget | Size | Visualization |
 |--------|------|--------------|
+| Recommended Actions | large | Ranked action list with severity badges and expandable steps |
+| Industry Benchmark | medium | Vertical benchmark comparison with compliance framework chips |
 | SLA Compliance Gauge | medium | DonutChart with 99.999% target ring |
 | Zero Outage Score | medium | Large metric + 3 CategoryBars (People/Processes/Platforms) |
 | Service Health Overview | large | Grid of service cards with status badges |
@@ -454,6 +465,10 @@ export async function getCurrentSla(customerId: string): Promise<number> {
 | `npm run build` | Production build (TypeScript check + optimize) |
 | `npm run start` | Serve production build |
 | `npm run lint` | Run ESLint |
+| `npm run typecheck` | TypeScript check without emitting |
+| `npm run test:ai` | AI layer unit tests (providers, routing, caching, SSE) |
+| `npm run test:platform` | Platform intelligence unit tests (verticals, ontology, zero outage, action rules) |
+| `npm test` | Run both test suites |
 
 ## Security
 

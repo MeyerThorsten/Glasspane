@@ -27,6 +27,9 @@ import {
   RiTeamLine,
   RiSpeedLine,
   RiShareForwardLine,
+  RiNodeTree,
+  RiBuilding2Line,
+  RiListCheck3,
 } from "@remixicon/react";
 
 const platformFeatures = [
@@ -53,6 +56,30 @@ const platformFeatures = [
     title: "Cost Management",
     description:
       "Budget vs. actual spending, month-over-month trends, and per-service breakdown.",
+  },
+  {
+    icon: RiNodeTree,
+    title: "Ontology Explorer",
+    description:
+      "A typed entity graph connecting services, incidents, changes, costs, certificates, and CVEs — with drill-down navigation and blast-radius analysis.",
+  },
+  {
+    icon: RiBuilding2Line,
+    title: "Vertical Intelligence",
+    description:
+      "Industry packs for manufacturing, healthcare, finance, retail, public sector, energy, technology, and logistics — compliance frameworks and benchmarks per vertical.",
+  },
+  {
+    icon: RiListCheck3,
+    title: "Action Center",
+    description:
+      "A deterministic rules engine that turns telemetry into ranked, recommended actions with rationale and concrete next steps.",
+  },
+  {
+    icon: RiShieldCheckLine,
+    title: "Computed Zero Outage",
+    description:
+      "People, Processes, and Platforms pillar scores derived live from operational signals — not static numbers.",
   },
 ];
 
