@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glasspane · Build Log — Last 10 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0A0E14;
+    --bg-2:      #0D1219;
+    --panel:     #111824;
+    --panel-2:   #0F1620;
+    --line:      rgba(255,255,255,0.08);
+    --line-2:    rgba(255,255,255,0.04);
+    --text:      #E7ECF3;
+    --muted:     #8A97A8;
+    --faint:     #5A6678;
+    --emerald:   #34D399;
+    --emerald-d: #10B981;
+    --indigo:    #818CF8;
+    --cyan:      #22D3EE;
+    --amber:     #FBBF24;
+    --rose:      #FB7185;
+    --shadow:    0 24px 60px -24px rgba(0,0,0,0.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---- atmosphere ------------------------------------------------ */
+  .bg-fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .bg-fx .glow-a {
+    position: absolute; top: -20%; left: -10%; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(52,211,153,0.10), transparent 62%);
+    filter: blur(20px);
+  }
+  .bg-fx .glow-b {
+    position: absolute; top: 8%; right: -18%; width: 55vw; height: 55vw;
+    background: radial-gradient(circle, rgba(129,140,248,0.10), transparent 62%);
+    filter: blur(20px);
+  }
+  .bg-fx .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line-2) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at 50% 24%, #000 0%, transparent 78%);
+    -webkit-mask-image: radial-gradient(circle at 50% 24%, #000 0%, transparent 78%);
+  }
+  .grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { position: relative; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---- mono utility --------------------------------------------- */
+  .mono { font-family: "JetBrains Mono", monospace; }
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--emerald);
+  }
+
+  /* ---- hero ------------------------------------------------------ */
+  header.hero { padding: 72px 0 28px; }
+  .status-line {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: "JetBrains Mono", monospace; font-size: 0.74rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 14px 7px 12px; background: rgba(255,255,255,0.015);
+  }
+  .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--emerald);
+    box-shadow: 0 0 0 0 rgba(52,211,153,0.55); animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+    70%  { box-shadow: 0 0 0 9px rgba(52,211,153,0); }
+    100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+  }
+
+  h1.title {
+    font-family: "Fraunces", serif;
+    font-weight: 600; font-size: clamp(2.6rem, 7vw, 5.1rem);
+    line-height: 0.98; letter-spacing: -0.025em; margin: 26px 0 0;
+  }
+  h1.title em {
+    font-style: italic; font-weight: 500;
+    background: linear-gradient(100deg, var(--emerald), var(--cyan) 55%, var(--indigo));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .dek {
+    max-width: 660px; margin: 22px 0 0; color: var(--muted);
+    font-size: 1.08rem; font-weight: 300;
+  }
+  .dek strong { color: var(--text); font-weight: 500; }
+
+  /* ---- stats ----------------------------------------------------- */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    margin: 48px 0 8px; border: 1px solid var(--line); border-radius: 16px;
+    overflow: hidden; background: var(--line);
+  }
+  .stat { background: var(--panel); padding: 24px 22px; }
+  .stat .num {
+    font-family: "Fraunces", serif; font-weight: 600;
+    font-size: clamp(1.9rem, 4.4vw, 2.7rem); line-height: 1; letter-spacing: -0.02em;
+  }
+  .stat .num .sfx { color: var(--emerald); }
+  .stat .lbl {
+    font-family: "JetBrains Mono", monospace; font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);
+    margin-top: 12px;
+  }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---- section heading ------------------------------------------ */
+  .section { padding: 64px 0 0; }
+  .section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 6px; }
+  .section-head .idx {
+    font-family: "JetBrains Mono", monospace; font-size: 0.78rem;
+    color: var(--faint); padding-top: 4px;
+  }
+  h2 {
+    font-family: "Fraunces", serif; font-weight: 600;
+    font-size: clamp(1.6rem, 3.5vw, 2.15rem); letter-spacing: -0.02em; margin: 0;
+  }
+  .section-sub {
+    color: var(--muted); font-weight: 300; margin: 4px 0 0 0; max-width: 680px;
+  }
+
+  /* ---- timeline / phases ---------------------------------------- */
+  .phase {
+    position: relative; margin-top: 40px; padding-left: 30px;
+    border-left: 1px solid var(--line);
+  }
+  .phase::before {
+    content: ""; position: absolute; left: -6px; top: 6px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--emerald);
+    box-shadow: 0 0 14px rgba(52,211,153,0.5);
+  }
+  .phase.indigo::before { border-color: var(--indigo); box-shadow: 0 0 14px rgba(129,140,248,0.5); }
+  .phase-meta {
+    font-family: "JetBrains Mono", monospace; font-size: 0.72rem;
+    letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase;
+  }
+  .phase-title {
+    font-family: "Fraunces", serif; font-size: 1.5rem; font-weight: 600;
+    letter-spacing: -0.015em; margin: 6px 0 4px;
+  }
+  .phase-lede { color: var(--muted); font-weight: 300; margin: 0 0 22px; max-width: 640px; }
+
+  /* ---- feature cards -------------------------------------------- */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    position: relative; background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid var(--line); border-radius: 14px; padding: 20px 20px 18px;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s;
+    overflow: hidden;
+  }
+  .card::after {
+    content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+    background: var(--accent, var(--emerald)); opacity: 0.7;
+    transition: width .35s, opacity .35s;
+  }
+  .card:hover {
+    transform: translateY(-4px); border-color: rgba(255,255,255,0.16);
+    box-shadow: var(--shadow);
+  }
+  .card:hover::after { width: 5px; opacity: 1; }
+  .card .kicker {
+    display: flex; align-items: center; gap: 9px; margin-bottom: 12px;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent, var(--emerald)); }
+  .card .tag {
+    font-family: "JetBrains Mono", monospace; font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--faint);
+  }
+  .card h3 {
+    font-family: "Fraunces", serif; font-size: 1.18rem; font-weight: 600;
+    letter-spacing: -0.01em; margin: 0 0 8px;
+  }
+  .card p { margin: 0; color: var(--muted); font-size: 0.92rem; font-weight: 300; }
+  .card .route {
+    display: inline-block; margin-top: 14px;
+    font-family: "JetBrains Mono", monospace; font-size: 0.72rem;
+    color: var(--accent, var(--emerald));
+    background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.18);
+    padding: 3px 9px; border-radius: 7px;
+  }
+  .card[data-accent="indigo"] { --accent: var(--indigo); }
+  .card[data-accent="indigo"] .route { color: var(--indigo); background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.2); }
+  .card[data-accent="cyan"] { --accent: var(--cyan); }
+  .card[data-accent="cyan"] .route { color: var(--cyan); background: rgba(34,211,238,0.08); border-color: rgba(34,211,238,0.2); }
+  .card[data-accent="amber"] { --accent: var(--amber); }
+  .card[data-accent="amber"] .route { color: var(--amber); background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.2); }
+
+  /* ---- ledger ---------------------------------------------------- */
+  .ledger {
+    margin-top: 30px; border: 1px solid var(--line); border-radius: 14px;
+    overflow: hidden; background: var(--panel-2);
+  }
+  .ledger-row {
+    display: grid; grid-template-columns: 116px 1fr auto;
+    gap: 18px; align-items: center; padding: 15px 20px;
+    border-bottom: 1px solid var(--line-2); font-size: 0.92rem;
+  }
+  .ledger-row:last-child { border-bottom: none; }
+  .ledger-row .date { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: var(--faint); }
+  .ledger-row .what strong { font-weight: 500; }
+  .ledger-row .what span { color: var(--muted); font-weight: 300; }
+  .ledger-row .hash {
+    font-family: "JetBrains Mono", monospace; font-size: 0.74rem; color: var(--emerald);
+  }
+  @media (max-width: 600px) {
+    .ledger-row { grid-template-columns: 1fr; gap: 4px; }
+    .ledger-row .hash { justify-self: start; }
+  }
+
+  /* ---- footer ---------------------------------------------------- */
+  footer {
+    position: relative; z-index: 2; margin-top: 84px; padding: 32px 0 56px;
+    border-top: 1px solid var(--line);
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-family: "JetBrains Mono", monospace; font-size: 0.74rem; color: var(--faint); }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--emerald); }
+
+  /* ---- reveal animation ----------------------------------------- */
+  .reveal { opacity: 0; transform: translateY(18px); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; opacity: 1; transform: none; }
+    .pulse { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-fx">
+  <div class="glow-a"></div>
+  <div class="glow-b"></div>
+  <div class="grid"></div>
+</div>
+<div class="grain"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="status-line reveal" style="animation-delay:.05s">
+      <span class="pulse"></span> BUILD&nbsp;LOG &nbsp;//&nbsp; 2026·06·04 &nbsp;→&nbsp; 2026·06·14
+    </div>
+    <h1 class="title reveal" style="animation-delay:.12s">
+      Ten days that turned a dashboard<br>into a <em>decision platform.</em>
+    </h1>
+    <p class="dek reveal" style="animation-delay:.2s">
+      A snapshot of everything shipped to <strong>Glasspane</strong> — the Zero&nbsp;Outage
+      transparency portal — over the last 10 days. Two major releases, from
+      <strong>workforce &amp; model transparency</strong> to a full
+      <strong>platform-intelligence layer</strong>.
+    </p>
+
+    <div class="stats reveal" style="animation-delay:.3s">
+      <div class="stat"><div class="num"><span class="count" data-to="10">0</span></div><div class="lbl">Days</div></div>
+      <div class="stat"><div class="num"><span class="sfx count" data-to="7">0</span></div><div class="lbl">New capabilities</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="5633" data-suffix="+">0</span></div><div class="lbl">Lines shipped</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="7">0</span></div><div class="lbl">Test suites added</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- PHASE 1 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="idx">01</span>
+        <div>
+          <span class="eyebrow">Release · June 5</span>
+          <h2>Transparency, Workforce &amp; Trust</h2>
+        </div>
+      </div>
+      <p class="section-sub reveal">Make the human side visible, prove which model produced each
+        AI insight, and let customers share their health story beyond the login wall.</p>
+
+      <div class="phase">
+        <div class="phase-lede" style="margin-top:24px">Highlights from this drop:</div>
+        <div class="cards">
+          <div class="card reveal" data-accent="emerald" style="animation-delay:.05s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Workforce</span></div>
+            <h3>Workforce Growth</h3>
+            <p>A new role-based dashboard surfacing team growth, capacity and skills — backed by an
+              AI workforce-growth analysis pipeline with its own prompts, parser and mock provider.</p>
+            <span class="route">/workforce</span>
+          </div>
+          <div class="card reveal" data-accent="indigo" style="animation-delay:.12s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Trust</span></div>
+            <h3>AI Model Transparency</h3>
+            <p>A widget plus <span class="mono">/api/ai/model-transparency</span> route and a 340-line
+              telemetry layer, so every insight can show which model, provider and cost produced it.</p>
+            <span class="route">model-telemetry.ts</span>
+          </div>
+          <div class="card reveal" data-accent="cyan" style="animation-delay:.19s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Sharing</span></div>
+            <h3>Public Transparency Sharing</h3>
+            <p>Tokenised, shareable health pages with a public Transparency Center and full sharing
+              controls in settings — health metrics without an account.</p>
+            <span class="route">/transparency/[token]</span>
+          </div>
+          <div class="card reveal" data-accent="amber" style="animation-delay:.26s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Platform</span></div>
+            <h3>AI Router &amp; Branding</h3>
+            <p>Hardened the provider-agnostic AI router with OpenAI wrappers, sturdier cost-forecast
+              &amp; SLA-risk parsing, model footnotes, data-freshness signals and a "Powered by" footer.</p>
+            <span class="route">lib/ai/router.ts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="idx">02</span>
+        <div>
+          <span class="eyebrow" style="color:var(--indigo)">Release · June 10</span>
+          <h2>The Platform-Intelligence Layer</h2>
+        </div>
+      </div>
+      <p class="section-sub reveal">The largest drop of the sprint: a typed entity ontology,
+        industry-aware benchmarks, Zero&nbsp;Outage scores computed from live signals, and a
+        prescriptive action layer — shipped with four dedicated test suites.</p>
+
+      <div class="phase indigo">
+        <div class="phase-lede" style="margin-top:24px">Four new capabilities, one decision layer:</div>
+        <div class="cards">
+          <div class="card reveal" data-accent="indigo" style="animation-delay:.05s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Knowledge</span></div>
+            <h3>Ontology Explorer</h3>
+            <p>A typed entity graph per customer connecting services, incidents, changes, cost
+              categories, certificates and CVEs. Search, drill through relations, inspect blast radius.</p>
+            <span class="route">/explorer</span>
+          </div>
+          <div class="card reveal" data-accent="emerald" style="animation-delay:.12s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Benchmarks</span></div>
+            <h3>Vertical Intelligence</h3>
+            <p>Eight industry packs — Manufacturing, Healthcare, Finance, Retail, Public Sector,
+              Energy, Tech, Logistics — each with compliance frameworks, targets and key risks.</p>
+            <span class="route">vertical-registry.ts</span>
+          </div>
+          <div class="card reveal" data-accent="cyan" style="animation-delay:.19s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Scoring</span></div>
+            <h3>Computed Zero Outage</h3>
+            <p>People / Processes / Platforms pillar scores now derived from live signals —
+              engagement, change success, MTTR, patch compliance, error-budget burn — not static numbers.</p>
+            <span class="route">zero-outage/compute.ts</span>
+          </div>
+          <div class="card reveal" data-accent="amber" style="animation-delay:.26s">
+            <div class="kicker"><span class="dot"></span><span class="tag">Action</span></div>
+            <h3>Action Center</h3>
+            <p>A deterministic rules engine that turns the operational snapshot into ranked
+              recommendations — expired certs, open P1s, SLA shortfalls, budget overruns, critical CVEs.</p>
+            <span class="route">lib/actions/rules.ts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEDGER -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="idx">03</span>
+        <div>
+          <span class="eyebrow">Commit ledger</span>
+          <h2>The receipts</h2>
+        </div>
+      </div>
+      <p class="section-sub reveal">Four commits, ~5,600 insertions across 120+ files, and 770+ lines
+        of new tests guarding the platform logic.</p>
+
+      <div class="ledger reveal">
+        <div class="ledger-row">
+          <span class="date">2026·06·10</span>
+          <span class="what"><strong>Document platform-intelligence layer</strong> <span>— README + landing page + standalone docs</span></span>
+          <span class="hash">86427c0</span>
+        </div>
+        <div class="ledger-row">
+          <span class="date">2026·06·10</span>
+          <span class="what"><strong>Add platform-intelligence layer</strong> <span>— verticals, ontology, computed Zero Outage, action center · +2,151 / 29 files</span></span>
+          <span class="hash">06dbd4b</span>
+        </div>
+        <div class="ledger-row">
+          <span class="date">2026·06·10</span>
+          <span class="what"><strong>Platform-intelligence design spec</strong> <span>— the blueprint behind the build</span></span>
+          <span class="hash">7860f21</span>
+        </div>
+        <div class="ledger-row">
+          <span class="date">2026·06·05</span>
+          <span class="what"><strong>Workforce, model transparency, sharing &amp; branding</strong> <span>— +2,860 / 89 files</span></span>
+          <span class="hash">d8ca5aa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>GLASSPANE · END-TO-END DIGITAL HEALTH</span>
+    <span>GENERATED 2026·06·14 · <a href="docs/PLATFORM-INTELLIGENCE.md">PLATFORM-INTELLIGENCE.md</a></span>
+  </div>
+</footer>
+
+<script>
+  // count-up for the hero stats
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = document.querySelectorAll('.count');
+    els.forEach(function (el) {
+      const to = parseFloat(el.dataset.to);
+      const suffix = el.dataset.suffix || '';
+      if (reduce) { el.textContent = to.toLocaleString() + suffix; return; }
+      const dur = 1300, start = performance.now();
+      function tick(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(to * eased).toLocaleString() + (p === 1 ? suffix : '');
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  })();
+</script>
+
+</body>
+</html>
